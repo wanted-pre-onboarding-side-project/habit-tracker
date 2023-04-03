@@ -50,7 +50,7 @@ export class LocalHabitManager implements HabitManager {
     description,
     dates,
   }: HabitDetailUpdateContent): Promise<Habit> {
-    const targetHabit = this.habits.find((habit) => habit.id);
+    const targetHabit = this.habits.find((habit) => habit.id === id);
     if (!targetHabit) throw new Error(`id : ${id} 인 해빗이 존재하지 않습니다`);
 
     const updatedHabit = {
