@@ -9,7 +9,8 @@ import {
   Period,
 } from '../service/HabitManager';
 
-interface HabitsState extends HabitsResponse, Period {
+export interface HabitsState extends HabitsResponse, Period {
+  lastDay: number;
   createHabit(content: HabitCreateContent): Promise<void>;
   deleteHabit(id: Habit['id']): Promise<void>;
   updateHabitDetail(content: HabitDetailUpdateContent): Promise<void>;
@@ -28,6 +29,7 @@ export const HabitProvider = ({
   const today = new Date();
   const year = today.getFullYear();
   const month = today.getMonth() + 1;
+  const lastDay = new Date(year, month, 0).getDate();
 
   const [habits, setHabits] = useState<HabitsResponse['habits']>([]);
   const [checks, setChecks] = useState<HabitsResponse['checks']>({});
@@ -65,6 +67,7 @@ export const HabitProvider = ({
       value={{
         year,
         month,
+        lastDay,
         habits,
         checks,
         createHabit,
