@@ -117,7 +117,7 @@ export class LocalHabitManager implements HabitManager {
   }
 }
 
-interface HabitManager {
+export interface HabitManager {
   getHabits({ year, month }: Period): Promise<HabitsResponse>;
   createHabit(content: HabitCreateContent): Promise<Habit>;
   deleteHabit(id: Habit['id']): Promise<boolean>;
@@ -125,35 +125,35 @@ interface HabitManager {
   updateHabitCheck(content: HabitCheckUpdateContent): Promise<boolean>;
 }
 
-interface Habit {
+export interface Habit {
   id: number;
   name: string;
   description: string;
   dates: Day[];
 }
 
-interface HabitsResponse {
+export interface HabitsResponse {
   habits: Habit[];
   checks: { [k: Habit['id']]: HabitCheck[] };
 }
 
-interface HabitCreateContent extends Period {
+export interface HabitCreateContent extends Period {
   name: Habit['name'];
   description?: Habit['description'];
   dates?: Habit['dates'];
 }
 
-interface HabitDetailUpdateContent extends HabitCreateContent {
+export interface HabitDetailUpdateContent extends HabitCreateContent {
   id: Habit['id'];
 }
 
-interface HabitCheckUpdateContent extends Period {
+export interface HabitCheckUpdateContent extends Period {
   id: Habit['id'];
   day: number;
   check: HabitCheck;
 }
 
-type Period = {
+export type Period = {
   year: number;
   month: number;
 };
