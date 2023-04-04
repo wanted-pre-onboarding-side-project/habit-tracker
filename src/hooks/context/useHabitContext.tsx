@@ -1,5 +1,8 @@
 import { useContext } from 'react';
-import { HabitActionContext, HabitValueContext } from '../context/HabitContext';
+import {
+  HabitActionContext,
+  HabitValueContext,
+} from '../../context/HabitContext';
 
 export const useHabitValueContext = () => {
   const habitValueContext = useContext(HabitValueContext);

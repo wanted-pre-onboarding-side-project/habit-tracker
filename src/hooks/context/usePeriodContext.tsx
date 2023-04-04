@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { PeriodContext } from '../context/PeriodContext';
+import { PeriodContext } from '../../context/PeriodContext';
 
 export const usePeriodContext = () => {
   const periodContext = useContext(PeriodContext);

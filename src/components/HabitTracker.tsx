@@ -7,18 +7,11 @@ import {
   IconButton,
   Stack,
   Text,
-  useDisclosure,
 } from '@chakra-ui/react';
-import { useCallback } from 'react';
-import {
-  useHabitActionContext,
-  useHabitValueContext,
-} from '../hooks/useHabitContext';
-import { usePeriodContext } from '../hooks/usePeriodContext';
-import HabitDetailForm, {
-  HabitDetailFormContainer,
-  HabitFormProps,
-} from './HabitDetailForm';
+import { useHabitAdd } from '../hooks/useHabitAdd';
+import { useHabitValueContext } from '../hooks/context/useHabitContext';
+import { usePeriodContext } from '../hooks/context/usePeriodContext';
+import HabitDetailForm, { HabitDetailFormContainer } from './HabitDetailForm';
 import HabitRow from './HabitRow';
 
 const HabitTracker = () => {
@@ -85,22 +78,6 @@ const HabitsHeader = ({ lastDay }: { lastDay: number }) => {
         ))}
     </>
   );
-};
-
-const useHabitAdd = () => {
-  const { year, month } = usePeriodContext();
-  const { createHabit } = useHabitActionContext();
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const submitHandler: HabitFormProps['submitHandler'] = useCallback(
-    (habitDetail) => {
-      createHabit({ ...habitDetail, year, month });
-      onClose();
-    },
-    [createHabit, month, onClose, year],
-  );
-
-  return { submitHandler, onOpen, onClose, isOpen };
 };
 
 const HabitAdd = () => {

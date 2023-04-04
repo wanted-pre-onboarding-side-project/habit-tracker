@@ -1,45 +1,8 @@
-import { GridItem, useDisclosure } from '@chakra-ui/react';
-import React, { useCallback } from 'react';
-import { useHabitActionContext } from '../hooks/useHabitContext';
-import { usePeriodContext } from '../hooks/usePeriodContext';
+import { GridItem } from '@chakra-ui/react';
+import React from 'react';
+import { useHabitRow } from '../hooks/useHabitRow';
 import { Habit } from '../service/HabitManager';
-import HabitDetailForm, {
-  HabitDetailFormContainer,
-  HabitFormProps,
-} from './HabitDetailForm';
-
-const useHabitRow = (habitId: Habit['id']) => {
-  const { year, month, lastDay } = usePeriodContext();
-  const { updateHabitDetail, deleteHabit } = useHabitActionContext();
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const submitHandler: HabitFormProps['submitHandler'] = useCallback(
-    (habitDetail) => {
-      updateHabitDetail({
-        ...habitDetail,
-        year,
-        month,
-        id: habitId,
-      });
-      onClose();
-    },
-    [habitId, month, onClose, updateHabitDetail, year],
-  );
-
-  const deleteHandler = useCallback(() => {
-    deleteHabit(habitId);
-    onClose();
-  }, [deleteHabit, habitId, onClose]);
-
-  return {
-    lastDay,
-    isOpen,
-    onOpen,
-    onClose,
-    submitHandler,
-    deleteHandler,
-  };
-};
+import HabitDetailForm, { HabitDetailFormContainer } from './HabitDetailForm';
 
 const HabitRow = ({ habit }: { habit: Habit }) => {
   const { lastDay, isOpen, onOpen, onClose, submitHandler, deleteHandler } =

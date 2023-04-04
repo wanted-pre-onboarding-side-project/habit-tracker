@@ -1,5 +1,5 @@
 import { createContext, useCallback, useEffect, useState } from 'react';
-import { usePeriodContext } from '../hooks/usePeriodContext';
+import { usePeriodContext } from '../hooks/context/usePeriodContext';
 import {
   Habit,
   HabitCheckUpdateContent,
