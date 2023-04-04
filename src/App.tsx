@@ -1,21 +1,22 @@
+import { Flex, VStack } from '@chakra-ui/react';
+import AppHeader from './component/AppHeader';
+import HabitList from './component/habits/HabitList';
+
 const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Flex direction="column" m="10">
+      <AppHeader />
+      <VStack mt="10">
+        <HabitList />
+        <HabitCreator />
+      </VStack>
+    </Flex>
   );
 };
 
 export default App;
+
+const HabitCreator = () => {
+  // 임시로 더미 컴포넌트 생성
+  return <button>NEW HABIT</button>;
+};
