@@ -1,6 +1,6 @@
 import { useDisclosure, GridItem } from '@chakra-ui/react';
 import React from 'react';
-import { useHabitContext } from '../context/HabitContext';
+import { useHabitContext } from '../hooks/useHabitContext';
 import { Habit } from '../service/HabitManager';
 import HabitDetailForm, {
   HabitFormProps,

@@ -9,7 +9,7 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react';
-import { useHabitContext } from '../context/HabitContext';
+import { useHabitContext } from '../hooks/useHabitContext';
 import HabitDetailForm, {
   HabitDetailFormContainer,
   HabitFormProps,

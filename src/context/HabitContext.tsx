@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import {
   Habit,
   HabitCheckUpdateContent,
@@ -17,7 +17,7 @@ export interface HabitsState extends HabitsResponse, Period {
   updateHabitCheck(content: HabitCheckUpdateContent): Promise<void>;
 }
 
-const HabitContext = createContext<HabitsState | null>(null);
+export const HabitContext = createContext<HabitsState | null>(null);
 
 export const HabitProvider = ({
   children,
@@ -79,13 +79,4 @@ export const HabitProvider = ({
       {children}
     </HabitContext.Provider>
   );
-};
-
-export const useHabitContext = () => {
-  const habitContext = useContext(HabitContext);
-  if (!habitContext)
-    throw new Error(
-      '<HabitContext.Provider> 내에서 useHabitContext를 사용해주세요',
-    );
-  return habitContext;
 };
