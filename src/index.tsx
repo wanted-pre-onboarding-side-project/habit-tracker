@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { HabitProvider } from './context/HabitContext';
+import { PeriodProvider } from './context/PeriodContext';
 import reportWebVitals from './reportWebVitals';
 import { LocalHabitManager } from './service/HabitManager';
 
@@ -14,9 +15,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ChakraProvider>
-      <HabitProvider habitManager={habitManager}>
-        <App />
-      </HabitProvider>
+      <PeriodProvider>
+        <HabitProvider habitManager={habitManager}>
+          <App />
+        </HabitProvider>
+      </PeriodProvider>
     </ChakraProvider>
   </React.StrictMode>,
 );

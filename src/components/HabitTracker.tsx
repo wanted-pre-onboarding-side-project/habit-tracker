@@ -9,7 +9,12 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react';
-import { useHabitContext } from '../hooks/useHabitContext';
+import { useCallback } from 'react';
+import {
+  useHabitActionContext,
+  useHabitValueContext,
+} from '../hooks/useHabitContext';
+import { usePeriodContext } from '../hooks/usePeriodContext';
 import HabitDetailForm, {
   HabitDetailFormContainer,
   HabitFormProps,
@@ -32,7 +37,7 @@ const HabitTracker = () => {
 export default HabitTracker;
 
 const PeriodSection = () => {
-  const { year, month } = useHabitContext();
+  const { year, month } = usePeriodContext();
   return (
     <Text>
       {year}년 {month}월
@@ -41,7 +46,7 @@ const PeriodSection = () => {
 };
 
 const Habits = () => {
-  const { lastDay, habits } = useHabitContext();
+  const { lastDay } = usePeriodContext();
 
   return (
     <Grid
@@ -50,11 +55,19 @@ const Habits = () => {
       gap={2}
     >
       <HabitsHeader lastDay={lastDay} />
+      <HabitRows />
+    </Grid>
+  );
+};
 
+const HabitRows = () => {
+  const { habits } = useHabitValueContext();
+  return (
+    <>
       {habits.map((habit) => (
         <HabitRow habit={habit} key={habit.id} />
       ))}
-    </Grid>
+    </>
   );
 };
 
@@ -74,14 +87,24 @@ const HabitsHeader = ({ lastDay }: { lastDay: number }) => {
   );
 };
 
-const HabitAdd = () => {
-  const { createHabit, year, month } = useHabitContext();
+const useHabitAdd = () => {
+  const { year, month } = usePeriodContext();
+  const { createHabit } = useHabitActionContext();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const submitHandler: HabitFormProps['submitHandler'] = (habitDetail) => {
-    createHabit({ ...habitDetail, year, month });
-    onClose();
-  };
+  const submitHandler: HabitFormProps['submitHandler'] = useCallback(
+    (habitDetail) => {
+      createHabit({ ...habitDetail, year, month });
+      onClose();
+    },
+    [createHabit, month, onClose, year],
+  );
+
+  return { submitHandler, onOpen, onClose, isOpen };
+};
+
+const HabitAdd = () => {
+  const { submitHandler, onOpen, onClose, isOpen } = useHabitAdd();
 
   return (
     <>

@@ -1,4 +1,5 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useCallback, useEffect, useState } from 'react';
+import { usePeriodContext } from '../hooks/usePeriodContext';
 import {
   Habit,
   HabitCheckUpdateContent,
@@ -6,18 +7,17 @@ import {
   HabitDetailUpdateContent,
   HabitManager,
   HabitsResponse,
-  Period,
 } from '../service/HabitManager';
 
-export interface HabitsState extends HabitsResponse, Period {
-  lastDay: number;
+export interface HabitActions {
   createHabit(content: HabitCreateContent): Promise<void>;
   deleteHabit(id: Habit['id']): Promise<void>;
   updateHabitDetail(content: HabitDetailUpdateContent): Promise<void>;
   updateHabitCheck(content: HabitCheckUpdateContent): Promise<void>;
 }
 
-export const HabitContext = createContext<HabitsState | null>(null);
+export const HabitActionContext = createContext<HabitActions | null>(null);
+export const HabitValueContext = createContext<HabitsResponse | null>(null);
 
 export const HabitProvider = ({
   children,
@@ -26,57 +26,64 @@ export const HabitProvider = ({
   children: React.ReactNode;
   habitManager: HabitManager;
 }) => {
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = today.getMonth() + 1;
-  const lastDay = new Date(year, month, 0).getDate();
-
+  const { year, month } = usePeriodContext();
   const [habits, setHabits] = useState<HabitsResponse['habits']>([]);
   const [checks, setChecks] = useState<HabitsResponse['checks']>({});
 
-  const loadHabitData = async () => {
+  const loadHabitData = useCallback(async () => {
     const data = await habitManager.getHabits({ year, month });
     setHabits(data.habits);
     setChecks(data.checks);
-  };
+  }, [habitManager, month, year]);
 
   useEffect(() => {
     loadHabitData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const createHabit = async (content: HabitCreateContent) => {
-    await habitManager.createHabit(content);
-    loadHabitData();
-  };
-  const deleteHabit = async (id: Habit['id']) => {
-    await habitManager.deleteHabit(id);
-    loadHabitData();
-  };
-  const updateHabitDetail = async (content: HabitDetailUpdateContent) => {
-    await habitManager.updateHabitDetail(content);
-    loadHabitData();
-  };
-  const updateHabitCheck = async (content: HabitCheckUpdateContent) => {
-    await habitManager.updateHabitCheck(content);
-    loadHabitData();
-  };
+  const createHabit = useCallback(
+    async (content: HabitCreateContent) => {
+      await habitManager.createHabit(content);
+      loadHabitData();
+    },
+    [habitManager, loadHabitData],
+  );
+
+  const deleteHabit = useCallback(
+    async (id: Habit['id']) => {
+      await habitManager.deleteHabit(id);
+      loadHabitData();
+    },
+    [habitManager, loadHabitData],
+  );
+
+  const updateHabitDetail = useCallback(
+    async (content: HabitDetailUpdateContent) => {
+      await habitManager.updateHabitDetail(content);
+      loadHabitData();
+    },
+    [habitManager, loadHabitData],
+  );
+  const updateHabitCheck = useCallback(
+    async (content: HabitCheckUpdateContent) => {
+      await habitManager.updateHabitCheck(content);
+      loadHabitData();
+    },
+    [habitManager, loadHabitData],
+  );
 
   return (
-    <HabitContext.Provider
-      value={{
-        year,
-        month,
-        lastDay,
-        habits,
-        checks,
-        createHabit,
-        deleteHabit,
-        updateHabitDetail,
-        updateHabitCheck,
-      }}
+    <HabitActionContext.Provider
+      value={{ createHabit, deleteHabit, updateHabitDetail, updateHabitCheck }}
     >
-      {children}
-    </HabitContext.Provider>
+      <HabitValueContext.Provider
+        value={{
+          habits,
+          checks,
+        }}
+      >
+        {children}
+      </HabitValueContext.Provider>
+    </HabitActionContext.Provider>
   );
 };

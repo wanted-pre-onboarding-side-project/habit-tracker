@@ -1,31 +1,49 @@
-import { useDisclosure, GridItem } from '@chakra-ui/react';
-import React from 'react';
-import { useHabitContext } from '../hooks/useHabitContext';
+import { GridItem, useDisclosure } from '@chakra-ui/react';
+import React, { useCallback } from 'react';
+import { useHabitActionContext } from '../hooks/useHabitContext';
+import { usePeriodContext } from '../hooks/usePeriodContext';
 import { Habit } from '../service/HabitManager';
 import HabitDetailForm, {
-  HabitFormProps,
   HabitDetailFormContainer,
+  HabitFormProps,
 } from './HabitDetailForm';
 
-const HabitRow = ({ habit }: { habit: Habit }) => {
-  const { year, month, lastDay, updateHabitDetail, deleteHabit } =
-    useHabitContext();
+const useHabitRow = (habitId: Habit['id']) => {
+  const { year, month, lastDay } = usePeriodContext();
+  const { updateHabitDetail, deleteHabit } = useHabitActionContext();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const submitHandler: HabitFormProps['submitHandler'] = (habitDetail) => {
-    updateHabitDetail({
-      ...habitDetail,
-      year,
-      month,
-      id: habit.id,
-    });
-    onClose();
-  };
+  const submitHandler: HabitFormProps['submitHandler'] = useCallback(
+    (habitDetail) => {
+      updateHabitDetail({
+        ...habitDetail,
+        year,
+        month,
+        id: habitId,
+      });
+      onClose();
+    },
+    [habitId, month, onClose, updateHabitDetail, year],
+  );
 
-  const deleteHandler = () => {
-    deleteHabit(habit.id);
+  const deleteHandler = useCallback(() => {
+    deleteHabit(habitId);
     onClose();
+  }, [deleteHabit, habitId, onClose]);
+
+  return {
+    lastDay,
+    isOpen,
+    onOpen,
+    onClose,
+    submitHandler,
+    deleteHandler,
   };
+};
+
+const HabitRow = ({ habit }: { habit: Habit }) => {
+  const { lastDay, isOpen, onOpen, onClose, submitHandler, deleteHandler } =
+    useHabitRow(habit.id);
 
   return (
     <React.Fragment key={habit.id}>
@@ -54,4 +72,4 @@ const HabitRow = ({ habit }: { habit: Habit }) => {
   );
 };
 
-export default HabitRow;
+export default React.memo(HabitRow);
