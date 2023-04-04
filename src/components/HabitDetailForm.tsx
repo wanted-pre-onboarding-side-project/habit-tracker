@@ -62,7 +62,11 @@ const HabitDetailForm = ({
         <Button type="submit" form={HABIT_DETAIL_FORM_ID} colorScheme="blue">
           저장
         </Button>
-        {deleteHandler && <Button colorScheme="red">삭제</Button>}
+        {deleteHandler && (
+          <Button colorScheme="red" onClick={deleteHandler}>
+            삭제
+          </Button>
+        )}
       </Stack>
     </Stack>
   );
