@@ -1,9 +1,9 @@
 import { Fragment } from 'react';
 import { Grid, GridItem } from '@chakra-ui/react';
 import { Habit } from '../../interface/main';
-import HabitNameCard from './HabitNameCard';
-import HabitDetail from './HabitDetail';
-import HabitController from './HabitController';
+import HabitNameCard from './list_parts/HabitNameCard';
+import HabitDetail from './list_parts/HabitDetail';
+import HabitController from './list_parts/HabitController';
 
 const HabitList = ({
   habits,

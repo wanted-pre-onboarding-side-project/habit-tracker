@@ -1,5 +1,5 @@
 import { Flex, HStack, Tag, Text } from '@chakra-ui/react';
-import { Habit } from '../../interface/main';
+import { Habit } from '../../../interface/main';
 
 const HabitDetail = ({
   days,

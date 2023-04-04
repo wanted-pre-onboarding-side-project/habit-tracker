@@ -1,5 +1,5 @@
 import { HStack, Button } from '@chakra-ui/react';
-import { Habit } from '../../interface/main';
+import { Habit } from '../../../interface/main';
 
 const HabitController = ({
   habitId,
