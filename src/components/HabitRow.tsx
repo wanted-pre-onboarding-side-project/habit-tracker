@@ -4,7 +4,7 @@ import { useHabitContext } from '../context/HabitContext';
 import { Habit } from '../service/HabitManager';
 import HabitDetailForm, {
   HabitFormProps,
-  HabitDrawer,
+  HabitDetailFormContainer,
 } from './HabitDetailForm';
 
 const HabitRow = ({ habit }: { habit: Habit }) => {
@@ -41,14 +41,15 @@ const HabitRow = ({ habit }: { habit: Habit }) => {
       {/* TODO : 체크박스 등으로 수정 필요 */}
       <GridItem colSpan={lastDay}>checks</GridItem>
 
-      <HabitDrawer onClose={onClose} isOpen={isOpen} title={'습관 수정하기'}>
+      <HabitDetailFormContainer onClose={onClose} isOpen={isOpen}>
         <HabitDetailForm
-          habitName={habit.name}
-          habitDescription={habit.description}
+          habitFormTitle="습관 수정하기"
+          defaultHabitName={habit.name}
+          defaultHabitDescription={habit.description}
           submitHandler={submitHandler}
           deleteHandler={deleteHandler}
         />
-      </HabitDrawer>
+      </HabitDetailFormContainer>
     </React.Fragment>
   );
 };

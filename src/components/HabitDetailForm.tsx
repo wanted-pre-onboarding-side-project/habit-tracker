@@ -3,11 +3,10 @@ import {
   Drawer,
   DrawerBody,
   DrawerContent,
-  DrawerHeader,
   DrawerOverlay,
-  DrawerProps,
   FormControl,
   FormLabel,
+  Heading,
   Input,
   Stack,
 } from '@chakra-ui/react';
@@ -16,9 +15,10 @@ import { HabitCreateContent } from '../service/HabitManager';
 const HABIT_DETAIL_FORM_ID = 'habit-detail-form';
 
 const HabitDetailForm = ({
+  habitFormTitle,
   submitHandler,
-  habitName,
-  habitDescription,
+  defaultHabitName,
+  defaultHabitDescription,
   deleteHandler,
 }: HabitFormProps) => {
   const onSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
@@ -38,23 +38,27 @@ const HabitDetailForm = ({
   };
   return (
     <Stack spacing={4}>
+      {habitFormTitle && <Heading fontSize="xl">{habitFormTitle}</Heading>}
+
       <form onSubmit={onSubmit} id={HABIT_DETAIL_FORM_ID}>
         <FormControl isRequired>
           <FormLabel>습관</FormLabel>
           <Input
+            type="text"
             name="habitName"
             required
             placeholder="만들고 싶은 습관을 입력해주세요"
-            defaultValue={habitName}
+            defaultValue={defaultHabitName}
           />
         </FormControl>
 
         <FormControl>
           <FormLabel>설명</FormLabel>
           <Input
+            type="text"
             name="habitDescription"
             placeholder="메모를 남겨보세요"
-            defaultValue={habitDescription}
+            defaultValue={defaultHabitDescription}
           />
         </FormControl>
       </form>
@@ -73,8 +77,12 @@ const HabitDetailForm = ({
 };
 
 export interface HabitFormProps {
-  habitName?: string;
-  habitDescription?: string;
+  /**폼 제목 */
+  habitFormTitle?: string;
+  /** 습관 이름 input 기본값, 습관수정 시 기존 습관 이름을 받아 표시합니다 */
+  defaultHabitName?: string;
+  /** 습관 설명 input 기본값, 습관수정 시 기존 습관 설명을 받아 표시합니다 */
+  defaultHabitDescription?: string;
   submitHandler({
     name,
     description,
@@ -85,23 +93,23 @@ export interface HabitFormProps {
 
 export default HabitDetailForm;
 
-export const HabitDrawer = ({
+export const HabitDetailFormContainer = ({
   onClose,
   isOpen,
-  title,
   children,
-}: HabitDrawerProps) => {
+}: HabitDetailFormContainerProps) => {
   return (
     <Drawer placement="bottom" onClose={onClose} isOpen={isOpen}>
       <DrawerOverlay />
       <DrawerContent>
-        <DrawerHeader borderBottomWidth="1px">{title}</DrawerHeader>
         <DrawerBody>{children}</DrawerBody>
       </DrawerContent>
     </Drawer>
   );
 };
 
-interface HabitDrawerProps extends DrawerProps {
-  title: string;
+interface HabitDetailFormContainerProps {
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
 }

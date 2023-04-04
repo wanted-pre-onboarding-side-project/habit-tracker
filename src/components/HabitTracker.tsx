@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { useHabitContext } from '../context/HabitContext';
 import HabitDetailForm, {
-  HabitDrawer,
+  HabitDetailFormContainer,
   HabitFormProps,
 } from './HabitDetailForm';
 import HabitRow from './HabitRow';
@@ -87,9 +87,12 @@ const HabitAdd = () => {
     <>
       <IconButton aria-label="add habit" icon={<AddIcon />} onClick={onOpen} />
 
-      <HabitDrawer onClose={onClose} isOpen={isOpen} title={'습관 생성하기'}>
-        <HabitDetailForm submitHandler={submitHandler} />
-      </HabitDrawer>
+      <HabitDetailFormContainer onClose={onClose} isOpen={isOpen}>
+        <HabitDetailForm
+          habitFormTitle="습관 생성하기"
+          submitHandler={submitHandler}
+        />
+      </HabitDetailFormContainer>
     </>
   );
 };
