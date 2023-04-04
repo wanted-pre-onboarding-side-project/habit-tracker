@@ -1,18 +1,24 @@
 import { useState } from 'react';
 import { Habit } from '../interface/main';
-
-const dummyHabit: Habit = {
-  id: 1,
-  name: '아침 명상',
-  description:
-    '아침 7시마마다 10분간 앉아서 호흡에만아침 7시마다 10분간마다 10분간 앉아서 호흡에만아침 7시마다 10분간다 10분간 앉아서 호흡에만아침 7시마다 10분간 앉아서 호흡에만 집중하기 집중하기',
-  days: ['월', '수', '화', '목'],
-};
+import { NewHabit } from '../interface/props';
 
 export const useHabitData = (): {
   habits: Habit[];
+  addHabit: (newHabit: NewHabit) => void;
 } => {
-  const [habits, setHabits] = useState<Habit[]>([dummyHabit]);
+  const [habits, setHabits] = useState<Habit[]>([]);
 
-  return { habits };
+  const handleAddHabit = (newHabit: NewHabit) => {
+    setHabits([
+      ...habits,
+      {
+        id: habits.length < 1 ? 1 : habits[habits.length - 1].id + 1,
+        name: newHabit.name,
+        description: newHabit.description,
+        days: newHabit.days,
+      },
+    ]);
+  };
+
+  return { habits, addHabit: handleAddHabit };
 };
