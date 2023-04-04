@@ -1,10 +1,17 @@
 import { Fragment } from 'react';
-import { Grid, GridItem, HStack, Button } from '@chakra-ui/react';
+import { Grid, GridItem } from '@chakra-ui/react';
 import { Habit } from '../../interface/main';
 import HabitNameCard from './HabitNameCard';
 import HabitDetail from './HabitDetail';
+import HabitController from './HabitController';
 
-const HabitList = ({ habits }: { habits: Habit[] }) => {
+const HabitList = ({
+  habits,
+  deleteHabit,
+}: {
+  habits: Habit[];
+  deleteHabit: (id: Habit['id']) => void;
+}) => {
   return (
     <Grid
       w="100%"
@@ -15,7 +22,7 @@ const HabitList = ({ habits }: { habits: Habit[] }) => {
       {habits.map((habit) => (
         <Fragment key={habit.id}>
           <GridItem h="100%" border="2px" padding="2">
-            <HabitController />
+            <HabitController habitId={habit.id} deleteHabit={deleteHabit} />
           </GridItem>
           <GridItem h="100%" border="2px" padding="2">
             <HabitNameCard name={habit.name} />
@@ -30,14 +37,3 @@ const HabitList = ({ habits }: { habits: Habit[] }) => {
 };
 
 export default HabitList;
-
-const HabitController = () => {
-  // 임시로 더미 컴포넌트 생성
-  return (
-    <HStack justify="space-around">
-      <Button bg="blue.100">자세히</Button>
-      <Button bg="green.100">수정</Button>
-      <Button bg="tomato">삭제</Button>
-    </HStack>
-  );
-};

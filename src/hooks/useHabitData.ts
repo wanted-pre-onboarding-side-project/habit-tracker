@@ -4,11 +4,12 @@ import { NewHabit } from '../interface/props';
 
 export const useHabitData = (): {
   habits: Habit[];
-  addHabit: (newHabit: NewHabit) => void;
+  createHabit: (newHabit: NewHabit) => void;
+  deleteHabit: (id: Habit['id']) => void;
 } => {
   const [habits, setHabits] = useState<Habit[]>([]);
 
-  const handleAddHabit = (newHabit: NewHabit) => {
+  const handleCreateHabit = (newHabit: NewHabit) => {
     setHabits([
       ...habits,
       {
@@ -20,5 +21,13 @@ export const useHabitData = (): {
     ]);
   };
 
-  return { habits, addHabit: handleAddHabit };
+  const handleDeleteHabit = (id: Habit['id']) => {
+    setHabits(habits.filter((habit) => habit.id !== id));
+  };
+
+  return {
+    habits,
+    createHabit: handleCreateHabit,
+    deleteHabit: handleDeleteHabit,
+  };
 };

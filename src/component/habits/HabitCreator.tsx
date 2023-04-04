@@ -10,14 +10,14 @@ import {
   VStack,
   Textarea,
 } from '@chakra-ui/react';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { Day } from '../../interface/main';
 import { NewHabit } from '../../interface/props';
 
 const HabitCreator = ({
-  addHabit,
+  createHabit,
 }: {
-  addHabit: (habit: NewHabit) => void;
+  createHabit: (habit: NewHabit) => void;
 }) => {
   const defaultNewHbit = {
     name: '',
@@ -55,7 +55,7 @@ const HabitCreator = ({
       window.alert('적어도 한 개 요일을 선택해야 합니다.');
       return;
     }
-    addHabit(structuredClone(newHabit.current));
+    createHabit(structuredClone(newHabit.current));
     newHabit.current = defaultNewHbit;
     setIsActive(!isActive);
   };
