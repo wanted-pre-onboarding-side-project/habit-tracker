@@ -5,9 +5,9 @@ import App from './App';
 import { HabitProvider } from './context/HabitContext';
 import { PeriodProvider } from './context/PeriodContext';
 import reportWebVitals from './reportWebVitals';
-import { LocalHabitManager } from './service/HabitManager';
+import { LocalStorageHabitManager } from './service/LocalStorageHabitManager';
 
-const habitManager = new LocalHabitManager();
+const habitManager = new LocalStorageHabitManager();
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
