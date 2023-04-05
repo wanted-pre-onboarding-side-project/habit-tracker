@@ -10,23 +10,45 @@ import {
   VStack,
   Textarea,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useHabitsHandlers } from '../../context/HabitContextProvider';
+import { useUpdatingHabitId } from '../../context/HabitContextProvider';
+import { useUpdatingHabitIdChange } from '../../context/HabitContextProvider';
 import { DAYS } from '../../constant';
 
 const HabitCreator = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
+  const updatingId = useUpdatingHabitId();
+  const setUpdatingId = useUpdatingHabitIdChange();
 
   const { handleHabitInput, clearHabitInput, handleHabitCreateComplete } =
     useHabitsHandlers();
+
+  const onClickAddMore = () => {
+    setIsActive(!isActive);
+    setUpdatingId(-1);
+  };
+
+  const onClickCancel = useCallback(() => {
+    if (window.confirm('정말로 취소하시겠습니까?')) {
+      clearHabitInput();
+      setIsActive(!isActive);
+    }
+  }, [clearHabitInput, isActive]);
 
   const onClickComplete = () => {
     const isSuccess = handleHabitCreateComplete();
     if (isSuccess) setIsActive(!isActive);
   };
+  useEffect(() => {
+    if (updatingId !== -1 && isActive)
+      if (
+        window.confirm('작성 중인 내용이 사라집니다. 정말로 취소하시겠습니까?')
+      )
+        setIsActive(false);
+  }, [updatingId, isActive]);
 
-  if (!isActive)
-    return <Button onClick={() => setIsActive(!isActive)}>add more +</Button>;
+  if (!isActive) return <Button onClick={onClickAddMore}>add more +</Button>;
 
   return (
     <Grid
@@ -36,17 +58,7 @@ const HabitCreator = () => {
       alignContent="center"
     >
       <GridItem h="100%" p="2">
-        <Button
-          w="30%"
-          bg="tomato"
-          mr="10%"
-          onClick={() => {
-            if (window.confirm('정말로 취소하시겠습니까?')) {
-              clearHabitInput();
-              setIsActive(!isActive);
-            }
-          }}
-        >
+        <Button w="30%" bg="tomato" mr="10%" onClick={onClickCancel}>
           취소
         </Button>
         <Button w="60%" bg="blue.300" onClick={onClickComplete}>
