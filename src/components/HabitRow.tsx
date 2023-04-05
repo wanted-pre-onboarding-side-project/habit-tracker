@@ -27,6 +27,7 @@ const HabitRow = ({ habit }: { habit: Habit }) => {
           habitFormTitle="습관 수정하기"
           defaultHabitName={habit.name}
           defaultHabitDescription={habit.description}
+          defaultRepeatDays={habit.dates}
           submitHandler={updateHabitRow}
           deleteHandler={deleteHabitRow}
         />
