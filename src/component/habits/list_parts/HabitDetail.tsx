@@ -7,22 +7,23 @@ import {
   Text,
   Textarea,
 } from '@chakra-ui/react';
-import { Habit, Day } from '../../../interface/main';
+import { Habit } from '../../../interface/main';
 import { DAYS } from '../../../constant';
+import { useHabitsHandlers } from '../../../context/HabitContextProvider';
 
 const HabitDetail = ({
   isUpdating,
+  id,
   days,
   description,
-  changeDesc,
-  changeDay,
 }: {
   isUpdating: boolean;
+  id: Habit['id'];
   days: Habit['days'];
   description: Habit['description'];
-  changeDesc: (desc: Habit['description']) => void;
-  changeDay: (isChecked: boolean, day: Day) => void;
 }) => {
+  const { handleHabitInput } = useHabitsHandlers();
+
   return (
     <Flex direction="row" gap="8" px="5">
       <HStack>
@@ -33,7 +34,7 @@ const HabitDetail = ({
             </Tag>
           ))
         ) : (
-          <DaysSelectForm onChangeDay={changeDay} currentDays={days} />
+          <DaysSelectForm id={id} currentDays={days} />
         )}
       </HStack>
 
@@ -44,7 +45,13 @@ const HabitDetail = ({
           variant="filled"
           bg="green.100"
           defaultValue={description}
-          onChange={(e) => changeDesc(e.currentTarget.value)}
+          onChange={(e) =>
+            handleHabitInput({
+              id: id,
+              payload: e.target.value,
+              actionType: 'DESCRIPTION',
+            })
+          }
         />
       )}
     </Flex>
@@ -54,12 +61,14 @@ const HabitDetail = ({
 export default HabitDetail;
 
 const DaysSelectForm = ({
-  onChangeDay,
+  id,
   currentDays,
 }: {
-  onChangeDay: (isChecked: boolean, day: Day) => void;
+  id: Habit['id'];
   currentDays: Habit['days'];
 }) => {
+  const { handleHabitInput } = useHabitsHandlers();
+
   return (
     <>
       {DAYS.map((day) => (
@@ -73,7 +82,13 @@ const DaysSelectForm = ({
             defaultChecked={
               currentDays.findIndex((D) => D === day) < 0 ? false : true
             }
-            onChange={(e) => onChangeDay(e.target.checked, day as Day)}
+            onChange={(e) =>
+              handleHabitInput({
+                id: id,
+                payload: { isChecked: e.target.checked, day: day },
+                actionType: 'DAYS',
+              })
+            }
           ></Checkbox>
         </VStack>
       ))}

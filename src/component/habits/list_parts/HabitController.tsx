@@ -1,26 +1,44 @@
 import { HStack, Button } from '@chakra-ui/react';
 import { Habit } from '../../../interface/main';
 import { useHabitsHandlers } from '../../../context/HabitContextProvider';
+import { useUpdatingHabitIdChange } from '../../../context/HabitContextProvider';
 
 const HabitController = ({
-  habitId,
-  setUpdatingId,
-  handleUpdateSubmit,
+  isUpdating,
+  id,
 }: {
-  habitId: Habit['id'];
-  setUpdatingId: (updatingId: Habit['id']) => void;
-  handleUpdateSubmit: () => void;
+  isUpdating: boolean;
+  id: Habit['id'];
 }) => {
-  const { handleDeleteHabit } = useHabitsHandlers();
+  const { handleHabitCreateComplete, handleDeleteHabit } = useHabitsHandlers();
+  const setUpdatingId = useUpdatingHabitIdChange();
+
+  if (isUpdating)
+    return (
+      <HStack justify="space-around">
+        <Button bg="tomato" w="30%" onClick={() => setUpdatingId(-1)}>
+          취소
+        </Button>
+        <Button
+          bg="green.100"
+          w="50%"
+          onClick={() => {
+            handleHabitCreateComplete(id);
+            setUpdatingId(-1);
+          }}
+        >
+          확인
+        </Button>
+      </HStack>
+    );
+
   return (
     <HStack justify="space-around">
-      <Button bg="blue.100" onClick={handleUpdateSubmit}>
-        자세히
-      </Button>
-      <Button bg="green.100" onClick={() => setUpdatingId(habitId)}>
+      <Button bg="blue.100">자세히</Button>
+      <Button bg="green.100" onClick={() => setUpdatingId(id)}>
         수정
       </Button>
-      <Button bg="tomato" onClick={() => handleDeleteHabit(habitId)}>
+      <Button bg="tomato" onClick={() => handleDeleteHabit(id)}>
         삭제
       </Button>
     </HStack>
