@@ -1,3 +1,5 @@
+import { HandleHabitInputProps } from './props';
+
 export interface Habit {
   id: number;
   name: string;
@@ -6,3 +8,14 @@ export interface Habit {
 }
 
 export type Day = '월' | '화' | '수' | '목' | '금' | '토' | '일';
+
+export interface HabitsHandlersContextType {
+  handleHabitInput: ({
+    id,
+    payload,
+    actionType,
+  }: HandleHabitInputProps) => void;
+  clearHabitInput: () => void;
+  handleHabitInputComplete: () => boolean;
+  handleDeleteHabit: (id: Habit['id']) => void;
+}

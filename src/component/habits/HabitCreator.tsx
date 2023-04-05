@@ -10,54 +10,18 @@ import {
   VStack,
   Textarea,
 } from '@chakra-ui/react';
-import { useState, useRef } from 'react';
-import { Day } from '../../interface/main';
-import { NewHabit } from '../../interface/props';
-
-const HabitCreator = ({
-  createHabit,
-}: {
-  createHabit: (habit: NewHabit) => void;
-}) => {
-  const defaultNewHbit = {
-    name: '',
-    description: '',
-    days: [],
-  };
+import { useState } from 'react';
+import { useHabitsHandlers } from '../../context/HabitContextProvider';
+const DAYS = ['월', '화', '수', '목', '금', '토', '일'];
+const HabitCreator = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
-  const newHabit = useRef<NewHabit>(defaultNewHbit);
 
-  const DAYS = ['월', '화', '수', '목', '금', '토', '일'];
+  const { handleHabitInput, clearHabitInput, handleHabitInputComplete } =
+    useHabitsHandlers();
 
-  const handleInput = (
-    fieldName: keyof Pick<NewHabit, 'name' | 'description'>,
-    value: NewHabit[keyof Pick<NewHabit, 'name' | 'description'>],
-  ) => {
-    newHabit.current[fieldName] = value;
-  };
-
-  const handleDaysInput = (day: Day, isChecked: boolean) => {
-    const currentDays = [...newHabit.current.days];
-    if (isChecked) newHabit.current.days = [...currentDays, day];
-    else {
-      newHabit.current.days = currentDays.filter((e) => e !== day);
-    }
-  };
-
-  const handleOnCreate = () => {
-    const { name, days } = newHabit.current;
-
-    if (name.trim() === '') {
-      window.alert('이름은 필수 입력입니다.');
-      return;
-    }
-    if (!days.length) {
-      window.alert('적어도 한 개 요일을 선택해야 합니다.');
-      return;
-    }
-    createHabit(structuredClone(newHabit.current));
-    newHabit.current = defaultNewHbit;
-    setIsActive(!isActive);
+  const onClickComplete = () => {
+    const isSuccess = handleHabitInputComplete();
+    if (isSuccess) setIsActive(!isActive);
   };
 
   return (
@@ -77,13 +41,15 @@ const HabitCreator = ({
               bg="tomato"
               mr="10%"
               onClick={() => {
-                if (window.confirm('정말로 취소하시겠습니까?'))
+                if (window.confirm('정말로 취소하시겠습니까?')) {
+                  clearHabitInput();
                   setIsActive(!isActive);
+                }
               }}
             >
               취소
             </Button>
-            <Button w="60%" bg="blue.300" onClick={handleOnCreate}>
+            <Button w="60%" bg="blue.300" onClick={onClickComplete}>
               완료
             </Button>
           </GridItem>
@@ -92,7 +58,12 @@ const HabitCreator = ({
               placeholder="습관 명칭을 입력하세요."
               variant="flushed"
               borderColor="blue"
-              onChange={(e) => handleInput('name', e.currentTarget.value)}
+              onChange={(e) =>
+                handleHabitInput({
+                  payload: e.currentTarget.value,
+                  actionType: 'NAME',
+                })
+              }
             ></Input>
           </GridItem>
           <GridItem h="100%" border="2px" padding="2">
@@ -107,16 +78,22 @@ const HabitCreator = ({
                       borderColor="salmon"
                       size="lg"
                       onChange={(e) =>
-                        handleDaysInput(day as Day, e.target.checked)
+                        handleHabitInput({
+                          payload: { isChecked: e.target.checked, day: day },
+                          actionType: 'DAYS',
+                        })
                       }
                     ></Checkbox>
                   </VStack>
                 ))}
               </HStack>
               <Textarea
-                onChange={(e) =>
-                  handleInput('description', e.currentTarget.value)
-                }
+                onChange={(e) => {
+                  handleHabitInput({
+                    payload: e.currentTarget.value,
+                    actionType: 'DESCRIPTION',
+                  });
+                }}
               />
             </Flex>
           </GridItem>
