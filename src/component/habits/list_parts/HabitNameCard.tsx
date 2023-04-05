@@ -1,16 +1,8 @@
 import { Center, Text, Input } from '@chakra-ui/react';
-import { Habit } from '../../../interface/main';
+import { HabitNameCardProps } from '../../../interface/componentProps';
 import { useHabitsHandlers } from '../../../context/HabitContextProvider';
 
-const HabitNameCard = ({
-  isUpdating,
-  id,
-  name,
-}: {
-  isUpdating: boolean;
-  id: Habit['id'];
-  name: Habit['name'];
-}) => {
+const HabitNameCard = ({ isUpdating, id, name }: HabitNameCardProps) => {
   const { handleHabitInput } = useHabitsHandlers();
 
   return (

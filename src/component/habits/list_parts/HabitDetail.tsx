@@ -7,7 +7,8 @@ import {
   Text,
   Textarea,
 } from '@chakra-ui/react';
-import { Habit } from '../../../interface/main';
+import { HabitDetailProps } from '../../../interface/componentProps';
+import { DaysSelectFormProps } from '../../../interface/componentProps';
 import { DAYS } from '../../../constant';
 import { useHabitsHandlers } from '../../../context/HabitContextProvider';
 
@@ -16,12 +17,7 @@ const HabitDetail = ({
   id,
   days,
   description,
-}: {
-  isUpdating: boolean;
-  id: Habit['id'];
-  days: Habit['days'];
-  description: Habit['description'];
-}) => {
+}: HabitDetailProps) => {
   const { handleHabitInput } = useHabitsHandlers();
 
   return (
@@ -60,13 +56,7 @@ const HabitDetail = ({
 
 export default HabitDetail;
 
-const DaysSelectForm = ({
-  id,
-  currentDays,
-}: {
-  id: Habit['id'];
-  currentDays: Habit['days'];
-}) => {
+const DaysSelectForm = ({ id, currentDays }: DaysSelectFormProps) => {
   const { handleHabitInput } = useHabitsHandlers();
 
   return (

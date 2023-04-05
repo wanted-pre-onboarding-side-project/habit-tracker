@@ -5,9 +5,10 @@ import {
   useState,
   useRef,
 } from 'react';
-import { Habit, HabitsHandlersContextType } from '../interface/main';
+import { Habit } from '../interface/habit';
+import { HabitsHandlersContextType } from '../interface/context';
+import { HandleHabitInputProps } from '../interface/eventHandlers';
 import { isNameEmpty } from '../util/validator';
-import { HandleHabitInputProps } from '../interface/props';
 
 const HabitsContext = createContext<Habit[]>([]);
 const HabitsHandlersContext = createContext({});

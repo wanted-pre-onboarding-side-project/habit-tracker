@@ -1,15 +1,9 @@
 import { HStack, Button } from '@chakra-ui/react';
-import { Habit } from '../../../interface/main';
+import { HabitControllerProps } from '../../../interface/componentProps';
 import { useHabitsHandlers } from '../../../context/HabitContextProvider';
 import { useUpdatingHabitIdChange } from '../../../context/HabitContextProvider';
 
-const HabitController = ({
-  isUpdating,
-  id,
-}: {
-  isUpdating: boolean;
-  id: Habit['id'];
-}) => {
+const HabitController = ({ isUpdating, id }: HabitControllerProps) => {
   const { handleHabitCreateComplete, handleDeleteHabit } = useHabitsHandlers();
   const setUpdatingId = useUpdatingHabitIdChange();
 
