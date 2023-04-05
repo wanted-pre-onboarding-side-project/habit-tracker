@@ -16,11 +16,11 @@ const DAYS = ['월', '화', '수', '목', '금', '토', '일'];
 const HabitCreator = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
 
-  const { handleHabitInput, clearHabitInput, handleHabitInputComplete } =
+  const { handleHabitInput, clearHabitInput, handleHabitCreateComplete } =
     useHabitsHandlers();
 
   const onClickComplete = () => {
-    const isSuccess = handleHabitInputComplete();
+    const isSuccess = handleHabitCreateComplete();
     if (isSuccess) setIsActive(!isActive);
   };
 

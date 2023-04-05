@@ -11,10 +11,15 @@ import { HandleHabitInputProps } from '../interface/props';
 
 const HabitsContext = createContext<Habit[]>([]);
 const HabitsHandlersContext = createContext({});
+const UpdatingContext = createContext<Habit['id'] | null>(null);
+const UpdatingHandlerContext = createContext({});
 
 export const useHabitsData = () => useContext(HabitsContext);
 export const useHabitsHandlers = () =>
   useContext(HabitsHandlersContext) as HabitsHandlersContextType;
+export const useUpdatingHabit = () => useContext(UpdatingContext);
+export const useUpdatingHabitHandler = () =>
+  useContext(UpdatingHandlerContext) as (updatingId: Habit['id']) => void;
 
 const habitSkeleton = {
   id: -1,
@@ -25,8 +30,11 @@ const habitSkeleton = {
 
 const HabitContextProvider = ({ children }: { children: JSX.Element }) => {
   console.log('Provider rendered');
-
   const [habits, setHabits] = useState<Habit[]>([]);
+  console.log(habits);
+  const [updatingHabitId, setUpdatingHabitId] = useState<Habit['id'] | null>(
+    null,
+  );
 
   const updatingHabit = useRef<Habit>(structuredClone(habitSkeleton));
 
@@ -65,7 +73,7 @@ const HabitContextProvider = ({ children }: { children: JSX.Element }) => {
     updatingHabit.current = structuredClone(habitSkeleton);
   }, []);
 
-  const handleHabitInputComplete = useCallback((): boolean => {
+  const handleHabitCreateComplete = useCallback((): boolean => {
     const { name, days } = updatingHabit.current;
     if (isNameEmpty(name)) {
       window.alert('이름은 필수 입력입니다.');
@@ -80,10 +88,35 @@ const HabitContextProvider = ({ children }: { children: JSX.Element }) => {
     return true;
   }, [habits, updatingHabit, clearHabitInput]);
 
+  const handleHabitUpdateComplete = useCallback(
+    (updatedHabit: Habit): boolean => {
+      const { name, days } = updatedHabit;
+      if (isNameEmpty(name)) {
+        window.alert('이름은 필수 입력입니다.');
+        return false;
+      }
+      if (!days.length) {
+        window.alert('적어도 한 개 요일을 선택해야 합니다.');
+        return false;
+      }
+      const updatedHabits = structuredClone(habits).map((curr: Habit) =>
+        curr.id !== updatedHabit.id ? curr : updatedHabit,
+      );
+      setHabits(updatedHabits);
+      return true;
+    },
+    [habits],
+  );
+
   const handleDeleteHabit = useCallback(
     (id: Habit['id']) => setHabits(habits.filter((habit) => habit.id !== id)),
     [habits],
   );
+
+  const handleUpdatingHabitId = (updatingId: Habit['id']) => {
+    setUpdatingHabitId(updatingId);
+    updatingHabit.current = habits[updatingId];
+  };
 
   //  TODO
   //  <HabitsHandlersContext.Provider> 이놈의 value는 객체다. 그러니까 memoization 해야한다.
@@ -93,11 +126,16 @@ const HabitContextProvider = ({ children }: { children: JSX.Element }) => {
         value={{
           handleHabitInput,
           clearHabitInput,
-          handleHabitInputComplete,
+          handleHabitCreateComplete,
+          handleHabitUpdateComplete,
           handleDeleteHabit,
         }}
       >
-        {children}
+        <UpdatingContext.Provider value={updatingHabitId}>
+          <UpdatingHandlerContext.Provider value={handleUpdatingHabitId}>
+            {children}
+          </UpdatingHandlerContext.Provider>
+        </UpdatingContext.Provider>
       </HabitsHandlersContext.Provider>
     </HabitsContext.Provider>
   );
