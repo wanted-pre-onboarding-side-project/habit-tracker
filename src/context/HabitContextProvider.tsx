@@ -35,27 +35,26 @@ const HabitContextProvider = ({ children }: { children: JSX.Element }) => {
     null,
   );
 
-  const updatingHabit = useRef<Habit>(structuredClone(habitSkeleton));
+  const habitFrame = useRef<Habit>(structuredClone(habitSkeleton));
 
   const handleHabitInput = useCallback(
     ({ id, payload, actionType }: HandleHabitInputProps) => {
       if (typeof id === 'undefined') {
-        updatingHabit.current.id = habits.length;
-      } else updatingHabit.current.id = id;
+        habitFrame.current.id = habits.length;
+      } else habitFrame.current.id = id;
       switch (actionType) {
         case 'NAME':
-          updatingHabit.current.name = payload as string;
+          habitFrame.current.name = payload as string;
           break;
         case 'DESCRIPTION':
-          updatingHabit.current.description = payload as string;
+          habitFrame.current.description = payload as string;
           break;
         case 'DAYS': {
           if (typeof payload !== 'string') {
             const { isChecked, day } = payload;
-            const currentDays = [...updatingHabit.current.days];
-            if (isChecked) updatingHabit.current.days = [...currentDays, day];
-            else
-              updatingHabit.current.days = currentDays.filter((e) => e !== day);
+            const currentDays = [...habitFrame.current.days];
+            if (isChecked) habitFrame.current.days = [...currentDays, day];
+            else habitFrame.current.days = currentDays.filter((e) => e !== day);
           }
           break;
         }
@@ -67,29 +66,29 @@ const HabitContextProvider = ({ children }: { children: JSX.Element }) => {
   );
 
   const clearHabitInput = useCallback(() => {
-    updatingHabit.current = structuredClone(habitSkeleton);
+    habitFrame.current = structuredClone(habitSkeleton);
   }, []);
 
   const handleHabitSubmit = useCallback(
     (updatingId: Habit['id']): boolean => {
-      if (isNameEmpty(updatingHabit.current.name)) {
+      if (isNameEmpty(habitFrame.current.name)) {
         window.alert('이름은 필수 입력입니다.');
         return false;
       }
-      if (!updatingHabit.current.days.length) {
+      if (!habitFrame.current.days.length) {
         window.alert('적어도 한 개 요일을 선택해야 합니다.');
         return false;
       }
 
       if (typeof updatingId === 'undefined') {
         // 아이디 제공 X => CREATE
-        setHabits([...habits, structuredClone(updatingHabit.current)]);
+        setHabits([...habits, structuredClone(habitFrame.current)]);
       } else {
         //  아이디 제공 O => UPDATE
         setHabits(
           habits.map((habit) =>
             habit.id === updatingId
-              ? structuredClone(updatingHabit.current)
+              ? structuredClone(habitFrame.current)
               : habit,
           ),
         );
@@ -97,7 +96,7 @@ const HabitContextProvider = ({ children }: { children: JSX.Element }) => {
       clearHabitInput();
       return true;
     },
-    [habits, updatingHabit, clearHabitInput],
+    [habits, habitFrame, clearHabitInput],
   );
 
   const handleDeleteHabit = useCallback(
@@ -109,8 +108,8 @@ const HabitContextProvider = ({ children }: { children: JSX.Element }) => {
     (updatingId: Habit['id']) => {
       setUpdatingHabitId(updatingId);
       if (updatingId === -1 || updatingId === -2)
-        updatingHabit.current = structuredClone(habitSkeleton);
-      else updatingHabit.current = structuredClone(habits[updatingId]);
+        habitFrame.current = structuredClone(habitSkeleton);
+      else habitFrame.current = structuredClone(habits[updatingId]);
     },
     [habits],
   );
