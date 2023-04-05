@@ -24,82 +24,79 @@ const HabitCreator = () => {
     if (isSuccess) setIsActive(!isActive);
   };
 
+  if (!isActive)
+    return <Button onClick={() => setIsActive(!isActive)}>add more +</Button>;
+
   return (
-    <>
-      {!isActive ? (
-        <Button onClick={() => setIsActive(!isActive)}>add more +</Button>
-      ) : (
-        <Grid
-          w="100%"
-          templateColumns="2.5fr 3fr 10fr"
-          gap={3}
-          alignContent="center"
+    <Grid
+      w="100%"
+      templateColumns="2.5fr 3fr 10fr"
+      gap={3}
+      alignContent="center"
+    >
+      <GridItem h="100%" p="2">
+        <Button
+          w="30%"
+          bg="tomato"
+          mr="10%"
+          onClick={() => {
+            if (window.confirm('정말로 취소하시겠습니까?')) {
+              clearHabitInput();
+              setIsActive(!isActive);
+            }
+          }}
         >
-          <GridItem h="100%" p="2">
-            <Button
-              w="30%"
-              bg="tomato"
-              mr="10%"
-              onClick={() => {
-                if (window.confirm('정말로 취소하시겠습니까?')) {
-                  clearHabitInput();
-                  setIsActive(!isActive);
-                }
-              }}
-            >
-              취소
-            </Button>
-            <Button w="60%" bg="blue.300" onClick={onClickComplete}>
-              완료
-            </Button>
-          </GridItem>
-          <GridItem h="100%" padding="2">
-            <Input
-              placeholder="습관 명칭을 입력하세요."
-              variant="flushed"
-              borderColor="blue"
-              onChange={(e) =>
-                handleHabitInput({
-                  payload: e.currentTarget.value,
-                  actionType: 'NAME',
-                })
-              }
-            ></Input>
-          </GridItem>
-          <GridItem h="100%" border="2px" padding="2">
-            <Flex direction="row" gap="8" px="5">
-              <HStack>
-                {DAYS.map((day) => (
-                  <VStack key={day}>
-                    <Tag size="lg" bg="salmon">
-                      {day}
-                    </Tag>
-                    <Checkbox
-                      borderColor="salmon"
-                      size="lg"
-                      onChange={(e) =>
-                        handleHabitInput({
-                          payload: { isChecked: e.target.checked, day: day },
-                          actionType: 'DAYS',
-                        })
-                      }
-                    ></Checkbox>
-                  </VStack>
-                ))}
-              </HStack>
-              <Textarea
-                onChange={(e) => {
-                  handleHabitInput({
-                    payload: e.currentTarget.value,
-                    actionType: 'DESCRIPTION',
-                  });
-                }}
-              />
-            </Flex>
-          </GridItem>
-        </Grid>
-      )}
-    </>
+          취소
+        </Button>
+        <Button w="60%" bg="blue.300" onClick={onClickComplete}>
+          완료
+        </Button>
+      </GridItem>
+      <GridItem h="100%" padding="2">
+        <Input
+          placeholder="습관 명칭을 입력하세요."
+          variant="flushed"
+          borderColor="blue"
+          onChange={(e) =>
+            handleHabitInput({
+              payload: e.currentTarget.value,
+              actionType: 'NAME',
+            })
+          }
+        ></Input>
+      </GridItem>
+      <GridItem h="100%" border="2px" padding="2">
+        <Flex direction="row" gap="8" px="5">
+          <HStack>
+            {DAYS.map((day) => (
+              <VStack key={day}>
+                <Tag size="lg" bg="salmon">
+                  {day}
+                </Tag>
+                <Checkbox
+                  borderColor="salmon"
+                  size="lg"
+                  onChange={(e) =>
+                    handleHabitInput({
+                      payload: { isChecked: e.target.checked, day: day },
+                      actionType: 'DAYS',
+                    })
+                  }
+                ></Checkbox>
+              </VStack>
+            ))}
+          </HStack>
+          <Textarea
+            onChange={(e) => {
+              handleHabitInput({
+                payload: e.currentTarget.value,
+                actionType: 'DESCRIPTION',
+              });
+            }}
+          />
+        </Flex>
+      </GridItem>
+    </Grid>
   );
 };
 
