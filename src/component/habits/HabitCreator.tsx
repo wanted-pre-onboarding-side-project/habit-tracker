@@ -37,7 +37,10 @@ const HabitCreator = () => {
 
   const onClickComplete = () => {
     const isSuccess = handleHabitSubmit();
-    if (isSuccess) setIsActive(!isActive);
+    if (isSuccess) {
+      setUpdatingId(-1);
+      setIsActive(!isActive);
+    }
   };
 
   if (!isActive) return <Button onClick={onClickAddMore}>add more +</Button>;

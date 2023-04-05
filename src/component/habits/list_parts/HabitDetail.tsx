@@ -11,6 +11,7 @@ import { HabitDetailProps } from '../../../interface/componentProps';
 import { DaysSelectFormProps } from '../../../interface/componentProps';
 import { DAYS } from '../../../constant';
 import { useHabitsHandlers } from '../../../context/HabitContextProvider';
+import { sortDays } from '../../../util/sortDays';
 
 const HabitDetail = ({
   isUpdating,
@@ -24,7 +25,7 @@ const HabitDetail = ({
     <Flex direction="row" gap="8" px="5">
       <HStack>
         {!isUpdating ? (
-          days.map((day) => (
+          days.sort(sortDays).map((day) => (
             <Tag key={day} size="lg" bg="salmon">
               {day}
             </Tag>

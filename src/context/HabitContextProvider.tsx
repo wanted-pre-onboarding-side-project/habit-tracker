@@ -62,7 +62,6 @@ const HabitContextProvider = ({ children }: { children: JSX.Element }) => {
         default:
           throw Error('정의되지 않은 actionType입니다.: ', actionType);
       }
-      //console.log(id, updatingHabit.current.id);
     },
     [habits],
   );
@@ -109,7 +108,7 @@ const HabitContextProvider = ({ children }: { children: JSX.Element }) => {
   const handleUpdatingHabitId = useCallback(
     (updatingId: Habit['id']) => {
       setUpdatingHabitId(updatingId);
-      if (updatingId === -1)
+      if (updatingId === -1 || updatingId === -2)
         updatingHabit.current = structuredClone(habitSkeleton);
       else updatingHabit.current = structuredClone(habits[updatingId]);
     },
