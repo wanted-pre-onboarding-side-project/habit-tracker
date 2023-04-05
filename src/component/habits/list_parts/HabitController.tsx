@@ -2,10 +2,18 @@ import { HStack, Button } from '@chakra-ui/react';
 import { HabitControllerProps } from '../../../interface/componentProps';
 import { useHabitsHandlers } from '../../../context/HabitContextProvider';
 import { useUpdatingHabitIdChange } from '../../../context/HabitContextProvider';
+import { useUpdatingHabitId } from '../../../context/HabitContextProvider';
 
 const HabitController = ({ isUpdating, id }: HabitControllerProps) => {
-  const { handleHabitCreateComplete, handleDeleteHabit } = useHabitsHandlers();
+  const { handleHabitSubmit, handleDeleteHabit } = useHabitsHandlers();
   const setUpdatingId = useUpdatingHabitIdChange();
+  const updatingId = useUpdatingHabitId();
+
+  const onClickUpdate = () => {
+    if (updatingId === -2)
+      window.alert('작성 중이던 것을 완료/취소 해 주세요. ');
+    else setUpdatingId(id);
+  };
 
   if (isUpdating)
     return (
@@ -17,7 +25,7 @@ const HabitController = ({ isUpdating, id }: HabitControllerProps) => {
           bg="green.100"
           w="50%"
           onClick={() => {
-            handleHabitCreateComplete(id);
+            handleHabitSubmit(id);
             setUpdatingId(-1);
           }}
         >
@@ -29,7 +37,7 @@ const HabitController = ({ isUpdating, id }: HabitControllerProps) => {
   return (
     <HStack justify="space-around">
       <Button bg="blue.100">자세히</Button>
-      <Button bg="green.100" onClick={() => setUpdatingId(id)}>
+      <Button bg="green.100" onClick={onClickUpdate}>
         수정
       </Button>
       <Button bg="tomato" onClick={() => handleDeleteHabit(id)}>

@@ -71,7 +71,7 @@ const HabitContextProvider = ({ children }: { children: JSX.Element }) => {
     updatingHabit.current = structuredClone(habitSkeleton);
   }, []);
 
-  const handleHabitCreateComplete = useCallback(
+  const handleHabitSubmit = useCallback(
     (updatingId: Habit['id']): boolean => {
       if (isNameEmpty(updatingHabit.current.name)) {
         window.alert('이름은 필수 입력입니다.');
@@ -124,7 +124,7 @@ const HabitContextProvider = ({ children }: { children: JSX.Element }) => {
         value={{
           handleHabitInput,
           clearHabitInput,
-          handleHabitCreateComplete,
+          handleHabitSubmit,
           handleDeleteHabit,
         }}
       >

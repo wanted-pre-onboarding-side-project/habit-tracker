@@ -7,6 +7,6 @@ export interface HabitsHandlersContextType {
     actionType,
   }: HandleHabitInputProps) => void;
   clearHabitInput: () => void;
-  handleHabitCreateComplete: (id?: Habit['id']) => boolean;
+  handleHabitSubmit: (id?: Habit['id']) => boolean;
   handleDeleteHabit: (id: Habit['id']) => void;
 }

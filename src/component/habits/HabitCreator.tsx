@@ -10,43 +10,35 @@ import {
   VStack,
   Textarea,
 } from '@chakra-ui/react';
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { useHabitsHandlers } from '../../context/HabitContextProvider';
-import { useUpdatingHabitId } from '../../context/HabitContextProvider';
 import { useUpdatingHabitIdChange } from '../../context/HabitContextProvider';
 import { DAYS } from '../../constant';
 
 const HabitCreator = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
-  const updatingId = useUpdatingHabitId();
   const setUpdatingId = useUpdatingHabitIdChange();
 
-  const { handleHabitInput, clearHabitInput, handleHabitCreateComplete } =
+  const { handleHabitInput, clearHabitInput, handleHabitSubmit } =
     useHabitsHandlers();
 
   const onClickAddMore = () => {
     setIsActive(!isActive);
-    setUpdatingId(-1);
+    setUpdatingId(-2);
   };
 
   const onClickCancel = useCallback(() => {
     if (window.confirm('정말로 취소하시겠습니까?')) {
+      setUpdatingId(-1);
       clearHabitInput();
       setIsActive(!isActive);
     }
-  }, [clearHabitInput, isActive]);
+  }, [clearHabitInput, isActive, setUpdatingId]);
 
   const onClickComplete = () => {
-    const isSuccess = handleHabitCreateComplete();
+    const isSuccess = handleHabitSubmit();
     if (isSuccess) setIsActive(!isActive);
   };
-  useEffect(() => {
-    if (updatingId !== -1 && isActive)
-      if (
-        window.confirm('작성 중인 내용이 사라집니다. 정말로 취소하시겠습니까?')
-      )
-        setIsActive(false);
-  }, [updatingId, isActive]);
 
   if (!isActive) return <Button onClick={onClickAddMore}>add more +</Button>;
 
