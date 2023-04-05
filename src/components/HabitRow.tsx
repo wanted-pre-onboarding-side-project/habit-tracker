@@ -5,7 +5,7 @@ import { Habit } from '../service/HabitManager';
 import HabitDetailForm, { HabitDetailFormContainer } from './HabitDetailForm';
 
 const HabitRow = ({ habit }: { habit: Habit }) => {
-  const { lastDay, isOpen, onOpen, onClose, submitHandler, deleteHandler } =
+  const { lastDay, isOpen, onOpen, onClose, updateHabitRow, deleteHabitRow } =
     useHabitRow(habit.id);
 
   return (
@@ -27,8 +27,8 @@ const HabitRow = ({ habit }: { habit: Habit }) => {
           habitFormTitle="습관 수정하기"
           defaultHabitName={habit.name}
           defaultHabitDescription={habit.description}
-          submitHandler={submitHandler}
-          deleteHandler={deleteHandler}
+          submitHandler={updateHabitRow}
+          deleteHandler={deleteHabitRow}
         />
       </HabitDetailFormContainer>
     </React.Fragment>

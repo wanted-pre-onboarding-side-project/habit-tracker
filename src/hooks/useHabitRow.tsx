@@ -10,7 +10,7 @@ export const useHabitRow = (habitId: Habit['id']) => {
   const { updateHabitDetail, deleteHabit } = useHabitActionContext();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const submitHandler: HabitFormProps['submitHandler'] = useCallback(
+  const updateHabitRow: HabitFormProps['submitHandler'] = useCallback(
     (habitDetail) => {
       updateHabitDetail({
         ...habitDetail,
@@ -23,7 +23,7 @@ export const useHabitRow = (habitId: Habit['id']) => {
     [habitId, month, onClose, updateHabitDetail, year],
   );
 
-  const deleteHandler = useCallback(() => {
+  const deleteHabitRow = useCallback(() => {
     deleteHabit(habitId);
     onClose();
   }, [deleteHabit, habitId, onClose]);
@@ -33,7 +33,7 @@ export const useHabitRow = (habitId: Habit['id']) => {
     isOpen,
     onOpen,
     onClose,
-    submitHandler,
-    deleteHandler,
+    updateHabitRow,
+    deleteHabitRow,
   };
 };

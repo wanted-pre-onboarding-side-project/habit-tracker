@@ -9,7 +9,7 @@ export const useHabitAdd = () => {
   const { createHabit } = useHabitActionContext();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const submitHandler: HabitFormProps['submitHandler'] = useCallback(
+  const addHabitRow: HabitFormProps['submitHandler'] = useCallback(
     (habitDetail) => {
       createHabit({ ...habitDetail, year, month });
       onClose();
@@ -17,5 +17,5 @@ export const useHabitAdd = () => {
     [createHabit, month, onClose, year],
   );
 
-  return { submitHandler, onOpen, onClose, isOpen };
+  return { addHabitRow, onOpen, onClose, isOpen };
 };

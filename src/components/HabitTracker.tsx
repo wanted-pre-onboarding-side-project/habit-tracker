@@ -21,7 +21,7 @@ const HabitTracker = () => {
         <Heading>Habit tracker</Heading>
         <PeriodSection />
         <Habits />
-        <HabitAdd />
+        <HabitAdder />
       </Stack>
     </Container>
   );
@@ -80,8 +80,8 @@ const HabitsHeader = ({ lastDay }: { lastDay: number }) => {
   );
 };
 
-const HabitAdd = () => {
-  const { submitHandler, onOpen, onClose, isOpen } = useHabitAdd();
+const HabitAdder = () => {
+  const { addHabitRow, onOpen, onClose, isOpen } = useHabitAdd();
 
   return (
     <>
@@ -90,7 +90,7 @@ const HabitAdd = () => {
       <HabitDetailFormContainer onClose={onClose} isOpen={isOpen}>
         <HabitDetailForm
           habitFormTitle="습관 생성하기"
-          submitHandler={submitHandler}
+          submitHandler={addHabitRow}
         />
       </HabitDetailFormContainer>
     </>
