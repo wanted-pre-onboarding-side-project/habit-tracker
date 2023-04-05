@@ -8,8 +8,7 @@ import {
   Textarea,
 } from '@chakra-ui/react';
 import { Habit, Day } from '../../../interface/main';
-
-const DAYS = ['월', '화', '수', '목', '금', '토', '일'];
+import { DAYS } from '../../../constant';
 
 const HabitDetail = ({
   isUpdating,

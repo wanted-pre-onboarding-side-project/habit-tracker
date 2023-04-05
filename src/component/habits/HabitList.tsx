@@ -40,7 +40,6 @@ const HabitList = () => {
     (updatingHabit.current.description = desc);
 
   const changeDay = (isChecked: boolean, day: Day) => {
-    console.log(day);
     const currentDays = [...updatingHabit.current.days];
     if (isChecked) updatingHabit.current.days = [...currentDays, day];
     else updatingHabit.current.days = currentDays.filter((d) => d !== day);
@@ -52,8 +51,6 @@ const HabitList = () => {
     );
     if (isUpdateSuccess) setUpdatingId(-1);
   };
-
-  //const handleSubmitUpdate = () => {};
 
   return (
     <Grid

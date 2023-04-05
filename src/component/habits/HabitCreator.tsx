@@ -12,7 +12,8 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useHabitsHandlers } from '../../context/HabitContextProvider';
-const DAYS = ['월', '화', '수', '목', '금', '토', '일'];
+import { DAYS } from '../../constant';
+
 const HabitCreator = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
 
