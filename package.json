@@ -21,7 +21,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prepare": "husky install",
+    "prepare": "husky install; (git config --get commit.template && echo 'commit message template이 확인되었습니다.') || (git config commit.template .commitTemplate && echo 'commit message template이 .commitTemplate으로 설정되었습니다.')",
     "lint": "eslint --cache ."
   },
   "eslintConfig": {
