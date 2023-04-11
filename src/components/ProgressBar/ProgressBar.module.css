@@ -1,0 +1,15 @@
+.backgroundArea {
+  height: 10px;
+  width: 100%;
+  background-color: #eef3fb;
+  border-radius: 5px;
+}
+
+.completedArea {
+  background-color: #007bff;
+  height: 10px;
+  border-radius: 5px;
+  width: 0;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width 0.3s;
+}
