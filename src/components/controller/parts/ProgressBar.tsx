@@ -1,31 +1,35 @@
+import { useHabits } from "contexts/HabitContext";
+
 const ProgressBar = () => {
-  //  habit 다 받아와서 활용
-  //
-  //  달성률 체크 할 수 없어서 0%겠지만 일단 계산해서 넣어주자.
-  //  주간 달성 횟수 표시 = (이번 주 체크한 개수 / 이번 주 체크해야 할 개수)
+  const habits = useHabits();
+  const weeklyChecksLength = habits.reduce(
+    (prev, curr) => prev + curr.days.length,
+    0
+  );
+  //  금주 체그 한 개수는 임시로 생성
+  const tempAchieveChecksLength = weeklyChecksLength > 5 ? 5 : 0;
+
+  const achieveRate = !weeklyChecksLength
+    ? "0%"
+    : Math.ceil((tempAchieveChecksLength / weeklyChecksLength) * 100) + "%";
+
   return (
-    <div>
+    <div
+      style={{
+        width: "50vw",
+        backgroundColor: "lightgray",
+      }}
+    >
       <div
         style={{
-          position: "absolute",
-          left: "1vw",
-          top: "1vh",
-          width: "50vw",
-          border: "solid 2px grey",
+          width: achieveRate,
+          height: "3vh",
+          backgroundColor: "cyan",
+          textAlign: "center",
+          lineHeight: "3vh",
         }}
       >
-        background length
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          left: "1vw",
-          top: "1vh",
-          width: "15vw",
-          backgroundColor: "blue",
-        }}
-      >
-        progress length
+        {achieveRate}
       </div>
     </div>
   );
