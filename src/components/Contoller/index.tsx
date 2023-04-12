@@ -1,5 +1,5 @@
 import useSelectWeekRange from "../../hooks/useSelectWeekRange";
-import styles from "./styles.module.css";
+import styles from "./Controller.module.css";
 
 const Controller = () => {
   const { selectedWeekRange, changeWeekRange, isDisabledToClickNextWeek } =
