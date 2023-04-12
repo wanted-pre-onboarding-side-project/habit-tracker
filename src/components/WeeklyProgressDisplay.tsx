@@ -1,10 +1,8 @@
+import { useHabitsInWeek } from '../contexts/HabitContextProvider';
 import './WeeklyProgressDisplay.css';
 
-interface WeeklyProgressDisplayProps {
-  percentage: number;
-}
-
-const WeeklyProgressDisplay = ({ percentage }: WeeklyProgressDisplayProps) => {
+const WeeklyProgressDisplay = () => {
+  const { achievePercentage: percentage } = useHabitsInWeek();
   return (
     <section className="weekly-progress-display">
       <progress

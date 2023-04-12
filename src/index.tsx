@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import HabitContextProvider from './contexts/HabitContextProvider';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import memoryHabitService from './service/memoryHabitService';
 import setupDayjs from './setupDayjs';
 
 setupDayjs();
@@ -10,9 +12,12 @@ setupDayjs();
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
+
 root.render(
   <React.StrictMode>
-    <App />
+    <HabitContextProvider habitService={memoryHabitService}>
+      <App />
+    </HabitContextProvider>
   </React.StrictMode>,
 );
 
