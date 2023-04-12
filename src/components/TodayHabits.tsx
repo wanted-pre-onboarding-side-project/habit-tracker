@@ -1,10 +1,10 @@
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import {
-  HabitType,
   useHabitsAction,
   useHabitsToday,
 } from '../contexts/HabitContextProvider';
+import { HabitType } from '../service/types';
 import AddHabitButton from './AddHabitButton';
 import './TodayHabits.css';
 

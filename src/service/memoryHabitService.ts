@@ -1,11 +1,5 @@
 import dayjs from 'dayjs';
-import {
-  Day,
-  HabitCheckChangeDataType,
-  HabitCreateDataType,
-  HabitService,
-  HabitType,
-} from '../contexts/HabitContextProvider';
+import { HabitService, HabitType } from './types';
 
 const dummyHabits: HabitType[] = [
   {
@@ -28,10 +22,10 @@ const dummyHabits: HabitType[] = [
 let habits: HabitType[] = dummyHabits;
 
 const memoryHabitService: HabitService = {
-  addHabit: (habit: HabitCreateDataType) => {
+  addHabit: (habit) => {
     habits = [...habits, { id: habits.length + 1, checks: [], ...habit }];
   },
-  changeHabitCheck: ({ id, date, value }: HabitCheckChangeDataType) => {
+  changeHabitCheck: ({ id, date, value }) => {
     habits = habits.map((habit) => {
       if (habit.id !== id) return habit;
 
@@ -42,10 +36,10 @@ const memoryHabitService: HabitService = {
       return { ...habit, checks: newChecks };
     });
   },
-  getHabitsByDay: (day: Day) => {
+  getHabitsByDay: (day) => {
     return habits.filter((habit) => habit.days.includes(day));
   },
-  getHabitsByPeriod: (startDate: string, endDate: string) => {
+  getHabitsByPeriod: (startDate, endDate) => {
     return habits.map((habit) => {
       return {
         ...habit,
