@@ -1,9 +1,11 @@
+import { usePeriod } from "contexts/RecordContext";
+
 const Period = () => {
-  //  period 상태값 받아서 표시만
+  const currentPeriod = usePeriod();
   return (
-    <div>
-      <p>2023.04.12 ~ 2023.04.19</p>
-    </div>
+    <p>
+      {`${currentPeriod.start.month}월 ${currentPeriod.start.date}일 ~ ${currentPeriod.end.month}월 ${currentPeriod.end.date}일`}
+    </p>
   );
 };
 
