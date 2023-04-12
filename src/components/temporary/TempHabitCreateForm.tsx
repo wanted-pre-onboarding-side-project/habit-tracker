@@ -1,4 +1,10 @@
+import { useModal } from "contexts/ModalContext";
+
 const TempHabitCreateForm = () => {
+  const isModalOpen = useModal();
+
+  if (!isModalOpen) return null;
+
   //  name, desc 모두 렌덤하게 생성 되도록 하자. 어차피 임시 컴포넌트니까.
   //  dispatch로 habit이 저장 되고 그것을 대쉬보드에서 보여주기만 하면 됨.
   return (
