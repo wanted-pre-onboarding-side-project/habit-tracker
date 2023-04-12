@@ -1,18 +1,20 @@
 .today-habits {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  padding: 10px;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .today-habit-card {
-  width: 100%;
-  min-height: 150px;
-  border-radius: 10px;
   display: flex;
-  padding: 12px;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
+  min-height: 185px;
+  padding: 12px;
+  margin-bottom: 1rem;
+  border-radius: 10px;
   overflow: hidden;
+  outline: 1px solid black;
 }
 .today-habit-card > * {
   margin-bottom: 10px;
@@ -20,6 +22,11 @@
 
 .today-habit-card.done {
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.today-habit-name {
+  font-weight: bold;
+  font-size: 1.125rem;
 }
 
 .today-habit-description-read-more-button {

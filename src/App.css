@@ -3,11 +3,12 @@
 }
 
 .habit-tracker-app {
+  display: flex;
   width: 1080px;
   height: 100vh;
   margin: 0 auto;
   padding: 2rem 0;
-  display: flex;
+  overflow: hidden;
   gap: 1rem;
 }
 
@@ -17,6 +18,13 @@
 
 .side-container {
   width: calc(100% - var(--main-container-width));
+}
+
+.today-habits-container {
+  height: 100%;
+}
+.today-habits-section-title {
+  padding: 0 10px;
 }
 
 .main-controllers {
@@ -30,15 +38,15 @@
 }
 
 .grid-weekly > * {
-  height: 4rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 4rem;
 }
 
 .grid-weekly > :first-child {
-  overflow: hidden;
   justify-self: flex-start;
   text-overflow: ellipsis;
   white-space: nowrap;
+  overflow: hidden;
 }

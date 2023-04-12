@@ -39,7 +39,7 @@ const TodayHabits = () => {
 
 export default TodayHabits;
 
-const FOLD_CRITERIA_LENGTH = 50;
+const FOLD_CRITERIA_LENGTH = 40;
 
 interface TodayHabitCardProps extends Omit<HabitType, 'days' | 'checks'> {
   isDone: boolean;
