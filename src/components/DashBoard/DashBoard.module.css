@@ -1,8 +1,44 @@
 .container {
   padding: 25px;
   border: 1px solid #bed1ed;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 .itemBox {
+  max-width: 250px;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+}
+
+.itemTitle {
+  font-size: 20px;
+  margin-top: 0;
+}
+
+.itemDescription {
+  display: -webkit-box;
+  word-wrap: break-word;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+}
+
+.itemMoreButton {
+  width: 100%;
+  margin-bottom: 8px;
+  height: 24px;
+}
+
+.itemCheckButton {
+  width: 100%;
+  height: 36px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #007bff;
+  background-color: #ffffff;
+  border: 1px solid #bed1ed;
+  border-radius: 4px;
 }
