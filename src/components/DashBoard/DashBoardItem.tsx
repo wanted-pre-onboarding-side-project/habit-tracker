@@ -1,3 +1,4 @@
+import { getToday } from "../../helpers/getToday";
 import styles from "./DashBoard.module.css";
 
 type DashBoardItemProps = {
@@ -10,6 +11,7 @@ type DashBoardItemProps = {
   };
 };
 
+const today = getToday();
 const DashBoardItem = ({ data }: DashBoardItemProps) => {
   return (
     <div className={styles.itemBox}>
@@ -17,7 +19,7 @@ const DashBoardItem = ({ data }: DashBoardItemProps) => {
       <p className={styles.itemDescription}>{data.description}</p>
       <button className={styles.itemMoreButton}>더보기</button>
       <button className={styles.itemCheckButton}>
-        {data.checkDays.includes("2023-04-12") ? "취소" : "완료하기"}
+        {data.checkDays.includes(today) ? "취소" : "완료하기"}
       </button>
     </div>
   );
