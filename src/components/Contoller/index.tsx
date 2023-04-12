@@ -2,7 +2,8 @@ import useSelectWeekRange from "../../hooks/useSelectWeekRange";
 import styles from "./styles.module.css";
 
 const Controller = () => {
-  const { selectedWeekRange, changeWeekRange } = useSelectWeekRange();
+  const { selectedWeekRange, changeWeekRange, isDisabledToClickNextWeek } =
+    useSelectWeekRange();
 
   return (
     <div className={styles.weekController}>
@@ -16,6 +17,7 @@ const Controller = () => {
         <button
           className={styles.weekSelectorButton}
           onClick={() => changeWeekRange("forward")}
+          disabled={isDisabledToClickNextWeek}
         >
           {">"}
         </button>

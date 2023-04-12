@@ -1,4 +1,4 @@
-import { getToday } from "../../helpers/getToday";
+import { getToday } from "../../helpers/getFormattedDate";
 import styles from "./DashBoard.module.css";
 
 type DashBoardItemProps = {
