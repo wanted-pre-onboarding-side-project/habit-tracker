@@ -1,6 +1,8 @@
 import dayjs from "dayjs";
+import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import { Day } from "interface/main";
 import { ObjectifiedDate } from "interface/context";
+dayjs.extend(isSameOrAfter);
 
 const now = dayjs(new Date());
 
@@ -67,4 +69,15 @@ export const getWeek = (
     start: objectifyDate(targetDate.subtract(MondayOffset, "day")),
     end: objectifyDate(targetDate.add(SundayOffset, "day")),
   };
+};
+
+export const isLatestWeek = (currentPeriodEnd: ObjectifiedDate) => {
+  const endDate = dayjs(
+    new Date(
+      currentPeriodEnd.year,
+      currentPeriodEnd.month - 1,
+      currentPeriodEnd.date
+    )
+  );
+  return endDate.isSameOrAfter(now);
 };
