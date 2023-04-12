@@ -1,3 +1,17 @@
 .period {
   display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.period-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  font-size: 1.125rem;
+}
+.period-button:hover:enabled {
+  background-color: transparent;
+  color: green;
 }

@@ -25,6 +25,11 @@ button {
   background-color: transparent;
 }
 
-button:hover {
+button:hover:enabled {
+  color: #fefefe;
   background-color: green;
+}
+
+button[disabled] {
+  cursor: not-allowed;
 }

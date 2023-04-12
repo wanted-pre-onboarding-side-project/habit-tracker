@@ -1,0 +1,8 @@
+.add-habit-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.add-habit-button > :first-child {
+  margin-right: 4px;
+}

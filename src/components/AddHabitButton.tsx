@@ -1,9 +1,13 @@
+import { FaPlus } from 'react-icons/fa';
 import { useHabitsAction } from '../contexts/HabitContextProvider';
+import './AddHabitButton.css';
 
 type AddHabitButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const AddHabitButton = (_: AddHabitButtonProps) => {
   const { addHabit } = useHabitsAction();
+
+  // 원래는 모달 열어야하지만, 임시로 해빗 생성
   // TODO : 나중에 habit create modal open하는 함수로 변경하기
   const onAddHabitButtonClick = () => {
     addHabit({
@@ -13,7 +17,12 @@ const AddHabitButton = (_: AddHabitButtonProps) => {
     });
   };
 
-  return <button onClick={onAddHabitButtonClick}>습관 추가하기</button>;
+  return (
+    <button onClick={onAddHabitButtonClick} className="add-habit-button">
+      <FaPlus />
+      습관 추가하기
+    </button>
+  );
 };
 
 export default AddHabitButton;
