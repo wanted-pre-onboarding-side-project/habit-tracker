@@ -1,0 +1,27 @@
+.today-habits {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.today-habit-card {
+  width: 100%;
+  min-height: 150px;
+  border-radius: 10px;
+  display: flex;
+  padding: 12px;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.today-habit-card > * {
+  margin-bottom: 10px;
+}
+
+.today-habit-card.done {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.today-habit-description-read-more-button {
+  align-self: flex-end;
+}
