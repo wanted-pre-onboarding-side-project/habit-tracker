@@ -1,12 +1,21 @@
+import { useHabits } from "contexts/HabitContext";
+
 const TempHabitList = () => {
-  // context에서 habit 받아와서 그냥 잘 생긴다는 것 보여주기
-  const dummyHabit = [1, 2, 3];
+  const habits = useHabits();
+
   return (
-    <div style={{ border: "solid 2px grey", width: "20vw" }}>
+    <div
+      style={{
+        border: "solid 2px grey",
+        width: "50vw",
+      }}
+    >
       <h3>temp habit list</h3>
       <ul>
-        {dummyHabit.map((e) => (
-          <li key={e}>habit - {e}</li>
+        {habits.map((habit) => (
+          <li key={habit.id}>
+            {habit.name} ===== {habit.days} ===== {habit.description}
+          </li>
         ))}
       </ul>
     </div>
