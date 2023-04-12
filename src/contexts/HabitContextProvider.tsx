@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import React, {
   createContext,
   useCallback,
@@ -7,6 +6,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
+import { usePeriodValue, useToday } from './PeriodProvider';
 
 export type Day = '월' | '화' | '수' | '목' | '금' | '토' | '일';
 export interface HabitType {
@@ -30,6 +30,13 @@ export type HabitCheckChangeDataType = {
 interface HabitsActionContextValue {
   addHabit: (habit: HabitCreateDataType) => void;
   changeHabitCheck: (changeData: HabitCheckChangeDataType) => void;
+  loadHabitsWithinPeriod: ({
+    startDate,
+    endDate,
+  }: {
+    startDate: string;
+    endDate: string;
+  }) => void;
 }
 
 interface HabitsInWeekContextValue {
@@ -46,7 +53,7 @@ const HabitsActionContext = createContext<HabitsActionContextValue | null>(
 );
 
 export interface HabitService {
-  // getHabitsByPeriod: (startDate: string, endDate: string) => HabitType[];
+  getHabitsByPeriod: (startDate: string, endDate: string) => HabitType[];
   getHabitsByDay: (day: Day) => HabitType[];
   addHabit: (habit: HabitCreateDataType) => void;
   changeHabitCheck: ({ id, date, value }: HabitCheckChangeDataType) => void;
@@ -59,42 +66,77 @@ const HabitContextProvider = ({
   children: React.ReactNode;
   habitService: HabitService;
 }) => {
-  const [habitsInWeek] = useState<HabitType[]>([]);
+  const today = useToday();
+  const period = usePeriodValue();
+
+  const [habitsWithinPeriod, setHabitsWithinPeriod] = useState<HabitType[]>([]);
   const [todayHabits, setTodayHabits] = useState<HabitType[]>([]);
 
+  const loadHabitsWithinPeriod = useCallback(
+    ({
+      startDate,
+      endDate,
+    }: { startDate: string; endDate: string } = period) => {
+      const loadedHabitsInPeriod = habitService.getHabitsByPeriod(
+        startDate,
+        endDate,
+      );
+      console.log(loadedHabitsInPeriod);
+      setHabitsWithinPeriod(loadedHabitsInPeriod);
+    },
+    [habitService, period],
+  );
+
   const loadTodayHabits = useCallback(() => {
-    const today = dayjs();
     const todayDay = today.format('dd') as Day;
     const loadedTodayHabits = habitService.getHabitsByDay(todayDay);
     setTodayHabits(loadedTodayHabits);
-    console.log('loadTodayHabits calleed');
-  }, [habitService]);
+  }, [habitService, today]);
+
+  const loadHabits = useCallback(() => {
+    loadTodayHabits();
+    loadHabitsWithinPeriod();
+  }, [loadHabitsWithinPeriod, loadTodayHabits]);
 
   useEffect(() => {
-    loadTodayHabits();
+    loadHabits();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const habitsInWeekValue = useMemo(
-    () => ({
-      habitsInWeek,
-      achievePercentage: 70, // TODO : 나중에 habitsInWeek 데이터에서 계산해서 전달
-    }),
-    [habitsInWeek],
-  );
+  const habitsInWeekValue = useMemo(() => {
+    const sum = habitsWithinPeriod.reduce(
+      ({ days, checks }, cur) => {
+        return {
+          days: days + cur.days.length,
+          checks: checks + cur.checks.length,
+        };
+      },
+      { days: 0, checks: 0 },
+    );
+
+    const percentage = Math.round((sum.checks / sum.days) * 100);
+
+    console.log(sum, percentage);
+
+    return {
+      habitsInWeek: habitsWithinPeriod,
+      achievePercentage: percentage || 0,
+    };
+  }, [habitsWithinPeriod]);
 
   const actions = useMemo(
     () => ({
       addHabit: (habit: HabitCreateDataType) => {
         habitService.addHabit(habit);
-        loadTodayHabits();
+        loadHabits();
       },
       changeHabitCheck: (checkChangeData: HabitCheckChangeDataType) => {
         habitService.changeHabitCheck(checkChangeData);
-        loadTodayHabits();
+        loadHabits();
       },
+      loadHabitsWithinPeriod,
     }),
-    [habitService, loadTodayHabits],
+    [habitService, loadHabits, loadHabitsWithinPeriod],
   );
 
   return (

@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import {
   Day,
   HabitCheckChangeDataType,
@@ -43,6 +44,16 @@ const memoryHabitService: HabitService = {
   },
   getHabitsByDay: (day: Day) => {
     return habits.filter((habit) => habit.days.includes(day));
+  },
+  getHabitsByPeriod: (startDate: string, endDate: string) => {
+    return habits.map((habit) => {
+      return {
+        ...habit,
+        checks: habit.checks.filter((checkDate) => {
+          return dayjs(checkDate).isBetween(startDate, endDate, null, '[]');
+        }),
+      };
+    });
   },
 };
 

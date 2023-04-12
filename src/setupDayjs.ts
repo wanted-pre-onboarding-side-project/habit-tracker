@@ -1,12 +1,14 @@
 import dayjs from 'dayjs';
 import weekday from 'dayjs/plugin/weekday';
 import updateLocale from 'dayjs/plugin/updateLocale';
+import isBetween from 'dayjs/plugin/isBetween';
 
 import 'dayjs/locale/ko';
 
 const setupDayjs = () => {
   dayjs.extend(updateLocale);
   dayjs.extend(weekday);
+  dayjs.extend(isBetween);
 
   dayjs.locale('ko');
 

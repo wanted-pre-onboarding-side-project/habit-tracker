@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import HabitContextProvider from './contexts/HabitContextProvider';
+import PeriodContextProvider from './contexts/PeriodProvider';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import memoryHabitService from './service/memoryHabitService';
@@ -15,9 +16,11 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <HabitContextProvider habitService={memoryHabitService}>
-      <App />
-    </HabitContextProvider>
+    <PeriodContextProvider>
+      <HabitContextProvider habitService={memoryHabitService}>
+        <App />
+      </HabitContextProvider>
+    </PeriodContextProvider>
   </React.StrictMode>,
 );
 
