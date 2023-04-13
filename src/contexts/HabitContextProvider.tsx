@@ -1,44 +1,18 @@
 import React, {
   createContext,
   useCallback,
-  useContext,
   useEffect,
   useMemo,
   useState,
 } from 'react';
 import {
-  HabitCreateDataType,
-  HabitCheckChangeDataType,
-  HabitType,
-  HabitService,
   Day,
+  HabitCheckChangeDataType,
+  HabitCreateDataType,
+  HabitService,
+  HabitType,
 } from '../service/types';
-import { usePeriodValue, useToday } from './PeriodProvider';
-
-interface HabitsActionContextValue {
-  addHabit: (habit: HabitCreateDataType) => void;
-  changeHabitCheck: (changeData: HabitCheckChangeDataType) => void;
-  loadHabitsWithinPeriod: ({
-    startDate,
-    endDate,
-  }: {
-    startDate: string;
-    endDate: string;
-  }) => void;
-}
-
-interface HabitsInWeekContextValue {
-  habitsInWeek: HabitType[];
-  achievePercentage: number;
-}
-
-const HabitsInWeekContext = createContext<HabitsInWeekContextValue | null>(
-  null,
-);
-const HabitsTodayContext = createContext<HabitType[] | null>(null);
-const HabitsActionContext = createContext<HabitsActionContextValue | null>(
-  null,
-);
+import { usePeriodValue, useToday } from './hooks/usePeriodContext';
 
 const HabitContextProvider = ({
   children,
@@ -62,7 +36,6 @@ const HabitContextProvider = ({
         startDate,
         endDate,
       );
-      console.log(loadedHabitsInPeriod);
       setHabitsWithinPeriod(loadedHabitsInPeriod);
     },
     [habitService, period],
@@ -96,8 +69,6 @@ const HabitContextProvider = ({
     );
 
     const percentage = Math.round((sum.checks / sum.days) * 100);
-
-    console.log(sum, percentage);
 
     return {
       habitsInWeek: habitsWithinPeriod,
@@ -133,26 +104,25 @@ const HabitContextProvider = ({
 
 export default HabitContextProvider;
 
-export const useHabitsInWeek = () => {
-  const value = useContext(HabitsInWeekContext);
-  if (!value) {
-    throw new Error('HabitsInWeekContext.Provider 내부에서 사용해주세요');
-  }
-  return value;
-};
+interface HabitsActionContextValue {
+  addHabit: (habit: HabitCreateDataType) => void;
+  changeHabitCheck: (changeData: HabitCheckChangeDataType) => void;
+  loadHabitsWithinPeriod: ({
+    startDate,
+    endDate,
+  }: {
+    startDate: string;
+    endDate: string;
+  }) => void;
+}
 
-export const useHabitsToday = () => {
-  const value = useContext(HabitsTodayContext);
-  if (!value) {
-    throw new Error('HabitsTodayContext.Provider 내부에서 사용해주세요');
-  }
-  return value;
-};
+interface HabitsInWeekContextValue {
+  habitsInWeek: HabitType[];
+  achievePercentage: number;
+}
 
-export const useHabitsAction = () => {
-  const value = useContext(HabitsActionContext);
-  if (!value) {
-    throw new Error('HabitsActionContext.Provider 내부에서 사용해주세요');
-  }
-  return value;
-};
+export const HabitsInWeekContext =
+  createContext<HabitsInWeekContextValue | null>(null);
+export const HabitsTodayContext = createContext<HabitType[] | null>(null);
+export const HabitsActionContext =
+  createContext<HabitsActionContextValue | null>(null);

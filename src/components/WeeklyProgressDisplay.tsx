@@ -1,4 +1,4 @@
-import { useHabitsInWeek } from '../contexts/HabitContextProvider';
+import { useHabitsInWeek } from '../contexts/hooks/useHbitContext';
 import './WeeklyProgressDisplay.css';
 
 const WeeklyProgressDisplay = () => {

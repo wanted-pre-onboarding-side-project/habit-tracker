@@ -1,21 +1,5 @@
 import dayjs from 'dayjs';
-import { createContext, useContext, useMemo, useState } from 'react';
-
-interface PeriodValueContextValue {
-  startDate: string;
-  endDate: string;
-}
-interface PeriodActionContextValue {
-  changePeriod: (newPeriod: PeriodValueContextValue) => void;
-}
-
-const TodayContext = createContext<dayjs.Dayjs | null>(null);
-
-const PeriodValueContext = createContext<PeriodValueContextValue | null>(null);
-
-const PeriodActionContext = createContext<PeriodActionContextValue | null>(
-  null,
-);
+import { createContext, useMemo, useState } from 'react';
 
 const PeriodContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [today] = useState(dayjs());
@@ -27,7 +11,6 @@ const PeriodContextProvider = ({ children }: { children: React.ReactNode }) => {
   const actions = useMemo(
     () => ({
       changePeriod: (newPeriod: PeriodValueContextValue) => {
-        console.log(newPeriod);
         setPeriod(newPeriod);
       },
     }),
@@ -46,28 +29,19 @@ const PeriodContextProvider = ({ children }: { children: React.ReactNode }) => {
 
 export default PeriodContextProvider;
 
-export const useToday = () => {
-  const value = useContext(TodayContext);
-  if (!value) {
-    throw new Error('TodayContext.Provider 내부에서 사용해주세요');
-  }
-  return value;
-};
+interface PeriodValueContextValue {
+  startDate: string;
+  endDate: string;
+}
+interface PeriodActionContextValue {
+  changePeriod: (newPeriod: PeriodValueContextValue) => void;
+}
 
-export const usePeriodValue = () => {
-  const value = useContext(PeriodValueContext);
+export const TodayContext = createContext<dayjs.Dayjs | null>(null);
 
-  if (!value) {
-    throw new Error('PeriodValueContext.Provider 내부에서 사용해주세요');
-  }
-  return value;
-};
+export const PeriodValueContext = createContext<PeriodValueContextValue | null>(
+  null,
+);
 
-export const usePeriodAction = () => {
-  const value = useContext(PeriodActionContext);
-
-  if (!value) {
-    throw new Error('PeriodActionContext.Provider 내부에서 사용해주세요');
-  }
-  return value;
-};
+export const PeriodActionContext =
+  createContext<PeriodActionContextValue | null>(null);

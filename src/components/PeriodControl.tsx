@@ -1,12 +1,12 @@
 import dayjs from 'dayjs';
 import './PeriodControl.css';
 import { FaChevronCircleLeft, FaChevronCircleRight } from 'react-icons/fa';
+import { useHabitsAction } from '../contexts/hooks/useHbitContext';
 import {
-  usePeriodAction,
   usePeriodValue,
+  usePeriodAction,
   useToday,
-} from '../contexts/PeriodProvider';
-import { useHabitsAction } from '../contexts/HabitContextProvider';
+} from '../contexts/hooks/usePeriodContext';
 
 const PeriodControl = () => {
   return (

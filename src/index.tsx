@@ -17,6 +17,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <PeriodContextProvider>
+      {/* // TODO : 로컬스토리지 사용하는 service로 변경 */}
       <HabitContextProvider habitService={memoryHabitService}>
         <App />
       </HabitContextProvider>
