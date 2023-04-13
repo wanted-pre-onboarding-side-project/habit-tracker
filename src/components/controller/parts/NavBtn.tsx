@@ -12,7 +12,7 @@ const NavBtn = () => {
   };
 
   return (
-    <div>
+    <div className="NavBtn NavBtnLayout">
       <button onClick={() => movePeriod("prev")}>Prev</button>
       <button onClick={handleClickNext}>Next</button>
     </div>

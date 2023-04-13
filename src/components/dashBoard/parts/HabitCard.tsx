@@ -5,28 +5,23 @@ import { TOGGLE_BY_HEIGHT } from "constant";
 const HabitCard = ({ habit }: { habit: Habit }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isLongToFold, setIsLongToFold] = useState<boolean>(false);
+
   useEffect(() => {
     if (cardRef.current && cardRef.current.offsetHeight > TOGGLE_BY_HEIGHT)
       setIsLongToFold(true);
   }, []);
+
   const [isFold, setIsFold] = useState<boolean>(true);
-  const [descStyle, setDescStyle] = useState<React.CSSProperties>();
+  const [descStyle, setDescStyle] = useState<string | undefined>();
+
   useEffect(() => {
-    const longStyle = {
-      height: "10vh",
-      textOverflow: "eclipse",
-      overflow: "hidden",
-    };
-    const shortStyle = {
-      margin: "5%",
-    };
-    setDescStyle(isFold ? longStyle : shortStyle);
+    setDescStyle(isFold ? "ShortDescCardStyle" : undefined);
   }, [isFold]);
 
   return (
-    <div ref={cardRef}>
+    <div ref={cardRef} className="HabitCard">
       <div>{habit.name}</div>
-      <div style={descStyle}>{habit.description}</div>
+      <div className={descStyle}>{habit.description}</div>
       <button onClick={() => alert("yet no record context")}>완료</button>
       {isLongToFold && (
         <button onClick={() => setIsFold((prev) => !prev)}>

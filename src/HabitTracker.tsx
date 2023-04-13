@@ -7,11 +7,11 @@ import TempHabitList from "components/temporary/TempHabitList";
 
 const HabitTracker = () => {
   return (
-    <div className="HabitTracker">
+    <div className="HabitTracker HabitTrackerLayout">
       <Header />
       <Controller />
       <DashBoard />
-      <div>
+      <div className="tempComponentsLayout">
         <TempHabitCreateForm />
         <TempHabitList />
       </div>

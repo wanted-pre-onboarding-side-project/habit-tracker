@@ -8,6 +8,9 @@ const TempHabitList = () => {
       style={{
         border: "solid 2px grey",
         width: "50vw",
+        marginTop: "2vh",
+        height: "30vh",
+        overflowY: "scroll",
       }}
     >
       <h3>temp habit list</h3>

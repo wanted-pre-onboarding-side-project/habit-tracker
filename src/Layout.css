@@ -1,0 +1,50 @@
+.HabitTrackerLayout {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr;
+  grid-template-rows: 0.2fr 0.8fr 3fr;
+  gap: 3%;
+}
+
+.HabitHeaderLayout {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
+.HabitControllerLayout {
+  grid-column: 1/2;
+  grid-row: 2/3;
+
+  display: grid;
+  grid-template-columns: 2fr 10fr 5fr;
+  grid-template-rows: 3fr 1fr;
+}
+
+.HabitDashBoardLayout {
+  grid-column: 2/3;
+  grid-row: 1/4;
+}
+
+.tempComponentsLayout {
+  grid-column: 1/2;
+  grid-row: 3/4;
+}
+
+.AddHabitBtnLayout {
+  grid-column: 3/4;
+  grid-row: 1/2;
+}
+
+.NavBtnLayout {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
+.PeriodLayout {
+  grid-column: 2/3;
+  grid-row: 1/2;
+}
+
+.ProgressBarLayout {
+  grid-column: 1/4;
+  grid-row: 2/3;
+}

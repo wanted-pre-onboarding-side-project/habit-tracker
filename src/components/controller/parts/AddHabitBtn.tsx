@@ -6,7 +6,11 @@ const AddHabitBtn = () => {
 
   const toggleModal = useModalHandle();
 
-  return <button onClick={toggleModal}>+ 습관 추가하기</button>;
+  return (
+    <button className="AddHabitBtn AddHabitBtnLayout" onClick={toggleModal}>
+      + 습관 추가하기
+    </button>
+  );
 };
 
 export default AddHabitBtn;

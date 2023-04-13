@@ -6,7 +6,7 @@ const ProgressBar = () => {
     (prev, curr) => prev + curr.days.length,
     0
   );
-  //  금주 체그 한 개수는 임시로 생성
+  //  금주 check 개수는 임시로 생성
   const tempAchieveChecksLength = weeklyChecksLength > 5 ? 5 : 0;
 
   const achieveRate = !weeklyChecksLength
@@ -15,9 +15,10 @@ const ProgressBar = () => {
 
   return (
     <div
+      className="ProgressBar ProgressBarLayout"
       style={{
-        width: "50vw",
         backgroundColor: "lightgray",
+        height: "3vh",
       }}
     >
       <div
