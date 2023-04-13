@@ -1,16 +1,19 @@
+import { getToday } from "lib/utils/dateUtils";
+import { useHabits } from "contexts/HabitContext";
 import HabitCard from "./parts/HabitCard";
 
 const DashBoard = () => {
-  //  오늘(요일) 데이터 받아서 보여주기
-  //  HabitCard props로 habit.id, habit.name, habit.desc
-  const todayDue = [1, 2, 3]; // habit[]
+  const habits = useHabits();
+
   return (
     <div style={{ border: "solid 2px grey", width: "20vw", float: "right" }}>
       <h3>TODAY</h3>
 
-      {todayDue.map((e) => (
-        <HabitCard key={e} />
-      ))}
+      {habits
+        .filter((habit) => habit.days.includes(getToday().dayWord))
+        .map((habit) => (
+          <HabitCard key={habit.id} habit={habit} />
+        ))}
     </div>
   );
 };
