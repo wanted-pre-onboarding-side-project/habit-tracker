@@ -1,5 +1,5 @@
 import { FaPlus } from 'react-icons/fa';
-import { useHabitsAction } from '../contexts/hooks/useHbitContext';
+import { useHabitsAction } from '../contexts/hooks/useHabitContext';
 import './AddHabitButton.css';
 
 type AddHabitButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;

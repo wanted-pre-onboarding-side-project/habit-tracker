@@ -3,7 +3,7 @@ import { useState } from 'react';
 import {
   useHabitsAction,
   useHabitsToday,
-} from '../contexts/hooks/useHbitContext';
+} from '../contexts/hooks/useHabitContext';
 import { HabitType } from '../service/types';
 import AddHabitButton from './AddHabitButton';
 import './TodayHabits.css';
