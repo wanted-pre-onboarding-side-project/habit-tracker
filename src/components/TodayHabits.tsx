@@ -1,9 +1,9 @@
-import { useState } from 'react';
 import {
   useHabitsAction,
   useHabitsToday,
 } from '../contexts/hooks/useHabitContext';
 import { getTodayDateString } from '../helpers/dateUtil';
+import useToggle from '../hooks/useToggle';
 import { HabitType } from '../service/types';
 import AddHabitButton from './AddHabitButton';
 import './TodayHabits.css';
@@ -54,11 +54,9 @@ const TodayHabitCard = ({
   const isLongDescription = fullDesc.length > FOLD_CRITERIA_LENGTH;
   const shortDesc = fullDesc.slice(0, FOLD_CRITERIA_LENGTH);
 
-  const [folded, setFolded] = useState(isLongDescription);
+  const [folded, toggle] = useToggle(isLongDescription);
   const displayDesc =
     isLongDescription && folded ? `${shortDesc}...` : fullDesc;
-
-  const toggle = () => setFolded((prev) => !prev);
 
   return (
     <div className={`today-habit-card ${isDone && 'done'}`}>
