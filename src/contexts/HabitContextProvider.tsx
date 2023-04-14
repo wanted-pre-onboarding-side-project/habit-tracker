@@ -5,6 +5,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
+import { calculateAchivementPercentage } from '../helpers/calculateWeeklyAchievePercentage';
 import { getDayOfToday } from '../helpers/dateUtil';
 import {
   HabitCheckChangeDataType,
@@ -57,17 +58,7 @@ const HabitContextProvider = ({
   }, []);
 
   const habitsInWeekValue = useMemo(() => {
-    const sum = habitsWithinPeriod.reduce(
-      ({ days, checks }, cur) => {
-        return {
-          days: days + cur.days.length,
-          checks: checks + cur.checks.length,
-        };
-      },
-      { days: 0, checks: 0 },
-    );
-
-    const percentage = Math.round((sum.checks / sum.days) * 100);
+    const percentage = calculateAchivementPercentage(habitsWithinPeriod);
 
     return {
       habitsInWeek: habitsWithinPeriod,
