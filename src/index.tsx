@@ -6,9 +6,7 @@ import PeriodContextProvider from './contexts/PeriodProvider';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import memoryHabitService from './service/memoryHabitService';
-import setupDayjs from './setupDayjs';
-
-setupDayjs();
+import './setupDayjs';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
