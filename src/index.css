@@ -17,7 +17,7 @@ code {
     monospace;
 }
 
-button {
+.default-button-style {
   padding: 0.2rem 0.6rem;
   border: 1px solid black;
   border-radius: 4px;
@@ -25,11 +25,11 @@ button {
   background-color: transparent;
 }
 
-button:hover:enabled {
+.default-button-style:hover:enabled {
   color: #fefefe;
   background-color: green;
 }
 
-button[disabled] {
+.default-button-style[disabled] {
   cursor: not-allowed;
 }

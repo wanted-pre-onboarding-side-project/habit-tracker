@@ -18,7 +18,10 @@ const AddHabitButton = (_: AddHabitButtonProps) => {
   };
 
   return (
-    <button onClick={onAddHabitButtonClick} className="add-habit-button">
+    <button
+      onClick={onAddHabitButtonClick}
+      className="default-button-style add-habit-button"
+    >
       <FaPlus />
       습관 추가하기
     </button>

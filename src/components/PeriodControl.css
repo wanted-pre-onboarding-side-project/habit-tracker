@@ -10,6 +10,7 @@
   align-items: center;
   border: none;
   font-size: 1.125rem;
+  cursor: pointer;
 }
 .period-button:hover:enabled {
   background-color: transparent;

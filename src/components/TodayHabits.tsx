@@ -66,13 +66,16 @@ const TodayHabitCard = ({
       <p className="today-habit-description">{displayDesc}</p>
       {isLongDescription && (
         <button
-          className="today-habit-description-read-more-button"
+          className="default-button-style today-habit-description-read-more-button"
           onClick={toggle}
         >
           {folded ? '자세히' : '접기'}
         </button>
       )}
-      <button className="today-habit-check-button" onClick={changeCheckState}>
+      <button
+        className="default-button-style today-habit-check-button"
+        onClick={changeCheckState}
+      >
         {isDone ? '되돌리기' : '완료'}
       </button>
     </div>
