@@ -1,15 +1,6 @@
 import { FaChevronCircleLeft, FaChevronCircleRight } from 'react-icons/fa';
-import { useHabitsAction } from '../contexts/hooks/useHabitContext';
-import {
-  usePeriodAction,
-  usePeriodValue,
-} from '../contexts/hooks/usePeriodContext';
-import {
-  getDateStringAWeekAfter,
-  getDateStringAWeekBefore,
-  getTodayDateString,
-  isDateBetween,
-} from '../helpers/dateUtil';
+import { usePeriodValue } from '../contexts/hooks/usePeriodContext';
+import usePeriodChange from '../hooks/usePeriodChange';
 import './PeriodControl.css';
 
 const PeriodControl = () => {
@@ -34,17 +25,7 @@ const PeriodDisplay = () => {
 };
 
 const WeekPrevButton = () => {
-  const period = usePeriodValue();
-  const { changePeriod } = usePeriodAction();
-  const { loadHabitsWithinPeriod } = useHabitsAction();
-
-  const moveToPrevWeek = () => {
-    const startDate = getDateStringAWeekBefore(period.startDate);
-    const endDate = getDateStringAWeekBefore(period.endDate);
-
-    changePeriod({ startDate, endDate });
-    loadHabitsWithinPeriod({ startDate, endDate });
-  };
+  const { moveToPrevWeek } = usePeriodChange();
   return (
     <button onClick={moveToPrevWeek} className="period-button prev">
       <FaChevronCircleLeft />
@@ -53,25 +34,8 @@ const WeekPrevButton = () => {
 };
 
 const WeekNextButton = () => {
-  const period = usePeriodValue();
-  const { changePeriod } = usePeriodAction();
-  const { loadHabitsWithinPeriod } = useHabitsAction();
-
-  const today = getTodayDateString();
-  const isDisabled = isDateBetween(today, {
-    start: period.startDate,
-    end: period.endDate,
-  });
-
-  const moveToNextWeek = () => {
-    if (isDisabled) return;
-    const startDate = getDateStringAWeekAfter(period.startDate);
-    const endDate = getDateStringAWeekAfter(period.endDate);
-
-    changePeriod({ startDate, endDate });
-    loadHabitsWithinPeriod({ startDate, endDate });
-  };
-
+  const { moveToNextWeek, isDisabledToMoveNextWeek: isDisabled } =
+    usePeriodChange();
   if (isDisabled) return null;
   return (
     <button onClick={moveToNextWeek} className="period-button next">
