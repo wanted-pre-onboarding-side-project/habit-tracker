@@ -1,13 +1,5 @@
-import {
-  PeriodActionContext,
-  PeriodValueContext,
-  TodayContext,
-} from '../PeriodProvider';
+import { PeriodActionContext, PeriodValueContext } from '../PeriodProvider';
 import { useContextWithErrorHandling } from './useContextWithErrorHandling';
-
-export const useToday = () => {
-  return useContextWithErrorHandling(TodayContext);
-};
 
 export const usePeriodValue = () => {
   return useContextWithErrorHandling(PeriodValueContext);

@@ -1,4 +1,4 @@
-import dayjs from 'dayjs';
+import { isDateBetween } from '../helpers/dateUtil';
 import { HabitService, HabitType } from './types';
 
 const dummyHabits: HabitType[] = [
@@ -44,7 +44,7 @@ const memoryHabitService: HabitService = {
       return {
         ...habit,
         checks: habit.checks.filter((checkDate) => {
-          return dayjs(checkDate).isBetween(startDate, endDate, null, '[]');
+          return isDateBetween(checkDate, { start: startDate, end: endDate });
         }),
       };
     });

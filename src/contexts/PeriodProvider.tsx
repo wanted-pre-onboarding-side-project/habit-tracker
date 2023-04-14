@@ -1,11 +1,14 @@
-import dayjs from 'dayjs';
 import { createContext, useMemo, useState } from 'react';
+import {
+  getFirstDateStringOfWeek,
+  getLastDateStringOfWeek,
+  getTodayDateString,
+} from '../helpers/dateUtil';
 
 const PeriodContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [today] = useState(dayjs());
   const [period, setPeriod] = useState<PeriodValueContextValue>({
-    startDate: today.weekday(0).format('YYYY-MM-DD'),
-    endDate: today.weekday(6).format('YYYY-MM-DD'),
+    startDate: getFirstDateStringOfWeek(getTodayDateString()),
+    endDate: getLastDateStringOfWeek(getTodayDateString()),
   });
 
   const actions = useMemo(
@@ -17,13 +20,11 @@ const PeriodContextProvider = ({ children }: { children: React.ReactNode }) => {
     [],
   );
   return (
-    <TodayContext.Provider value={today}>
-      <PeriodValueContext.Provider value={period}>
-        <PeriodActionContext.Provider value={actions}>
-          {children}
-        </PeriodActionContext.Provider>
-      </PeriodValueContext.Provider>
-    </TodayContext.Provider>
+    <PeriodValueContext.Provider value={period}>
+      <PeriodActionContext.Provider value={actions}>
+        {children}
+      </PeriodActionContext.Provider>
+    </PeriodValueContext.Provider>
   );
 };
 
@@ -36,8 +37,6 @@ interface PeriodValueContextValue {
 interface PeriodActionContextValue {
   changePeriod: (newPeriod: PeriodValueContextValue) => void;
 }
-
-export const TodayContext = createContext<dayjs.Dayjs | null>(null);
 
 export const PeriodValueContext = createContext<PeriodValueContextValue | null>(
   null,

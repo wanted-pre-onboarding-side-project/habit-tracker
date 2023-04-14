@@ -1,12 +1,16 @@
-import dayjs from 'dayjs';
-import './PeriodControl.css';
 import { FaChevronCircleLeft, FaChevronCircleRight } from 'react-icons/fa';
 import { useHabitsAction } from '../contexts/hooks/useHabitContext';
 import {
-  usePeriodValue,
   usePeriodAction,
-  useToday,
+  usePeriodValue,
 } from '../contexts/hooks/usePeriodContext';
+import {
+  getDateStringAWeekAfter,
+  getDateStringAWeekBefore,
+  getTodayDateString,
+  isDateBetween,
+} from '../helpers/dateUtil';
+import './PeriodControl.css';
 
 const PeriodControl = () => {
   return (
@@ -35,12 +39,8 @@ const WeekPrevButton = () => {
   const { loadHabitsWithinPeriod } = useHabitsAction();
 
   const moveToPrevWeek = () => {
-    const startDate = dayjs(period.startDate)
-      .subtract(1, 'week')
-      .format('YYYY-MM-DD');
-    const endDate = dayjs(period.endDate)
-      .subtract(1, 'week')
-      .format('YYYY-MM-DD');
+    const startDate = getDateStringAWeekBefore(period.startDate);
+    const endDate = getDateStringAWeekBefore(period.endDate);
 
     changePeriod({ startDate, endDate });
     loadHabitsWithinPeriod({ startDate, endDate });
@@ -57,15 +57,16 @@ const WeekNextButton = () => {
   const { changePeriod } = usePeriodAction();
   const { loadHabitsWithinPeriod } = useHabitsAction();
 
-  const today = useToday();
-  const isDisabled = today.isBetween(period.startDate, period.endDate);
+  const today = getTodayDateString();
+  const isDisabled = isDateBetween(today, {
+    start: period.startDate,
+    end: period.endDate,
+  });
 
   const moveToNextWeek = () => {
     if (isDisabled) return;
-    const startDate = dayjs(period.startDate)
-      .add(1, 'week')
-      .format('YYYY-MM-DD');
-    const endDate = dayjs(period.endDate).add(1, 'week').format('YYYY-MM-DD');
+    const startDate = getDateStringAWeekAfter(period.startDate);
+    const endDate = getDateStringAWeekAfter(period.endDate);
 
     changePeriod({ startDate, endDate });
     loadHabitsWithinPeriod({ startDate, endDate });

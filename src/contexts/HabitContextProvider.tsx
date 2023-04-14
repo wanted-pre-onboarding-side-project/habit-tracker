@@ -5,14 +5,14 @@ import React, {
   useMemo,
   useState,
 } from 'react';
+import { getDayOfToday } from '../helpers/dateUtil';
 import {
-  Day,
   HabitCheckChangeDataType,
   HabitCreateDataType,
   HabitService,
   HabitType,
 } from '../service/types';
-import { usePeriodValue, useToday } from './hooks/usePeriodContext';
+import { usePeriodValue } from './hooks/usePeriodContext';
 
 const HabitContextProvider = ({
   children,
@@ -21,7 +21,6 @@ const HabitContextProvider = ({
   children: React.ReactNode;
   habitService: HabitService;
 }) => {
-  const today = useToday();
   const period = usePeriodValue();
 
   const [habitsWithinPeriod, setHabitsWithinPeriod] = useState<HabitType[]>([]);
@@ -42,10 +41,10 @@ const HabitContextProvider = ({
   );
 
   const loadTodayHabits = useCallback(() => {
-    const todayDay = today.format('dd') as Day;
-    const loadedTodayHabits = habitService.getHabitsByDay(todayDay);
+    const dayOfToday = getDayOfToday();
+    const loadedTodayHabits = habitService.getHabitsByDay(dayOfToday);
     setTodayHabits(loadedTodayHabits);
-  }, [habitService, today]);
+  }, [habitService]);
 
   const loadHabits = useCallback(() => {
     loadTodayHabits();

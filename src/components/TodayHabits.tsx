@@ -1,9 +1,9 @@
-import dayjs from 'dayjs';
 import { useState } from 'react';
 import {
   useHabitsAction,
   useHabitsToday,
 } from '../contexts/hooks/useHabitContext';
+import { getTodayDateString } from '../helpers/dateUtil';
 import { HabitType } from '../service/types';
 import AddHabitButton from './AddHabitButton';
 import './TodayHabits.css';
@@ -12,7 +12,7 @@ const TodayHabits = () => {
   const todayHabits = useHabitsToday();
   const { changeHabitCheck } = useHabitsAction();
 
-  const todayString = dayjs().format('YYYY-MM-DD');
+  const todayString = getTodayDateString();
 
   return (
     <div className="today-habits">
