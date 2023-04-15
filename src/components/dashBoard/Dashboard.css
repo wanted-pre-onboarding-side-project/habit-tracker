@@ -38,6 +38,6 @@
 
 .ShortDescCardStyle {
   height: 11vh;
-  text-overflow: eclipse;
+  text-overflow: ellipsis;
   overflow: hidden;
 }
