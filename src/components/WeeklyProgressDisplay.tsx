@@ -13,7 +13,9 @@ const WeeklyProgressDisplay = () => {
       >
         {percentage}%
       </progress>
-      <label htmlFor="weekly-progress">{percentage}%</label>
+      <label htmlFor="weekly-progress" className="weekly-progress-label">
+        {percentage}%
+      </label>
     </section>
   );
 };

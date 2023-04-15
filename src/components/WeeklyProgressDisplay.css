@@ -1,12 +1,16 @@
 .weekly-progress-display {
   display: flex;
-  gap: 1rem;
 }
 
 .weekly-progress-bar {
   -webkit-appearance: none;
   appearance: none;
 
-  width: 100%;
+  width: 95%;
   height: 20px;
+}
+
+.weekly-progress-label {
+  width: 5%;
+  text-align: right;
 }
