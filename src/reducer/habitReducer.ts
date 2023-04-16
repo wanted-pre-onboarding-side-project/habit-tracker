@@ -1,9 +1,12 @@
-import { getDayOfToday } from '../helpers/dateUtil';
 import {
-  HabitType,
-  HabitCreateDataType,
+  getDayOfToday,
+  getThisWeekPeriodDateString,
+} from '../helpers/dateUtil';
+import {
   HabitCheckChangeDataType,
+  HabitCreateDataType,
   HabitService,
+  HabitType,
 } from '../service/types';
 
 // TODO: reducer 타입 정리 필요
@@ -23,7 +26,7 @@ type LoadOnlyHabitsWithinPeriodActionType = {
   type: 'loadHabitWithinPeriod';
   period: TempPeriod;
 };
-type LoadAllHabitsActionType = { type: 'loadAllHabits'; period: TempPeriod };
+type LoadAllHabitsActionType = { type: 'loadAllHabits'; period?: TempPeriod };
 type ActionType =
   | AddActionType
   | CheckChangeActionType
@@ -51,14 +54,14 @@ export function getReducer(habitService: HabitService) {
         return { ...state, habitsWithinPeriod: loadedHabitsInPeriod };
       }
       case 'loadAllHabits': {
-        const { startDate, endDate } = action.period;
-
         const dayOfToday = getDayOfToday();
         const loadedTodayHabits = habitService.getHabitsByDay(dayOfToday);
 
+        const period = action.period ?? getThisWeekPeriodDateString();
+
         const loadedHabitsInPeriod = habitService.getHabitsByPeriod(
-          startDate,
-          endDate,
+          period.startDate,
+          period.endDate,
         );
 
         return {

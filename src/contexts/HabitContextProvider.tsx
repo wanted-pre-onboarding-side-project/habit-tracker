@@ -25,11 +25,7 @@ const HabitContextProvider = ({
   });
 
   useEffect(() => {
-    dispatch({ type: 'loadAllHabits', period });
-    // period가 없는 구조면 의존성 배열 비워둘 수 있다
-    // 초기 데이터 불러올때 period가 꼭 필요할까?
-    // 초기 데이터를 프로바이더 마운트시 불러와야 할까?
-    // TODO: 주석으로 경고 끄지 않고 올바른 형태로 의존성배열 처리하기(마운트시 한번만 실행할 함수에서 period 사용하지 않는 형태로?)
+    dispatch({ type: 'loadAllHabits' });
   }, []);
 
   const habitsInWeekValue = useMemo(() => {

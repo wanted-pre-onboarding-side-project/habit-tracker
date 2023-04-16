@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import { PeriodValueContextValue } from '../contexts/PeriodProvider';
 import { Day } from '../service/types';
 
 const DEFAULT_DATE_FORMAT = 'YYYY-MM-DD';
@@ -64,4 +65,15 @@ export const getFirstDateStringOfWeek = (currentDate: string | Date) => {
  */
 export const getLastDateStringOfWeek = (currentDate: string | Date) => {
   return dayjs(currentDate).endOf('week').format('YYYY-MM-DD');
+};
+
+/**
+ * 이번주 시작일(월요일), 마지막일(일요일) 날짜 YYYY-MM-DD 형태의 문자열로 리턴
+ * @returns
+ */
+export const getThisWeekPeriodDateString = (): PeriodValueContextValue => {
+  return {
+    startDate: getFirstDateStringOfWeek(getTodayDateString()),
+    endDate: getLastDateStringOfWeek(getTodayDateString()),
+  };
 };

@@ -1,15 +1,10 @@
 import { createContext, useMemo, useState } from 'react';
-import {
-  getFirstDateStringOfWeek,
-  getLastDateStringOfWeek,
-  getTodayDateString,
-} from '../helpers/dateUtil';
+import { getThisWeekPeriodDateString } from '../helpers/dateUtil';
 
 const PeriodContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [period, setPeriod] = useState<PeriodValueContextValue>({
-    startDate: getFirstDateStringOfWeek(getTodayDateString()),
-    endDate: getLastDateStringOfWeek(getTodayDateString()),
-  });
+  const [period, setPeriod] = useState<PeriodValueContextValue>(
+    getThisWeekPeriodDateString(),
+  );
 
   const actions = useMemo(
     () => ({
@@ -30,7 +25,7 @@ const PeriodContextProvider = ({ children }: { children: React.ReactNode }) => {
 
 export default PeriodContextProvider;
 
-interface PeriodValueContextValue {
+export interface PeriodValueContextValue {
   startDate: string;
   endDate: string;
 }
