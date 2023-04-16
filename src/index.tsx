@@ -13,14 +13,15 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <React.StrictMode>
-    <PeriodContextProvider>
-      {/* // TODO : 로컬스토리지 사용하는 service로 변경 */}
-      <HabitContextProvider habitService={memoryHabitService}>
-        <App />
-      </HabitContextProvider>
-    </PeriodContextProvider>
-  </React.StrictMode>,
+  // dispatch함수가 두 번 실행되는 문제 해결하지 못해 주석처리
+  // <React.StrictMode>
+  <PeriodContextProvider>
+    {/* // TODO : 로컬스토리지 사용하는 service로 변경 */}
+    <HabitContextProvider habitService={memoryHabitService}>
+      <App />
+    </HabitContextProvider>
+  </PeriodContextProvider>,
+  // </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

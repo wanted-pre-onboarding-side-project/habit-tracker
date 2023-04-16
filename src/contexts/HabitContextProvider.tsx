@@ -1,12 +1,6 @@
-import React, {
-  createContext,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import React, { createContext, useEffect, useMemo, useReducer } from 'react';
 import { calculateAchivementPercentage } from '../helpers/calculateWeeklyAchievePercentage';
-import { getDayOfToday } from '../helpers/dateUtil';
+import { getReducer } from '../reducer/habitReducer';
 import {
   HabitCheckChangeDataType,
   HabitCreateDataType,
@@ -23,38 +17,19 @@ const HabitContextProvider = ({
   habitService: HabitService;
 }) => {
   const period = usePeriodValue();
+  const reducer = getReducer(habitService);
 
-  const [habitsWithinPeriod, setHabitsWithinPeriod] = useState<HabitType[]>([]);
-  const [todayHabits, setTodayHabits] = useState<HabitType[]>([]);
-
-  const loadHabitsWithinPeriod = useCallback(
-    ({
-      startDate,
-      endDate,
-    }: { startDate: string; endDate: string } = period) => {
-      const loadedHabitsInPeriod = habitService.getHabitsByPeriod(
-        startDate,
-        endDate,
-      );
-      setHabitsWithinPeriod(loadedHabitsInPeriod);
-    },
-    [habitService, period],
-  );
-
-  const loadTodayHabits = useCallback(() => {
-    const dayOfToday = getDayOfToday();
-    const loadedTodayHabits = habitService.getHabitsByDay(dayOfToday);
-    setTodayHabits(loadedTodayHabits);
-  }, [habitService]);
-
-  const loadHabits = useCallback(() => {
-    loadTodayHabits();
-    loadHabitsWithinPeriod();
-  }, [loadHabitsWithinPeriod, loadTodayHabits]);
+  const [{ todayHabits, habitsWithinPeriod }, dispatch] = useReducer(reducer, {
+    todayHabits: [],
+    habitsWithinPeriod: [],
+  });
 
   useEffect(() => {
-    loadHabits();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    dispatch({ type: 'loadAllHabits', period });
+    // period가 없는 구조면 의존성 배열 비워둘 수 있다
+    // 초기 데이터 불러올때 period가 꼭 필요할까?
+    // 초기 데이터를 프로바이더 마운트시 불러와야 할까?
+    // TODO: 주석으로 경고 끄지 않고 올바른 형태로 의존성배열 처리하기(마운트시 한번만 실행할 함수에서 period 사용하지 않는 형태로?)
   }, []);
 
   const habitsInWeekValue = useMemo(() => {
@@ -69,16 +44,21 @@ const HabitContextProvider = ({
   const actions = useMemo(
     () => ({
       addHabit: (habit: HabitCreateDataType) => {
-        habitService.addHabit(habit);
-        loadHabits();
+        dispatch({ type: 'add', habit });
+        dispatch({ type: 'loadAllHabits', period });
       },
       changeHabitCheck: (checkChangeData: HabitCheckChangeDataType) => {
-        habitService.changeHabitCheck(checkChangeData);
-        loadHabits();
+        dispatch({ type: 'changeCheck', data: checkChangeData });
+        dispatch({ type: 'loadAllHabits', period });
       },
-      loadHabitsWithinPeriod,
+      loadHabitsWithinPeriod: (newPeriod: {
+        startDate: string;
+        endDate: string;
+      }) => {
+        dispatch({ type: 'loadHabitWithinPeriod', period: newPeriod });
+      },
     }),
-    [habitService, loadHabits, loadHabitsWithinPeriod],
+    [period],
   );
 
   return (
