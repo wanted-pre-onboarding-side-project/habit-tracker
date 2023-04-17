@@ -1,7 +1,9 @@
 import React from "react";
-import { getWeekRangeByDate } from "../helpers/getWeekRangeByDate";
-import { getManipulatedDate } from "../helpers/dateUtils";
-import { getFirstDateOfWeekByDate } from "../helpers/getFormattedDate";
+import {
+  getWeekRangeByDate,
+  getFirstDateOfWeekByDate,
+} from "../helpers/dateHelpers";
+import { getManipulatedDate } from "../utils/dateUtils";
 
 const useSelectWeekRange = () => {
   const [selectedDate, setSelectedDate] = React.useState(new Date());
