@@ -1,6 +1,6 @@
 import React from "react";
 import { getWeekRangeByDate } from "../helpers/getWeekRangeByDate";
-import { calculateDateByWeek } from "../helpers/calculateDateByWeek";
+import { getManipulatedDate } from "../helpers/dateUtils";
 import { getFirstDateOfWeekByDate } from "../helpers/getFormattedDate";
 
 const useSelectWeekRange = () => {
@@ -11,7 +11,7 @@ const useSelectWeekRange = () => {
     getFirstDateOfWeekByDate(selectedDate);
 
   const changeWeekRange = (direction: "back" | "forward") => {
-    setSelectedDate(calculateDateByWeek(selectedDate, direction));
+    setSelectedDate(getManipulatedDate(selectedDate, "weekBefore"));
   };
 
   return { selectedWeekRange, changeWeekRange, isDisabledToClickNextWeek };
