@@ -4,10 +4,13 @@ export const getToday = () => {
   return getFormattedString(new Date(), "YYYY-MM-DD");
 };
 
-export const getFirstDateOfWeekByDate = (date: Date) => {
-  return getFormattedString(
-    getManipulatedDate(date, "startOfWeek"),
-    "YYYY-MM-DD"
+export const isSameWeekRange = (date1: Date, date2: Date) => {
+  return (
+    getFormattedString(
+      getManipulatedDate(date1, "startOfWeek"),
+      "YYYY-MM-DD"
+    ) ===
+    getFormattedString(getManipulatedDate(date2, "startOfWeek"), "YYYY-MM-DD")
   );
 };
 
