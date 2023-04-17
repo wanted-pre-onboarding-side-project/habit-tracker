@@ -1,28 +1,32 @@
-import useSelectWeekRange from "../../hooks/useSelectWeekRange";
+import useWeekRange from "../../hooks/useWeekRange";
 import styles from "./Controller.module.css";
 
 const Controller = () => {
-  const { selectedWeekRange, changeWeekRange, isDisabledToClickNextWeek } =
-    useSelectWeekRange();
+  const {
+    weekRange,
+    changeToPrevRange,
+    changeToNextRange,
+    isDisabledToClickNextWeek,
+  } = useWeekRange();
 
   return (
     <div className={styles.weekController}>
       <div className={styles.weekSelector}>
         <button
           className={styles.weekSelectorButton}
-          onClick={() => changeWeekRange("back")}
+          onClick={changeToPrevRange}
         >
           {"<"}
         </button>
         <button
           className={styles.weekSelectorButton}
-          onClick={() => changeWeekRange("forward")}
+          onClick={changeToNextRange}
           disabled={isDisabledToClickNextWeek}
         >
           {">"}
         </button>
       </div>
-      <h2 className={styles.weekIndicator}>{selectedWeekRange}</h2>
+      <h2 className={styles.weekIndicator}>{weekRange}</h2>
     </div>
   );
 };
