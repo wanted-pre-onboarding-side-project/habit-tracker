@@ -14,6 +14,14 @@ export const isSameWeekRange = (date1: Date, date2: Date) => {
   );
 };
 
+export const getWeekBeforeDate = (date: Date) => {
+  return getManipulatedDate(date, "weekBefore");
+};
+
+export const getWeekAfterDate = (date: Date) => {
+  return getManipulatedDate(date, "weekAfter");
+};
+
 export const getWeekRangeByDate = (date: Date) => {
   const startOfWeek = getFormattedString(
     getManipulatedDate(date, "startOfWeek"),

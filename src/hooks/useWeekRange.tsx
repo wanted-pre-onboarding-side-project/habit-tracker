@@ -1,6 +1,10 @@
 import React from "react";
-import { getWeekRangeByDate, isSameWeekRange } from "../helpers/dateHelpers";
-import { getManipulatedDate } from "../utils/dateUtils";
+import {
+  getWeekBeforeDate,
+  getWeekRangeByDate,
+  getWeekAfterDate,
+  isSameWeekRange,
+} from "../helpers/dateHelpers";
 
 const useSelectWeekRange = () => {
   const [selectedDate, setSelectedDate] = React.useState(new Date());
@@ -8,11 +12,11 @@ const useSelectWeekRange = () => {
   const isDisabledToClickNextWeek = isSameWeekRange(new Date(), selectedDate);
 
   const changeToPrevRange = () => {
-    setSelectedDate(getManipulatedDate(selectedDate, "weekBefore"));
+    setSelectedDate(getWeekBeforeDate(selectedDate));
   };
 
   const changeToNextRange = () => {
-    setSelectedDate(getManipulatedDate(selectedDate, "weekAfter"));
+    setSelectedDate(getWeekAfterDate(selectedDate));
   };
 
   return {
