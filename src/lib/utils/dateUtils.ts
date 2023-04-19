@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import { Day } from "interface/main";
 import { ObjectifiedDate } from "interface/context";
+import { PERIOD_CHANGE_OFFSET } from "constant";
 dayjs.extend(isSameOrAfter);
 
 const now = dayjs(new Date());
@@ -45,7 +46,7 @@ export const getToday = () => {
 
 export const getPeriod = (
   currentPeriodStart?: ObjectifiedDate,
-  periodOffset?: number
+  direction?: "prev" | "next"
 ) => {
   let targetDate;
   const current = !currentPeriodStart
@@ -58,9 +59,10 @@ export const getPeriod = (
         )
       );
 
-  if (!periodOffset) targetDate = current;
-  else if (periodOffset > 0) targetDate = current.add(periodOffset, "day");
-  else targetDate = current.subtract(periodOffset * -1, "day");
+  if (!direction) targetDate = current;
+  else if (direction === "next")
+    targetDate = current.add(PERIOD_CHANGE_OFFSET, "day");
+  else targetDate = current.subtract(PERIOD_CHANGE_OFFSET, "day");
 
   const MondayOffset = targetDate.get("day") - 1;
   const SundayOffset = 7 - targetDate.get("day");

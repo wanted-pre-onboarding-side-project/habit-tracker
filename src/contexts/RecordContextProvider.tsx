@@ -7,7 +7,7 @@ export const RecordProvider = ({ children }: { children: ReactNode }) => {
 
   const movePeriod = useCallback(
     (direction: "prev" | "next") => {
-      setPeriod(getPeriod(period.start, direction === "prev" ? -7 : 7));
+      setPeriod(getPeriod(period.start, direction));
     },
     [period]
   );
