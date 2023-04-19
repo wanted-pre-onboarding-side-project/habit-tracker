@@ -43,7 +43,7 @@ export const getToday = () => {
   return objectifyDate(now);
 };
 
-export const getWeek = (
+export const getPeriod = (
   currentPeriodStart?: ObjectifiedDate,
   periodOffset?: number
 ) => {
