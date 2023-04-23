@@ -8,6 +8,7 @@ export interface ObjectifiedDate {
   dayWord: Day;
   hour: number;
   minute: number;
+  origin: Date;
 }
 
 export type PeriodContextType = {

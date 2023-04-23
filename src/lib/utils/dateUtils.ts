@@ -1,11 +1,9 @@
 import dayjs from "dayjs";
-import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import { Day } from "interface/main";
 import { ObjectifiedDate } from "interface/context";
 import { PERIOD_CHANGE_OFFSET } from "constant";
+import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 dayjs.extend(isSameOrAfter);
-
-const now = dayjs(new Date());
 
 const dayNumToWord = (dayNum: number): Day => {
   switch (dayNum) {
@@ -30,6 +28,7 @@ const dayNumToWord = (dayNum: number): Day => {
 
 const objectifyDate = (dateObj: dayjs.Dayjs): ObjectifiedDate => {
   return {
+    origin: dateObj.toDate(),
     year: dateObj.get("year"),
     month: dateObj.get("month") + 1,
     date: dateObj.get("date"),
@@ -41,45 +40,45 @@ const objectifyDate = (dateObj: dayjs.Dayjs): ObjectifiedDate => {
 };
 
 export const getToday = () => {
+  const now = dayjs(new Date());
+
   return objectifyDate(now);
 };
 
-export const getPeriod = (
-  currentPeriodStart?: ObjectifiedDate,
-  direction?: "prev" | "next"
-) => {
-  let targetDate;
-  const current = !currentPeriodStart
-    ? now
-    : dayjs(
-        new Date(
-          currentPeriodStart.year,
-          currentPeriodStart.month - 1,
-          currentPeriodStart.date
-        )
-      );
-
-  if (!direction) targetDate = current;
-  else if (direction === "next")
-    targetDate = current.add(PERIOD_CHANGE_OFFSET, "day");
-  else targetDate = current.subtract(PERIOD_CHANGE_OFFSET, "day");
-
-  const MondayOffset = targetDate.get("day") - 1;
-  const SundayOffset = 7 - targetDate.get("day");
+export const getLatestPeriod = () => {
+  const now = dayjs(new Date());
+  const start = dayjs(now).startOf("week");
+  const end = dayjs(now).endOf("week");
 
   return {
-    start: objectifyDate(targetDate.subtract(MondayOffset, "day")),
-    end: objectifyDate(targetDate.add(SundayOffset, "day")),
+    start: objectifyDate(start),
+    end: objectifyDate(end),
+  };
+};
+
+export const getChangedPeriod = (
+  { start, end }: { start: ObjectifiedDate; end: ObjectifiedDate },
+  direction: "prev" | "next"
+) => {
+  if (direction === "prev")
+    return {
+      start: objectifyDate(
+        dayjs(start.origin).subtract(PERIOD_CHANGE_OFFSET, "day")
+      ),
+      end: objectifyDate(
+        dayjs(end.origin).subtract(PERIOD_CHANGE_OFFSET, "day")
+      ),
+    };
+
+  return {
+    start: objectifyDate(dayjs(start.origin).add(PERIOD_CHANGE_OFFSET, "day")),
+    end: objectifyDate(dayjs(end.origin).add(PERIOD_CHANGE_OFFSET, "day")),
   };
 };
 
 export const isLatestWeek = (currentPeriodEnd: ObjectifiedDate) => {
-  const endDate = dayjs(
-    new Date(
-      currentPeriodEnd.year,
-      currentPeriodEnd.month - 1,
-      currentPeriodEnd.date
-    )
-  );
+  const now = dayjs(new Date());
+  const endDate = dayjs(currentPeriodEnd.origin);
+
   return endDate.isSameOrAfter(now);
 };

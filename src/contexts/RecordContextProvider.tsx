@@ -1,13 +1,13 @@
 import { useState, ReactNode, useCallback } from "react";
-import { getPeriod } from "lib/utils/dateUtils";
+import { getLatestPeriod, getChangedPeriod } from "lib/utils/dateUtils";
 import { PeriodContext, PeriodHandleContext } from "./RecordContext";
 
 export const RecordProvider = ({ children }: { children: ReactNode }) => {
-  const [period, setPeriod] = useState(getPeriod());
+  const [period, setPeriod] = useState(getLatestPeriod());
 
   const movePeriod = useCallback(
     (direction: "prev" | "next") => {
-      setPeriod(getPeriod(period.start, direction));
+      setPeriod(getChangedPeriod(period, direction));
     },
     [period]
   );
