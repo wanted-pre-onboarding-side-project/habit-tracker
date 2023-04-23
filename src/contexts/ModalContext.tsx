@@ -1,5 +1,8 @@
 import { createContext, useContext } from "react";
-import { ModalContextType, ModalHandleContextType } from "interface/context";
+import type {
+  ModalContextType,
+  ModalHandleContextType,
+} from "interface/context";
 
 export const ModalContext = createContext<ModalContextType>(null);
 export const ModalHandleContext = createContext<ModalHandleContextType>(null);

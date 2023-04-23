@@ -1,6 +1,6 @@
 import { useState, ReactNode, useCallback } from "react";
-import { Habit } from "interface/main";
 import { HabitContext, HabitHandleContext } from "./HabitContext";
+import type { Habit } from "interface/main";
 
 export const HabitProvider = ({ children }: { children: ReactNode }) => {
   const [habits, setHabits] = useState<Habit[]>([]);

@@ -1,5 +1,8 @@
 import { createContext, useContext } from "react";
-import { HabitContextType, HabitHandleContextType } from "interface/context";
+import type {
+  HabitContextType,
+  HabitHandleContextType,
+} from "interface/context";
 
 export const HabitContext = createContext<HabitContextType>([]);
 export const HabitHandleContext = createContext<HabitHandleContextType>(null);

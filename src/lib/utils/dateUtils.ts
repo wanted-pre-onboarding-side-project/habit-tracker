@@ -1,8 +1,8 @@
 import dayjs from "dayjs";
-import { Day } from "interface/main";
-import { ObjectifiedDate } from "interface/context";
 import { PERIOD_CHANGE_OFFSET } from "constant";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
+import type { Day } from "interface/main";
+import type { ObjectifiedDate } from "interface/context";
 dayjs.extend(isSameOrAfter);
 
 const dayNumToWord = (dayNum: number): Day => {

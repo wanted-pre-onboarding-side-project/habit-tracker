@@ -1,5 +1,8 @@
 import { createContext, useContext } from "react";
-import { PeriodContextType, PeriodHandleContextType } from "interface/context";
+import type {
+  PeriodContextType,
+  PeriodHandleContextType,
+} from "interface/context";
 
 export const PeriodContext = createContext<PeriodContextType>(null);
 export const PeriodHandleContext = createContext<PeriodHandleContextType>(null);

@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from "react";
-import { Habit } from "interface/main";
 import { TOGGLE_BY_HEIGHT } from "constant";
 import styles from "../Dashboard.module.css";
+import type { Habit } from "interface/main";
 
 const HabitCard = ({ habit }: { habit: Habit }) => {
   const cardRef = useRef<HTMLDivElement>(null);
