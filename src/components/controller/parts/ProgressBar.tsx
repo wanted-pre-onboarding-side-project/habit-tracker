@@ -1,4 +1,5 @@
 import { useHabits } from "contexts/HabitContext";
+import styles from "../Controller.module.css";
 
 const ProgressBar = () => {
   const habits = useHabits();
@@ -15,7 +16,7 @@ const ProgressBar = () => {
 
   return (
     <div
-      className="ProgressBar ProgressBarLayout"
+      className={`${styles.ProgressBar} ProgressBarLayout`}
       style={{
         backgroundColor: "lightgray",
         height: "3vh",

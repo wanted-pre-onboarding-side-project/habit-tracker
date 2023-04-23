@@ -1,4 +1,5 @@
 import { useModalHandle } from "contexts/ModalContext";
+import styles from "../Controller.module.css";
 
 const AddHabitBtn = () => {
   //  TODO
@@ -7,7 +8,10 @@ const AddHabitBtn = () => {
   const toggleModal = useModalHandle();
 
   return (
-    <button className="AddHabitBtn AddHabitBtnLayout" onClick={toggleModal}>
+    <button
+      className={`${styles.AddHabitBtn} AddHabitBtnLayout`}
+      onClick={toggleModal}
+    >
       + 습관 추가하기
     </button>
   );

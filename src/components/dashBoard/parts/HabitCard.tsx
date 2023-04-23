@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import { Habit } from "interface/main";
 import { TOGGLE_BY_HEIGHT } from "constant";
+import styles from "../Dashboard.module.css";
 
 const HabitCard = ({ habit }: { habit: Habit }) => {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -15,11 +16,11 @@ const HabitCard = ({ habit }: { habit: Habit }) => {
   const [descStyle, setDescStyle] = useState<string | undefined>();
 
   useEffect(() => {
-    setDescStyle(isFold ? "ShortDescCardStyle" : undefined);
+    setDescStyle(isFold ? styles.ShortDescCardStyle : undefined);
   }, [isFold]);
 
   return (
-    <div ref={cardRef} className="HabitCard">
+    <div ref={cardRef} className={styles.HabitCard}>
       <div>{habit.name}</div>
       <div className={descStyle}>{habit.description}</div>
       <button onClick={() => alert("yet no record context")}>완료</button>
