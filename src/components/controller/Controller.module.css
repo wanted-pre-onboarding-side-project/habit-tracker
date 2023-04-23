@@ -1,0 +1,35 @@
+.AddHabitBtn {
+  position: relative;
+  width: 80%;
+  height: 50%;
+  top: 25%;
+  left: 10%;
+}
+
+.NavBtn {
+  position: relative;
+  width: 70%;
+  height: 50%;
+  top: 25%;
+  left: 10%;
+  display: flex;
+  flex-direction: row;
+  gap: 10%;
+}
+
+.Period {
+  position: relative;
+  width: 100%;
+  height: 5vh;
+  line-height: 5vh;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 1.2rem;
+  word-spacing: 1rem;
+}
+
+.ProgressBar {
+  position: relative;
+  width: 96%;
+  left: 1%;
+}
