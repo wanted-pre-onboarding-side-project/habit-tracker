@@ -15,24 +15,13 @@ const ProgressBar = () => {
     : Math.ceil((tempAchieveChecksLength / weeklyChecksLength) * 100) + '%';
 
   return (
-    <div
-      className={`${styles.ProgressBar} ProgressBarLayout`}
-      style={{
-        backgroundColor: 'lightgray',
-        height: '3vh',
-      }}
-    >
+    <div className={styles.backgroundArea}>
       <div
+        className={styles.completedArea}
         style={{
           width: achieveRate,
-          height: '3vh',
-          backgroundColor: 'cyan',
-          textAlign: 'center',
-          lineHeight: '3vh',
         }}
-      >
-        {achieveRate}
-      </div>
+      ></div>
     </div>
   );
 };

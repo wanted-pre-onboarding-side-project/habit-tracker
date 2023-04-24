@@ -1,4 +1,3 @@
-import './Layout.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import HabitTracker from 'HabitTracker';

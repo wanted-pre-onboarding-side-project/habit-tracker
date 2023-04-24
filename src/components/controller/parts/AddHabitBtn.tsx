@@ -8,10 +8,7 @@ const AddHabitBtn = () => {
   const toggleModal = useModalHandle();
 
   return (
-    <button
-      className={`${styles.AddHabitBtn} AddHabitBtnLayout`}
-      onClick={toggleModal}
-    >
+    <button className={styles.addHabitBtn} onClick={toggleModal}>
       + 습관 추가하기
     </button>
   );

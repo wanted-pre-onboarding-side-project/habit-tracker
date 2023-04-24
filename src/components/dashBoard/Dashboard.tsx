@@ -1,14 +1,13 @@
 import { getToday } from 'lib/utils/dateUtils';
 import { useHabits } from 'contexts/HabitContext';
 import styles from './Dashboard.module.css';
-import HabitCard from './parts/HabitCard';
+import HabitCard from './HabitCard/HabitCard';
 
 const DashBoard = () => {
   const habits = useHabits();
 
   return (
-    <div className={`${styles.HabitDashBoard} HabitDashBoardLayout`}>
-      <h3>TODAY</h3>
+    <div className={styles.container}>
       <div>
         {habits
           .filter((habit) => habit.days.includes(getToday().dayWord))

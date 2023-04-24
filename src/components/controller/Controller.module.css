@@ -1,35 +1,30 @@
-.AddHabitBtn {
-  position: relative;
-  width: 80%;
-  height: 50%;
-  top: 25%;
-  left: 10%;
-}
-
-.NavBtn {
-  position: relative;
-  width: 70%;
-  height: 50%;
-  top: 25%;
-  left: 10%;
+.container {
   display: flex;
-  flex-direction: row;
-  gap: 10%;
+  align-items: center;
+  gap: 2rem;
 }
 
-.Period {
-  position: relative;
+.addHabitBtn {
+}
+
+.navBtn {
+}
+
+.period {
+}
+
+.backgroundArea {
+  height: 10px;
   width: 100%;
-  height: 5vh;
-  line-height: 5vh;
-  text-align: center;
-  vertical-align: middle;
-  font-size: 1.2rem;
-  word-spacing: 1rem;
+  background-color: #eef3fb;
+  border-radius: 5px;
 }
 
-.ProgressBar {
-  position: relative;
-  width: 96%;
-  left: 1%;
+.completedArea {
+  background-color: #007bff;
+  height: 10px;
+  border-radius: 5px;
+  width: 0;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width 0.3s;
 }

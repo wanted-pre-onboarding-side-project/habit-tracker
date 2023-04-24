@@ -1,43 +1,5 @@
-.HabitDashBoard {
-  height: 100%;
-}
-
-.HabitDashBoard > div {
-  height: 80%;
-  overflow-y: scroll;
-}
-
-.HabitDashBoard > h3 {
-  text-align: center;
-}
-
-.HabitDashBoard > div {
-  border: solid 2px grey;
-  border-radius: 10px;
-  padding: 5%;
-}
-
-.HabitCard {
-  border: solid 2px grey;
-  border-radius: 10px;
-  padding: 2vh 1vw 2vh 1vw;
-  margin-bottom: 2vh;
-}
-
-.HabitCard > * {
-  margin: 3%;
-}
-
-.HabitCard > button {
-  height: 3vh;
-}
-
-.HabitCard > button:nth-child(4) {
-  float: right;
-}
-
-.ShortDescCardStyle {
-  height: 11vh;
-  text-overflow: ellipsis;
-  overflow: hidden;
+.container {
+  padding: 25px;
+  border: 1px solid #bed1ed;
+  border-radius: 4px;
 }
