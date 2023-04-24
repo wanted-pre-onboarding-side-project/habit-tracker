@@ -1,7 +1,7 @@
-import { getToday } from "lib/utils/dateUtils";
-import { useHabits } from "contexts/HabitContext";
-import styles from "./Dashboard.module.css";
-import HabitCard from "./parts/HabitCard";
+import { getToday } from 'lib/utils/dateUtils';
+import { useHabits } from 'contexts/HabitContext';
+import styles from './Dashboard.module.css';
+import HabitCard from './parts/HabitCard';
 
 const DashBoard = () => {
   const habits = useHabits();
