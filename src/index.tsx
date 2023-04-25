@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import HabitTracker from 'HabitTracker';
 import { ModalProvider } from 'contexts/ModalContextProvider';
 import { RecordProvider } from 'contexts/RecordContextProvider';
-import { HabitProvider } from 'contexts/HabitContextProvider';
+import HabitProvider from 'contexts/HabitContextProvider';
 import './setupDayjs.ts';
 
 const root = ReactDOM.createRoot(

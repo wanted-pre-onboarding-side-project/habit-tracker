@@ -1,4 +1,4 @@
-import { Day, Habit } from './main';
+import { Day } from './main';
 
 export interface ObjectifiedDate {
   year: number;
@@ -21,10 +21,4 @@ export type PeriodHandleContextType =
   | null;
 
 export type ModalContextType = boolean | null;
-
 export type ModalHandleContextType = (() => void) | null;
-
-export type HabitContextType = Habit[];
-export type HabitHandleContextType =
-  | ((newHabit: Omit<Habit, 'id'>) => void)
-  | null;

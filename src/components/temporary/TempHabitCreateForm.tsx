@@ -1,10 +1,10 @@
 import { useModal } from 'contexts/ModalContext';
-import { useHabitsHandle } from 'contexts/HabitContext';
-import { Habit, Day } from 'interface/main';
+import { useHabitDispatchContext } from 'contexts/HabitContext';
+import { Day, Habit } from 'interface/main';
 
 const TempHabitCreateForm = () => {
   const isModalOpen = useModal();
-  const handleCreateHabit = useHabitsHandle();
+  const dispatch = useHabitDispatchContext();
 
   if (!isModalOpen) return null;
 
@@ -15,10 +15,18 @@ const TempHabitCreateForm = () => {
         <input placeholder="name random 생성" disabled />
         <textarea placeholder="desc random 생성" disabled />
         <input placeholder="days random 생성" disabled />
-        <button onClick={() => handleCreateHabit(makeRandomHabit(true))}>
+        <button
+          onClick={() =>
+            dispatch({ type: 'ADD', payload: makeRandomHabit(true) })
+          }
+        >
           Long desc 생성
         </button>
-        <button onClick={() => handleCreateHabit(makeRandomHabit(false))}>
+        <button
+          onClick={() =>
+            dispatch({ type: 'ADD', payload: makeRandomHabit(false) })
+          }
+        >
           Short desc 생성
         </button>
       </div>
@@ -28,7 +36,7 @@ const TempHabitCreateForm = () => {
 
 export default TempHabitCreateForm;
 
-function makeRandomHabit(isLongDesc: boolean): Omit<Habit, 'id'> {
+function makeRandomHabit(isLongDesc: boolean): Habit {
   const randomNum = Math.ceil(Math.random() * 1000);
   const randomDesc = !isLongDesc
     ? '짧은 description 예시.....'
@@ -40,6 +48,7 @@ function makeRandomHabit(isLongDesc: boolean): Omit<Habit, 'id'> {
   ][Math.ceil(Math.random() * 10) % 3];
 
   return {
+    id: Math.ceil(Math.random() * 10000),
     name: `temp name(${randomNum})`,
     description: randomDesc,
     routineDays: randomDays as Day[],
