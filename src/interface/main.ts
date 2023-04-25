@@ -1,5 +1,6 @@
-export type Day = '월' | '화' | '수' | '목' | '금' | '토' | '일';
+import { WEEK_DAYS } from 'constant';
 
+export type Day = (typeof WEEK_DAYS)[number];
 export interface Habit {
   id: number;
   name: string;
