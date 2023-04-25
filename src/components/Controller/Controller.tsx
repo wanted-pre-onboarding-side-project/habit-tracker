@@ -2,7 +2,6 @@ import { usePeriodHandle } from 'contexts/RecordContext';
 import { usePeriod } from 'contexts/RecordContext';
 import { isLatestWeek } from 'lib/utils/dateUtils';
 import AddHabitBtn from './parts/AddHabitBtn';
-import ProgressBar from './parts/ProgressBar';
 import styles from './Controller.module.css';
 
 const Controller = () => {
@@ -24,7 +23,6 @@ const Controller = () => {
         {`${period.start.month}월 ${period.start.date}일 ~ ${period.end.month}월 ${period.end.date}일`}
       </h2>
       <AddHabitBtn />
-      <ProgressBar />
     </div>
   );
 };

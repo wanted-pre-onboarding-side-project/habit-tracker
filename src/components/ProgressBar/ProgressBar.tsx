@@ -1,5 +1,5 @@
 import { useHabitStateContext } from 'contexts/HabitContext';
-import styles from '../Controller.module.css';
+import styles from './ProgressBar.module.css';
 
 const ProgressBar = () => {
   const habits = useHabitStateContext();
