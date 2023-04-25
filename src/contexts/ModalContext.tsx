@@ -1,22 +1,18 @@
 import { createContext, useContext } from 'react';
-import type {
-  ModalContextType,
-  ModalHandleContextType,
-} from 'interface/context';
 
-export const ModalContext = createContext<ModalContextType>(null);
-export const ModalHandleContext = createContext<ModalHandleContextType>(null);
+export const ModalStateContext = createContext<boolean | null>(null);
+export const ModalHandleContext = createContext<(() => void) | null>(null);
 
-export const useModal = () => {
-  const context = useContext(ModalContext);
+export const useModalStateContext = () => {
+  const context = useContext(ModalStateContext);
 
   if (context === null)
-    throw new Error('<ModalContext.Provider>가 제공되지 않았습니다.');
+    throw new Error('<ModalStateContext.Provider>가 제공되지 않았습니다.');
 
   return context;
 };
 
-export const useModalHandle = () => {
+export const useModalHandleContext = () => {
   const context = useContext(ModalHandleContext);
 
   if (!context)

@@ -19,6 +19,3 @@ export type PeriodContextType = {
 export type PeriodHandleContextType =
   | ((direction: 'prev' | 'next') => void)
   | null;
-
-export type ModalContextType = boolean | null;
-export type ModalHandleContextType = (() => void) | null;
