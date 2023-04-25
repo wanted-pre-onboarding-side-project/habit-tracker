@@ -1,7 +1,13 @@
 import { createContext, useContext } from 'react';
 
-export const ModalStateContext = createContext<boolean | null>(null);
-export const ModalHandleContext = createContext<(() => void) | null>(null);
+export const ModalStateContext = createContext<{
+  isModalOpen: boolean;
+  modalComponent: React.ReactElement;
+} | null>(null);
+export const ModalHandleContext = createContext<{
+  toggleModal: () => void;
+  changeModalComponent: (component: React.ReactElement) => void;
+} | null>(null);
 
 export const useModalStateContext = () => {
   const context = useContext(ModalStateContext);

@@ -3,14 +3,19 @@ import Modal from 'components/Modal/Modal';
 import styles from '../Controller.module.css';
 
 const AddHabitBtn = () => {
-  const toggleModal = useModalHandleContext();
+  const { toggleModal, changeModalComponent } = useModalHandleContext();
 
   return (
     <>
-      <button className={styles.addHabitBtn} onClick={toggleModal}>
+      <button
+        className={styles.addHabitBtn}
+        onClick={() => {
+          toggleModal();
+          changeModalComponent(<Modal />);
+        }}
+      >
         + 습관 추가하기
       </button>
-      <Modal />
     </>
   );
 };

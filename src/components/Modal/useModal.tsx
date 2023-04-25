@@ -5,12 +5,16 @@ import { useHabitDispatchContext } from 'contexts/HabitContext';
 import { useModalHandleContext } from 'contexts/ModalContext';
 import dayjs from 'dayjs';
 
-const useModal = () => {
+const useModal = (habitToUpdate?: Habit) => {
   const dispatch = useHabitDispatchContext();
-  const toggleModal = useModalHandleContext();
-  const [name, setName] = React.useState<string>('');
-  const [description, setDescription] = React.useState<string>('');
-  const [routineDays, setRoutineDays] = React.useState([...WEEK_DAYS]);
+  const { toggleModal } = useModalHandleContext();
+  const [name, setName] = React.useState<string>(habitToUpdate?.name || '');
+  const [description, setDescription] = React.useState<string>(
+    habitToUpdate?.description || '',
+  );
+  const [routineDays, setRoutineDays] = React.useState(
+    habitToUpdate?.routineDays || [...WEEK_DAYS],
+  );
 
   const reset = () => {
     setName('');
@@ -44,13 +48,28 @@ const useModal = () => {
       name,
       description,
       routineDays,
-      recordedDates: routineDays.includes(WEEK_DAYS[now])
+      recordedDates: routineDays.includes(WEEK_DAYS[now - 1])
         ? { [now2]: 'inactive' }
         : {},
     };
 
     dispatch({ type: 'ADD', payload });
-    reset();
+    closeModal();
+  };
+
+  const editHabit = () => {
+    const payload: Habit = {
+      id: habitToUpdate?.id as number,
+      name,
+      description,
+      routineDays,
+      recordedDates: habitToUpdate?.recordedDates as {
+        [key: string]: 'inactive' | 'completed';
+      },
+    };
+
+    dispatch({ type: 'UPDATE', payload });
+    closeModal();
   };
 
   const closeModal = () => {
@@ -67,6 +86,7 @@ const useModal = () => {
     changeRoutineDays,
     WEEK_DAYS,
     addHabit,
+    editHabit,
     closeModal,
   };
 };

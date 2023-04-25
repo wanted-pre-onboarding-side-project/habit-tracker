@@ -4,6 +4,7 @@ import HabitTracker from 'HabitTracker';
 import { ModalProvider } from 'contexts/ModalContextProvider';
 import { RecordProvider } from 'contexts/RecordContextProvider';
 import HabitProvider from 'contexts/HabitContextProvider';
+import ModalPortal from 'components/Modal/ModalPortal';
 import './setupDayjs.ts';
 
 const root = ReactDOM.createRoot(
@@ -14,6 +15,7 @@ root.render(
     <HabitProvider>
       <RecordProvider>
         <ModalProvider>
+          <ModalPortal />
           <HabitTracker />
         </ModalProvider>
       </RecordProvider>
