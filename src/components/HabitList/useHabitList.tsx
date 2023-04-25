@@ -28,7 +28,9 @@ const useHabitList = () => {
         ? dayjs(day.date).isSameOrBefore(now, 'day')
           ? item.recordedDates[day.date] === 'inactive'
             ? 'inactive'
-            : 'completed'
+            : item.recordedDates[day.date]
+            ? 'completed'
+            : undefined
           : 'future'
         : undefined;
     }

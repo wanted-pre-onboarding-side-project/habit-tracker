@@ -8,13 +8,15 @@ const reducer = (
   action: { type: 'ADD' | 'UPDATE' | 'DELETE'; payload: Habit },
 ) => {
   const targetIdx = state.findIndex((item) => item.id === action.payload.id);
+  const newState = [...state];
 
   switch (action.type) {
     case 'ADD':
-      return [...state, action.payload];
+      return newState.concat(action.payload);
 
     case 'UPDATE':
-      return [...state].splice(targetIdx, 1, action.payload);
+      newState.splice(targetIdx, 1, action.payload);
+      return newState;
 
     case 'DELETE':
       return [...state.filter((_, idx) => idx !== targetIdx)];
