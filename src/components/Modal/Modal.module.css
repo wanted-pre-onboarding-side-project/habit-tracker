@@ -1,0 +1,43 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+
+.modalContent {
+  position: relative;
+  padding: 50px;
+  background-color: #fff;
+  width: 450px;
+  height: 100vh;
+}
+
+.routineSelectContainer {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-column-gap: 15px;
+  grid-row-gap: 15px;
+}
+
+.routineSelectButton {
+  width: 100%;
+  font-weight: 500;
+  height: 45px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.routineSelectButton[data-active='true'] {
+  color: #fff;
+  border: 1px solid #007bff;
+  background-color: #007bff;
+}
