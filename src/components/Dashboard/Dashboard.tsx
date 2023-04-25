@@ -10,7 +10,7 @@ const DashBoard = () => {
     <div className={styles.container}>
       <div>
         {habits
-          .filter((habit) => habit.days.includes(getToday().dayWord))
+          .filter((habit) => habit.routineDays.includes(getToday().dayWord))
           .map((habit) => (
             <HabitCard key={habit.id} habit={habit} />
           ))}

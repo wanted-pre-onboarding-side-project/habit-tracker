@@ -42,6 +42,12 @@ function makeRandomHabit(isLongDesc: boolean): Omit<Habit, 'id'> {
   return {
     name: `temp name(${randomNum})`,
     description: randomDesc,
-    days: randomDays as Day[],
+    routineDays: randomDays as Day[],
+    recordedDates: {
+      '2023-04-22': 'inactive',
+      '2023-04-23': 'inactive',
+      '2023-04-24': 'inactive',
+      '2023-04-25': 'inactive',
+    },
   };
 }

@@ -4,5 +4,8 @@ export interface Habit {
   id: number;
   name: string;
   description: string;
-  days: Day[];
+  routineDays: Day[];
+  recordedDates: {
+    [key: string]: 'inactive' | 'completed';
+  };
 }

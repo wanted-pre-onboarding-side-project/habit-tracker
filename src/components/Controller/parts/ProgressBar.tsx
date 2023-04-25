@@ -4,7 +4,7 @@ import styles from '../Controller.module.css';
 const ProgressBar = () => {
   const habits = useHabits();
   const weeklyChecksLength = habits.reduce(
-    (prev, curr) => prev + curr.days.length,
+    (prev, curr) => prev + curr.routineDays.length,
     0,
   );
   //  금주 check 개수는 임시로 생성
