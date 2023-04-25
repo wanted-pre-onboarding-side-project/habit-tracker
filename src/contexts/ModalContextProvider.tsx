@@ -1,7 +1,7 @@
 import { useState, ReactNode, useCallback } from 'react';
 import { ModalStateContext, ModalHandleContext } from './ModalContext';
 
-export const ModalProvider = ({ children }: { children: ReactNode }) => {
+const ModalProvider = ({ children }: { children: ReactNode }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalComponent, setModalComponent] = useState(<div />);
   const toggleModal = useCallback(() => setIsModalOpen((prev) => !prev), []);
@@ -19,3 +19,5 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
     </ModalStateContext.Provider>
   );
 };
+
+export default ModalProvider;
