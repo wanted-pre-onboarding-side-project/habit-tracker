@@ -1,8 +1,8 @@
 import Header from 'components/Header/Header';
 import Controller from 'components/Controller/Controller';
 import DashBoard from 'components/Dashboard/Dashboard';
+import HabitList from 'components/HabitList/HabitList';
 import TempHabitCreateForm from 'components/temporary/TempHabitCreateForm';
-import TempHabitList from 'components/temporary/TempHabitList';
 import styles from './HabitTracker.module.css';
 
 const HabitTracker = () => {
@@ -11,8 +11,8 @@ const HabitTracker = () => {
       <div className={styles.leftSection}>
         <Header />
         <Controller />
+        <HabitList />
         <TempHabitCreateForm />
-        <TempHabitList />
       </div>
       <DashBoard />
     </div>
