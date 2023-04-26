@@ -12,14 +12,7 @@ export const TooltipContext = createContext<TooltipContextType>(null);
 export const TooltipHandleContext =
   createContext<TooltipHandleContextType>(null);
 
-export const useModalContext = () => {
-  const context = useContext(ModalContext);
-
-  if (context === null)
-    throw new Error('<ModalContext.Provider>가 제공되지 않았습니다.');
-
-  return context;
-};
+export const useModalContext = () => useContext(ModalContext);
 
 export const useModalHandleContext = () => {
   const context = useContext(ModalHandleContext);
@@ -30,11 +23,7 @@ export const useModalHandleContext = () => {
   return context;
 };
 
-export const useTooltipContext = () => {
-  const context = useContext(TooltipContext);
-
-  return context;
-};
+export const useTooltipContext = () => useContext(TooltipContext);
 
 export const useTooltipHandleContext = () => {
   const context = useContext(TooltipHandleContext);
