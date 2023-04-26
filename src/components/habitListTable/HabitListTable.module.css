@@ -1,0 +1,7 @@
+.HabitListTable {
+  overflow-y: scroll;
+}
+
+.HabitListTable table {
+  width: 100%;
+}

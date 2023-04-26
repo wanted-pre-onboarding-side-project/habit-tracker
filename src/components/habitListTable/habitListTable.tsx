@@ -1,6 +1,6 @@
-import styles from './HabitListTable.module.css';
 import TableHead from './parts/TableHead';
 import TableBody from './parts/TableBody';
+import styles from './HabitListTable.module.css';
 
 const HabitListTable = () => {
   return (

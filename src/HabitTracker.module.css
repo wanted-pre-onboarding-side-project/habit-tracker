@@ -5,4 +5,5 @@ body {
 .HabitTracker {
   height: 96vh;
   padding: 2vh 2vw;
+  box-sizing: border-box;
 }
