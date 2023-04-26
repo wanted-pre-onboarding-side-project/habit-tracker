@@ -2,8 +2,9 @@ import React from 'react';
 import { HabitStateContext, HabitDispatchContext } from './HabitContext';
 import type { Habit } from 'interface/main';
 
-const initialState: Habit[] =
-  JSON.parse(localStorage.getItem('HABIT_DATA') || '') || [];
+const initialState: Habit[] = JSON.parse(
+  localStorage.getItem('HABIT_DATA') || '[]',
+);
 
 const reducer = (
   state: Habit[],
@@ -24,7 +25,7 @@ const reducer = (
       return [...state.filter((_, idx) => idx !== targetIdx)];
 
     default:
-      throw new Error();
+      throw new Error('choose right action type');
   }
 };
 
