@@ -6,7 +6,7 @@ const Tooltip = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <button onClick={() => openModal('update')}>edit</button>
-      <button>delete</button>
+      <button onClick={() => openModal('delete')}>delete</button>
     </div>
   );
 };

@@ -35,4 +35,5 @@ export type HabitContextType = Habit[];
 export type HabitHandleContextType = {
   createHabit: (newHabitContent: Omit<Habit, 'id'>) => void;
   updateHabit: (updatingHabitContent: Habit) => void;
+  deleteHabit: (habitId: Habit['id']) => void;
 } | null;

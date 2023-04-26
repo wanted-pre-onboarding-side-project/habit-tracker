@@ -25,10 +25,16 @@ export const HabitProvider = ({ children }: { children: ReactNode }) => {
     closeModal();
   };
 
+  const handleDeleteHabit = (habitId: Habit['id']) => {
+    setHabits(habits.filter((habit) => habit.id !== habitId));
+    closeModal();
+  };
+
   //  TODO: useReducer
   const habitHandlers = {
     createHabit: handleCreateHabit,
     updateHabit: handleUpdateHabit,
+    deleteHabit: handleDeleteHabit,
   };
 
   return (
