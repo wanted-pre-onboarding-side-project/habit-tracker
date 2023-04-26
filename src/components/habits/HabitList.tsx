@@ -40,25 +40,36 @@ const HabitList = () => {
         ))}
       </div>
 
-      <div
-        className={[styles.habitListItems, styles.habitListContainer].join(' ')}
-      >
-        {habits.map((habit) => (
-          <HabitListItem
-            selected={selectedHabit ? selectedHabit.id === habit.id : false}
-            onNameClick={() => openContextMenu(habit)}
-            closeContextMenu={closeContextMenu}
-            currentWeekDates={currentWeekDates}
-            key={habit.id}
-            habit={habit}
-            records={
-              records.find(({ habitId }) => habitId === habit.id)?.records || []
-            }
-          />
-        ))}
-      </div>
+      {habits.length === 0 ? (
+        <EmptyHabitList />
+      ) : (
+        <div
+          className={[styles.habitListItems, styles.habitListContainer].join(
+            ' ',
+          )}
+        >
+          {habits.map((habit) => (
+            <HabitListItem
+              selected={selectedHabit ? selectedHabit.id === habit.id : false}
+              onNameClick={() => openContextMenu(habit)}
+              closeContextMenu={closeContextMenu}
+              currentWeekDates={currentWeekDates}
+              key={habit.id}
+              habit={habit}
+              records={
+                records.find(({ habitId }) => habitId === habit.id)?.records ||
+                []
+              }
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
 
 export default HabitList;
+
+const EmptyHabitList = () => {
+  return <div className={styles.emptyHabitList}>생성된 습관이 없습니다</div>;
+};

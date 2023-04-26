@@ -13,7 +13,7 @@ const dummy: Habit[] = Array(5)
   }));
 
 export const HabitProvider = ({ children }: { children: ReactNode }) => {
-  const [habits, setHabits] = useState<Habit[]>(dummy);
+  const [habits, setHabits] = useState<Habit[]>([]);
 
   const handlers = useMemo(
     () => ({

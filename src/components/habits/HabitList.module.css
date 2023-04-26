@@ -40,3 +40,10 @@
   left: 100%;
   top: 0;
 }
+
+.emptyHabitList {
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
