@@ -1,10 +1,19 @@
 import { useRef, useEffect, useState } from 'react';
 import { TOGGLE_BY_HEIGHT } from 'constant';
+import { useRecords, useRecordsHandle } from 'contexts/RecordContext';
+import { getToday } from 'lib/utils/dateUtils';
 import styles from '../Dashboard.module.css';
 import type { Habit } from 'interface/main';
 
 const HabitCard = ({ habit }: { habit: Habit }) => {
   const cardRef = useRef<HTMLDivElement>(null);
+  const records = useRecords();
+  const thisHabitRecord =
+    records.find(({ habitId }) => habitId === habit.id)?.records || [];
+  const today = getToday();
+  const isMarked = thisHabitRecord.includes(today.yyyymmdd);
+  const handleChangeRecord = useRecordsHandle();
+
   const [isLongToFold, setIsLongToFold] = useState<boolean>(false);
 
   useEffect(() => {
@@ -20,10 +29,23 @@ const HabitCard = ({ habit }: { habit: Habit }) => {
   }, [isFold]);
 
   return (
-    <div ref={cardRef} className={styles.HabitCard}>
+    <div
+      ref={cardRef}
+      className={`${styles.HabitCard} ${isMarked ? styles.marked : ''}`}
+    >
       <div>{habit.name}</div>
       <div className={descStyle}>{habit.description}</div>
-      <button onClick={() => alert('yet no record context')}>완료</button>
+      <button
+        onClick={() => {
+          handleChangeRecord({
+            id: habit.id,
+            date: today.yyyymmdd,
+            type: isMarked ? 'unmark' : 'mark',
+          });
+        }}
+      >
+        {isMarked ? '되돌리기' : '완료하기'}
+      </button>
       {isLongToFold && (
         <button onClick={() => setIsFold((prev) => !prev)}>
           toggle: desc Open or Close
@@ -34,8 +56,3 @@ const HabitCard = ({ habit }: { habit: Habit }) => {
 };
 
 export default HabitCard;
-
-//  TODO
-//
-//  habit.id랑 오늘 날짜 값으로 record도 가져와야겠네.
-//  habit.id로 dispatch done or undone
