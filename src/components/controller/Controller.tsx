@@ -6,8 +6,8 @@ import ProgressBar from './parts/ProgressBar';
 const Controller = () => {
   return (
     <div className="HabitControllerLayout">
-      <AddHabitBtn />
       <NavBtn />
+      <AddHabitBtn />
       <Period />
       <ProgressBar />
     </div>

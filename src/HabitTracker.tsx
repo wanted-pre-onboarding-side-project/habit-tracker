@@ -10,8 +10,8 @@ const HabitTracker = () => {
     <div className="HabitTracker HabitTrackerLayout">
       <Header />
       <Controller />
-      <DashBoard />
       <HabitList />
+      <DashBoard />
       <Overlays />
     </div>
   );
