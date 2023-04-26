@@ -3,6 +3,7 @@ const TableHead = () => {
     <thead>
       <tr>
         <th>habit name</th>
+        <th>{/* tooltip */}</th>
         <th>월</th>
         <th>화</th>
         <th>수</th>

@@ -1,8 +1,15 @@
 import { useState, ReactNode, useCallback } from 'react';
-import { ModalContext, ModalHandleContext } from './ModalContext';
+import {
+  ModalContext,
+  ModalHandleContext,
+  TooltipContext,
+  TooltipHandleContext,
+} from './ModalContext';
+import type { Habit } from 'interface/main';
 
 export const ModalProvider = ({ children }: { children: ReactNode }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [tooltipId, setTooltipId] = useState<Habit['id'] | null>(null);
 
   const toggleModal = useCallback(() => setIsModalOpen((prev) => !prev), []);
 
@@ -12,7 +19,11 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
   return (
     <ModalContext.Provider value={isModalOpen}>
       <ModalHandleContext.Provider value={toggleModal}>
-        {children}
+        <TooltipContext.Provider value={tooltipId}>
+          <TooltipHandleContext.Provider value={setTooltipId}>
+            {children}
+          </TooltipHandleContext.Provider>
+        </TooltipContext.Provider>
       </ModalHandleContext.Provider>
     </ModalContext.Provider>
   );

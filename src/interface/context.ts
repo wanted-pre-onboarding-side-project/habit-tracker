@@ -21,8 +21,11 @@ export type PeriodHandleContextType =
   | null;
 
 export type ModalContextType = boolean | null;
-
 export type ModalHandleContextType = (() => void) | null;
+export type TooltipContextType = Habit['id'] | null;
+export type TooltipHandleContextType = React.Dispatch<
+  React.SetStateAction<Habit['id'] | null>
+> | null;
 
 export type HabitContextType = Habit[];
 export type HabitHandleContextType =
