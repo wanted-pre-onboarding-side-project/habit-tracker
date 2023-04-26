@@ -3,6 +3,9 @@
   grid-template-columns: 150px repeat(7, 1fr);
   text-align: center;
 }
+.habitListContainer > div {
+  padding: 10px 0px;
+}
 
 .habitListHeader {
   padding-right: 16px;
@@ -12,10 +15,28 @@
   max-height: 50vh;
   overflow-y: scroll;
 }
+.recordCheckBox {
+  width: 1.128rem;
+  height: 1.128rem;
+  cursor: pointer;
+}
 
 .recordCheckBox:disabled {
   cursor: not-allowed;
 }
 .highlight {
   background-color: yellow;
+}
+
+.habitName {
+  position: relative;
+  cursor: pointer;
+}
+.habitContextMenuContainer {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  left: 100%;
+  top: 0;
 }

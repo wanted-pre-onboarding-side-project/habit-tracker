@@ -3,22 +3,41 @@ import { ObjectifiedDate } from 'interface/context';
 import { Habit, HabitRecord } from 'interface/main';
 import { getToday, isFutureDate } from 'lib/utils/dateUtils';
 import styles from '../HabitList.module.css';
+import HabitContextMenu from './HabitContextMenu';
 
 const HabitListItem = ({
+  selected,
   habit,
   records,
   currentWeekDates,
+  onNameClick,
+  closeContextMenu,
 }: {
+  selected?: boolean;
   habit: Habit;
   records: HabitRecord['records'];
   currentWeekDates: ObjectifiedDate[];
+  onNameClick: () => void;
+  closeContextMenu: () => void;
 }) => {
   const handleChangeRecord = useRecordsHandle();
   const today = getToday();
 
   return (
     <>
-      <div>{habit.name}</div>
+      <div
+        className={styles.habitName}
+        onClick={(e) => {
+          e.stopPropagation();
+          onNameClick();
+        }}
+        tabIndex={0}
+      >
+        {habit.name}
+        {selected && (
+          <HabitContextMenu closeContextMenu={closeContextMenu} habit={habit} />
+        )}
+      </div>
       {currentWeekDates.map((targetDate) => (
         <div
           key={targetDate.yyyymmdd}
