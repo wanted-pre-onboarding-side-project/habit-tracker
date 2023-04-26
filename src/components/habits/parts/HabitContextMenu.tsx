@@ -1,4 +1,6 @@
 import Dialog from 'components/overlay/Dialog';
+import HabitEditForm from 'components/overlay/HabitEditForm';
+import Modal from 'components/overlay/Modal';
 import { useHabitsHandle } from 'contexts/HabitContext';
 import { Habit } from 'interface/main';
 import { useState } from 'react';
@@ -24,9 +26,19 @@ const HabitContextMenu = ({
     closeDialog();
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => {
+    setIsModalOpen(false);
+    closeContextMenu();
+  };
+
   return (
     <div className={styles.habitContextMenuContainer}>
-      <button>수정</button>
+      <button onClick={openModal}>수정</button>
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <HabitEditForm habit={habit} onClose={closeModal} />
+      </Modal>
       <button onClick={() => setIsDialogOpen(true)}>삭제</button>
       <Dialog isOpen={isDialogOpen} onClose={closeDialog}>
         <div>

@@ -25,6 +25,7 @@ export type HabitContextType = Habit[];
 export type HabitHandleContextType = {
   handleCreateHabit: (newHabit: Omit<Habit, 'id'>) => void;
   handleDeleteHabit: (deleteHabitId: Habit['id']) => void;
+  handleEditHabit: (editedHabit: Habit) => void;
 } | null;
 
 export type RecordsContextType = HabitRecord[] | null;

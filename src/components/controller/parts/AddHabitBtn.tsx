@@ -1,4 +1,4 @@
-import HabitCreateForm from 'components/overlay/HabitForm';
+import HabitCreateForm from 'components/overlay/HabitCreateForm';
 import Modal from 'components/overlay/Modal';
 import { useState } from 'react';
 import styles from '../Controller.module.css';
