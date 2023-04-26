@@ -1,4 +1,4 @@
-import { Day, Habit } from './main';
+import { Day, Habit, HabitRecord } from './main';
 
 export interface ObjectifiedDate {
   year: number;
@@ -9,6 +9,7 @@ export interface ObjectifiedDate {
   hour: number;
   minute: number;
   origin: Date;
+  yyyymmdd: string;
 }
 
 export type PeriodContextType = {
@@ -27,4 +28,13 @@ export type ModalHandleContextType = (() => void) | null;
 export type HabitContextType = Habit[];
 export type HabitHandleContextType =
   | ((newHabit: Omit<Habit, 'id'>) => void)
+  | null;
+
+export type RecordsContextType = HabitRecord[] | null;
+export type RecordsHandleContextType =
+  | ((recordChangeValue: {
+      id: Habit['id'];
+      date: string;
+      type: 'mark' | 'unmark';
+    }) => void)
   | null;

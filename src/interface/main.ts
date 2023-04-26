@@ -6,3 +6,8 @@ export interface Habit {
   description: string;
   days: Day[];
 }
+
+export interface HabitRecord {
+  habitId: number;
+  records: string[];
+}
