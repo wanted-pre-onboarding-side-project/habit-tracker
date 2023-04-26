@@ -24,6 +24,11 @@
   grid-row: 1/4;
 }
 
+.ModalContainerLayout {
+  grid-column: 2/3;
+  grid-row: 1/4;
+}
+
 .HabitListTableLayout {
   grid-column: 1/2;
   grid-row: 3/4;
