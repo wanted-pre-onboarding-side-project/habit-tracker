@@ -1,0 +1,18 @@
+.habitListContainer {
+  display: grid;
+  grid-template-columns: 150px repeat(7, 1fr);
+}
+
+.habitListHeader {
+  /* TODO : habitListItems 가 overflow일때만 레이아웃 맞추기 위해 필요함 */
+  padding-right: 16px;
+}
+
+.habitListItems {
+  max-height: 50vh;
+  /* TODO : auto등으로 바꾸어 overflow아닐때는 안보이게 수정하기 */
+  overflow-y: scroll;
+}
+
+.habitListItem {
+}

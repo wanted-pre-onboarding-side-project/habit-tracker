@@ -1,9 +1,19 @@
 import { useState, ReactNode, useCallback } from 'react';
+import { DAYS } from 'constant';
 import { HabitContext, HabitHandleContext } from './HabitContext';
 import type { Habit } from 'interface/main';
 
+const dummy: Habit[] = Array(10)
+  .fill(0)
+  .map((val, idx) => ({
+    id: idx,
+    name: `습관 ${idx}`,
+    description: `습관 ${idx} 설명`,
+    days: DAYS,
+  }));
+
 export const HabitProvider = ({ children }: { children: ReactNode }) => {
-  const [habits, setHabits] = useState<Habit[]>([]);
+  const [habits, setHabits] = useState<Habit[]>(dummy);
 
   const handleCreateHabit = useCallback(
     (newHabitContent: Omit<Habit, 'id'>) => {
