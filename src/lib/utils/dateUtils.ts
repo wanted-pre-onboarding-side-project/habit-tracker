@@ -36,6 +36,7 @@ const objectifyDate = (dateObj: dayjs.Dayjs): ObjectifiedDate => {
     dayWord: dayNumToWord(dateObj.get('day')),
     hour: dateObj.get('hour'),
     minute: dateObj.get('minute'),
+    yyyymmdd: dateObj.format('YYYY-MM-DD'),
   };
 };
 
@@ -82,3 +83,17 @@ export const isLatestWeek = (currentPeriodEnd: ObjectifiedDate) => {
 
   return endDate.isSameOrAfter(now);
 };
+
+export function getCurrentWeekDates(startDate: ObjectifiedDate) {
+  return Array(7)
+    .fill(0)
+    .map((_, index) =>
+      objectifyDate(dayjs(startDate.origin).add(index, 'day')),
+    );
+}
+
+export function isFutureDate(targetDate: ObjectifiedDate) {
+  const now = dayjs(new Date());
+  const target = dayjs(targetDate.origin);
+  return target.isAfter(now);
+}

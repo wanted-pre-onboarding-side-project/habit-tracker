@@ -1,10 +1,15 @@
-import { DAYS } from 'constant';
 import { useHabits } from 'contexts/HabitContext';
-import { Fragment } from 'react';
+import { usePeriod, useRecords } from 'contexts/RecordContext';
+import { getCurrentWeekDates, getToday } from 'lib/utils/dateUtils';
 import styles from './HabitList.module.css';
+import HabitListItem from './parts/HabitListItem';
 
 const HabitList = () => {
   const habits = useHabits();
+  const records = useRecords();
+  const { start } = usePeriod();
+  const today = getToday();
+  const currentWeekDates = getCurrentWeekDates(start);
   return (
     <div className="HabitListLayout">
       <div
@@ -13,8 +18,15 @@ const HabitList = () => {
         )}
       >
         <div>habit</div>
-        {DAYS.map((day) => (
-          <div key={day}>{day}</div>
+        {currentWeekDates.map((targetDate) => (
+          <div
+            key={targetDate.dayWord}
+            className={
+              targetDate.yyyymmdd === today.yyyymmdd ? styles.highlight : ''
+            }
+          >
+            {targetDate.dayWord}
+          </div>
         ))}
       </div>
 
@@ -22,12 +34,14 @@ const HabitList = () => {
         className={[styles.habitListItems, styles.habitListContainer].join(' ')}
       >
         {habits.map((habit) => (
-          <Fragment key={habit.id}>
-            <div>{habit.name}</div>
-            {DAYS.map((day) => (
-              <div key={day}>{day}</div>
-            ))}
-          </Fragment>
+          <HabitListItem
+            currentWeekDates={currentWeekDates}
+            key={habit.id}
+            habit={habit}
+            records={
+              records.find(({ habitId }) => habitId === habit.id)?.records || []
+            }
+          />
         ))}
       </div>
     </div>
@@ -35,6 +49,3 @@ const HabitList = () => {
 };
 
 export default HabitList;
-function getToday() {
-  throw new Error('Function not implemented.');
-}
