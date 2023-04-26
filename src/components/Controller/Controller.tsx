@@ -2,7 +2,6 @@ import {
   usePeriodStateContext,
   usePeriodHandleContext,
 } from 'contexts/PeriodContext';
-import AddHabitBtn from './parts/AddHabitBtn';
 import styles from './Controller.module.css';
 
 const Controller = () => {
@@ -11,14 +10,13 @@ const Controller = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.navBtn}>
+      <div className={styles.periodSelector}>
         <button onClick={movePrevPeriod}>{'<'}</button>
         <button onClick={moveNextPeriod} disabled={isLatestWeek}>
           {'>'}
         </button>
       </div>
       <h2 className={styles.period}>{period}</h2>
-      <AddHabitBtn />
     </div>
   );
 };

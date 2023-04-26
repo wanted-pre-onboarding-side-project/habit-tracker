@@ -1,6 +1,6 @@
 import { useModalHandleContext } from 'contexts/ModalContext';
 import Modal from 'components/Modal/Modal';
-import styles from '../Controller.module.css';
+import styles from './Header.module.css';
 
 const AddHabitBtn = () => {
   const { toggleModal, changeModalComponent } = useModalHandleContext();

@@ -3,3 +3,18 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.addHabitBtn {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 16px;
+  border-radius: 8px;
+  outline: none;
+  transition: border 0.3s;
+  color: #007bff;
+  border: 1px solid #bed1ed;
+}
+
+.addHabitBtn:hover {
+  border: 1px solid #007bff;
+}
