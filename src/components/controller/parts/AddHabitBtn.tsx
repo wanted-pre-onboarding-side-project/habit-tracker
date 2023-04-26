@@ -1,5 +1,5 @@
-import { useModalHandle } from "contexts/ModalContext";
-import styles from "../Controller.module.css";
+import { useModalHandle } from 'contexts/ModalContext';
+import styles from '../Controller.module.css';
 
 const AddHabitBtn = () => {
   //  TODO

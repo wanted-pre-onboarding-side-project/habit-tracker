@@ -1,5 +1,5 @@
-import { useState, ReactNode, useCallback } from "react";
-import { ModalContext, ModalHandleContext } from "./ModalContext";
+import { useState, ReactNode, useCallback } from 'react';
+import { ModalContext, ModalHandleContext } from './ModalContext';
 
 export const ModalProvider = ({ children }: { children: ReactNode }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);

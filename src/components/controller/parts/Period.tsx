@@ -1,5 +1,5 @@
-import { usePeriod } from "contexts/RecordContext";
-import styles from "../Controller.module.css";
+import { usePeriod } from 'contexts/RecordContext';
+import styles from '../Controller.module.css';
 
 const Period = () => {
   const currentPeriod = usePeriod();
