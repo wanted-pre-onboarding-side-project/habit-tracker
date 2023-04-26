@@ -12,12 +12,12 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <HabitProvider>
-      <RecordProvider>
-        <ModalProvider>
+    <ModalProvider>
+      <HabitProvider>
+        <RecordProvider>
           <HabitTracker />
-        </ModalProvider>
-      </RecordProvider>
-    </HabitProvider>
+        </RecordProvider>
+      </HabitProvider>
+    </ModalProvider>
   </React.StrictMode>,
 );
