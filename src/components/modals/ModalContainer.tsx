@@ -1,17 +1,17 @@
 import { useModalContext } from 'contexts/ModalContext';
 import CreateHabitForm from './modalForms/CreateHabitForm';
+import UpdateHabitForm from './modalForms/UpdateHabitForm';
 // TODO: lazy import
 
 const ModalContainer = () => {
-  const isModalOpen = useModalContext();
+  const modalState = useModalContext();
 
-  if (!isModalOpen) return null;
+  if (!modalState) return null;
 
-  return (
-    <div className="ModalContainerLayout">
-      <CreateHabitForm />
-    </div>
-  );
+  const selectedModal =
+    modalState === 'create' ? <CreateHabitForm /> : <UpdateHabitForm />;
+
+  return <div className="ModalContainerLayout">{selectedModal}</div>;
 };
 
 export default ModalContainer;

@@ -5,12 +5,12 @@ const AddHabitBtn = () => {
   //  TODO
   //  모달 만들고 나면 create 모달임을 action type에 넣어 전달한다.
 
-  const toggleModal = useModalHandleContext();
+  const { openModal } = useModalHandleContext();
 
   return (
     <button
       className={`${styles.AddHabitBtn} AddHabitBtnLayout`}
-      onClick={toggleModal}
+      onClick={() => openModal('create')}
     >
       + 습관 추가하기
     </button>
