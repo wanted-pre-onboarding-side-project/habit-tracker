@@ -1,9 +1,5 @@
 import dayjs from 'dayjs';
-import { PERIOD_CHANGE_OFFSET } from 'constant';
-import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
-import type { Day } from 'interface/main';
-import type { ObjectifiedDate } from 'interface/context';
-dayjs.extend(isSameOrAfter);
+import type { Day, ObjectifiedDate } from 'interface/main';
 
 const dayNumToWord = (dayNum: number): Day => {
   switch (dayNum) {
@@ -26,7 +22,7 @@ const dayNumToWord = (dayNum: number): Day => {
   }
 };
 
-const objectifyDate = (dateObj: dayjs.Dayjs): ObjectifiedDate => {
+export const objectifyDate = (dateObj: dayjs.Dayjs): ObjectifiedDate => {
   return {
     origin: dateObj.toDate(),
     year: dateObj.get('year'),
@@ -45,40 +41,73 @@ export const getToday = () => {
   return objectifyDate(now);
 };
 
-export const getLatestPeriod = () => {
-  const now = dayjs(new Date());
-  const start = dayjs(now).startOf('week');
-  const end = dayjs(now).endOf('week');
-
-  return {
-    start: objectifyDate(start),
-    end: objectifyDate(end),
-  };
+export const getFormattedString = (date: Date, formatString?: string) => {
+  return dayjs(date).format(formatString || 'YYYY-MM-DD');
 };
 
-export const getChangedPeriod = (
-  { start, end }: { start: ObjectifiedDate; end: ObjectifiedDate },
-  direction: 'prev' | 'next',
+export const getEdgePointDate = (
+  date: Date,
+  point: 'TO_START_OF' | 'TO_END_OF',
+  unit: dayjs.ManipulateType,
 ) => {
-  if (direction === 'prev')
-    return {
-      start: objectifyDate(
-        dayjs(start.origin).subtract(PERIOD_CHANGE_OFFSET, 'day'),
-      ),
-      end: objectifyDate(
-        dayjs(end.origin).subtract(PERIOD_CHANGE_OFFSET, 'day'),
-      ),
-    };
+  switch (point) {
+    case 'TO_START_OF':
+      return dayjs(date).startOf(unit).toDate();
 
-  return {
-    start: objectifyDate(dayjs(start.origin).add(PERIOD_CHANGE_OFFSET, 'day')),
-    end: objectifyDate(dayjs(end.origin).add(PERIOD_CHANGE_OFFSET, 'day')),
-  };
+    case 'TO_END_OF':
+      return dayjs(date).endOf(unit).toDate();
+
+    default:
+      throw new Error('choose right point');
+  }
 };
 
-export const isLatestWeek = (currentPeriodEnd: ObjectifiedDate) => {
-  const now = dayjs(new Date());
-  const endDate = dayjs(currentPeriodEnd.origin);
+export const getCalculatedDate = (
+  date: Date,
+  mode: 'ADD' | 'SUBTRACT',
+  num: number,
+  unit: dayjs.ManipulateType,
+) => {
+  switch (mode) {
+    case 'ADD':
+      return dayjs(date).add(num, unit).toDate();
 
-  return endDate.isSameOrAfter(now);
+    case 'SUBTRACT':
+      return dayjs(date).subtract(num, unit).toDate();
+
+    default:
+      throw new Error('choose right calculation mode');
+  }
+};
+
+export const compareDate = (
+  dateSubject: Date | string,
+  compare:
+    | 'isSame'
+    | 'isSameOrBefore'
+    | 'isSameOrAfter'
+    | 'isBefore'
+    | 'isAfter',
+  dateObject: Date | string,
+  unit: dayjs.OpUnitType,
+) => {
+  switch (compare) {
+    case 'isSame':
+      return dayjs(dateSubject).isSame(dateObject, unit);
+
+    case 'isSameOrBefore':
+      return dayjs(dateSubject).isSameOrBefore(dateObject, unit);
+
+    case 'isSameOrAfter':
+      return dayjs(dateSubject).isSameOrAfter(dateObject, unit);
+
+    case 'isBefore':
+      return dayjs(dateSubject).isBefore(dateObject, unit);
+
+    case 'isAfter':
+      return dayjs(dateSubject).isAfter(dateObject, unit);
+
+    default:
+      throw new Error('choose right compare');
+  }
 };

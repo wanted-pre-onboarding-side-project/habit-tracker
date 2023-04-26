@@ -1,9 +1,9 @@
 import { createContext, useContext } from 'react';
-import type { ObjectifiedDate } from 'interface/main';
 
 export const PeriodStateContext = createContext<{
-  start: ObjectifiedDate;
-  end: ObjectifiedDate;
+  selectedDate: Date;
+  isLatestWeek: boolean;
+  period: string;
 } | null>(null);
 export const PeriodHandleContext = createContext<{
   movePrevPeriod: () => void;

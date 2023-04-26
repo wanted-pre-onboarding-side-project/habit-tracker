@@ -1,19 +1,26 @@
 import { useState, ReactNode, useCallback } from 'react';
-import { getLatestPeriod, getChangedPeriod } from 'lib/utils/dateUtils';
+import {
+  getPeriod,
+  getWeekBeforeDate,
+  getWeekAfterDate,
+  isSameWeek,
+} from './PeriodContext.helpers';
 import { PeriodStateContext, PeriodHandleContext } from './PeriodContext';
 
 const PeriodProvider = ({ children }: { children: ReactNode }) => {
-  const [period, setPeriod] = useState(getLatestPeriod());
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const period = getPeriod(selectedDate);
+  const isLatestWeek = isSameWeek(selectedDate, new Date());
 
   const movePrevPeriod = useCallback(() => {
-    setPeriod(getChangedPeriod(period, 'prev'));
-  }, [period]);
+    setSelectedDate(getWeekBeforeDate(selectedDate));
+  }, [selectedDate]);
   const moveNextPeriod = useCallback(() => {
-    setPeriod(getChangedPeriod(period, 'next'));
-  }, [period]);
+    setSelectedDate(getWeekAfterDate(selectedDate));
+  }, [selectedDate]);
 
   return (
-    <PeriodStateContext.Provider value={period}>
+    <PeriodStateContext.Provider value={{ selectedDate, isLatestWeek, period }}>
       <PeriodHandleContext.Provider value={{ movePrevPeriod, moveNextPeriod }}>
         {children}
       </PeriodHandleContext.Provider>
