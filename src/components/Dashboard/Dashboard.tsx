@@ -5,15 +5,18 @@ import HabitCard from './HabitCard/HabitCard';
 
 const DashBoard = () => {
   const habits = useHabitStateContext();
+  const todayHabits = habits.filter((habit) =>
+    habit.routineDays.includes(getToday().dayWord),
+  );
 
   return (
     <div className={styles.container}>
       <div>
-        {habits
-          .filter((habit) => habit.routineDays.includes(getToday().dayWord))
-          .map((habit) => (
-            <HabitCard key={habit.id} habit={habit} />
-          ))}
+        {todayHabits.length === 0 ? (
+          <div className={styles.addHabitButton}>오늘은 할일이 없습니다</div>
+        ) : (
+          todayHabits.map((habit) => <HabitCard key={habit.id} habit={habit} />)
+        )}
       </div>
     </div>
   );
