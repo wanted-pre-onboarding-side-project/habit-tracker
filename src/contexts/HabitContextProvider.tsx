@@ -2,7 +2,9 @@ import React from 'react';
 import { HabitStateContext, HabitDispatchContext } from './HabitContext';
 import type { Habit } from 'interface/main';
 
-const initialState: Habit[] = [];
+const initialState: Habit[] =
+  JSON.parse(localStorage.getItem('HABIT_DATA') || '') || [];
+
 const reducer = (
   state: Habit[],
   action: { type: 'ADD' | 'UPDATE' | 'DELETE'; payload: Habit },
@@ -28,6 +30,7 @@ const reducer = (
 
 const HabitProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = React.useReducer(reducer, initialState);
+  localStorage.setItem('HABIT_DATA', JSON.stringify(state));
 
   return (
     <HabitStateContext.Provider value={state}>
