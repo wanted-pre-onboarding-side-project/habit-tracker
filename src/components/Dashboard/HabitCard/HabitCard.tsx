@@ -1,3 +1,4 @@
+import HabitPopover from 'components/Popover/Popover';
 import styles from './HabitCard.module.css';
 import useHabitCard from './useHabitCard';
 import type { Habit } from 'interface/main';
@@ -9,13 +10,17 @@ const HabitCard = ({ habit }: { habit: Habit }) => {
     isFold,
     toggleFold,
     foldButtonContent,
+    completed,
     toggleComplete,
     completeButtonContent,
   } = useHabitCard(habit);
 
   return (
-    <div ref={cardRef} className={styles.container}>
-      <h2 className={styles.title}>{habit.name}</h2>
+    <div ref={cardRef} className={styles.container} data-completed={completed}>
+      <div className={styles.header}>
+        <h2 className={styles.title}>{habit.name}</h2>
+        <HabitPopover habit={habit} />
+      </div>
       <p
         className={
           isFold && isLongToFold ? styles.descriptionFolded : styles.description

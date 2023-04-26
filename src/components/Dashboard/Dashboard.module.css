@@ -3,3 +3,7 @@
   border: 1px solid #bed1ed;
   border-radius: 4px;
 }
+
+.addHabitButton {
+  width: 250px;
+}

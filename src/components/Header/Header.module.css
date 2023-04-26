@@ -2,10 +2,18 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.heading {
+  font-size: 32px;
+  font-weight: 500;
 }
 
 .addHabitBtn {
-  font-size: 18px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
   font-weight: 600;
   padding: 16px;
   border-radius: 8px;
@@ -17,4 +25,8 @@
 
 .addHabitBtn:hover {
   border: 1px solid #007bff;
+}
+
+.addHabitBtn span {
+  margin-left: 8px;
 }

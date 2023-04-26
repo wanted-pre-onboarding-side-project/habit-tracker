@@ -26,7 +26,7 @@ const useModal = (habitToUpdate?: Habit) => {
     setName(event.target.value);
   };
 
-  const changeDescription = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const changeDescription = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(event.target.value);
   };
 

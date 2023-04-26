@@ -11,10 +11,9 @@ const useHabitCard = (habit: Habit) => {
   const [isFold, setIsFold] = React.useState<boolean>(true);
   const dispatch = useHabitDispatchContext();
   const foldButtonContent = isFold ? '더보기' : '닫기';
-  const completeButtonContent =
-    habit.recordedDates[getFormattedString(getToday().origin)] === 'completed'
-      ? '취소'
-      : '완료';
+  const completed =
+    habit.recordedDates[getFormattedString(getToday().origin)] === 'completed';
+  const completeButtonContent = completed ? '취소' : '완료';
 
   React.useEffect(() => {
     if (cardRef.current && cardRef.current.offsetHeight > TOGGLE_BY_HEIGHT)
@@ -42,6 +41,7 @@ const useHabitCard = (habit: Habit) => {
     isFold,
     toggleFold,
     foldButtonContent,
+    completed,
     toggleComplete,
     completeButtonContent,
   };

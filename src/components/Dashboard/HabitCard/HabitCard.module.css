@@ -1,22 +1,35 @@
 .container {
-  max-width: 250px;
-  padding: 8px;
+  min-width: 250px;
+  padding: 16px;
   margin-bottom: 8px;
   border-radius: 4px;
 }
 
+.container[data-completed='true'] {
+  background-color: #f3f3f3;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .title {
   font-size: 20px;
-  margin-top: 0;
+  margin: 0;
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .description {
-  display: -webkit-box;
   font-size: 14px;
 }
 
 .descriptionFolded {
   composes: description;
+  display: -webkit-box;
   word-wrap: break-word;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
@@ -31,4 +44,14 @@
 }
 
 .completeToggleButton {
+  font-weight: 600;
+  font-size: 16px;
+  color: #007bff;
+  width: 100%;
+  border: 1px solid #bed1ed;
+  border-radius: 4px;
+  transition: border 0.3s;
+  background-color: #fff;
+  padding: 10px 0;
+  cursor: pointer;
 }

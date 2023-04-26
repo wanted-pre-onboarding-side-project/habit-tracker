@@ -3,7 +3,7 @@
 
 .gridRow {
   display: grid;
-  grid-template-columns: 200px 1fr 100px;
+  grid-template-columns: 160px 1fr 80px;
   grid-template-areas: 'heading grid summary';
   height: 60px;
   align-items: center;
@@ -14,6 +14,13 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.gridRowHeading span {
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .gridRowMain {
@@ -39,18 +46,21 @@
   transition: background-color 0.5s;
   background-color: transparent;
   cursor: default;
+  pointer-events: none;
 }
 
 .gridRowItem[data-type='inactive'] {
   background-color: #ddd;
   cursor: pointer;
+  pointer-events: auto;
 }
 
 .gridRowItem[data-type='completed'] {
   background-color: #111;
   cursor: pointer;
+  pointer-events: auto;
 }
 
 .gridRowItem[data-type='future'] {
-  background-color: #eee;
+  background-color: #f4f4f4;
 }
