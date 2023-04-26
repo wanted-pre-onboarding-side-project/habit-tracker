@@ -1,13 +1,13 @@
-import { useReducer, ReactNode, useMemo } from 'react';
+import { ReactNode, useMemo } from 'react';
 import { isValid } from 'lib/utils/validator';
+import useLocalStorageReducer from 'lib/hooks/useLocalStorageReducer';
 import { HabitContext, HabitHandleContext } from './HabitContext';
 import { useModalHandleContext } from './ModalContext';
-import { habitReducer } from './reducers/habitReducer';
 import type { Habit } from 'interface/main';
 
 export const HabitProvider = ({ children }: { children: ReactNode }) => {
   const { closeModal } = useModalHandleContext();
-  const [habits, dispatch] = useReducer(habitReducer, []);
+  const { state: habits, dispatch } = useLocalStorageReducer('habits');
 
   const habitHandlers = useMemo(
     () => ({
@@ -28,7 +28,7 @@ export const HabitProvider = ({ children }: { children: ReactNode }) => {
         closeModal();
       },
     }),
-    [closeModal],
+    [closeModal, dispatch],
   );
 
   return (
