@@ -30,13 +30,7 @@ const useHabitInputs = (
   const onChangeDays = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name: selectedDay, checked: isChecked } = event.target;
     if (isChecked) setDays([...days, selectedDay as Day]);
-    else {
-      const omitted = days.reduce((prev: Day[], curr) => {
-        if (curr === selectedDay) return prev;
-        else return [...prev, curr];
-      }, []);
-      setDays(omitted);
-    }
+    else setDays(days.filter((day) => day !== selectedDay));
   };
 
   const habitObject = {
