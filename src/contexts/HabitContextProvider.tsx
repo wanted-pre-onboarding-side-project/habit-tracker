@@ -16,9 +16,26 @@ export const HabitProvider = ({ children }: { children: ReactNode }) => {
     [habits],
   );
 
+  const handleUpdateHabit = useCallback(
+    (updatingHabitContent: Habit) => {
+      const updatedHabits = habits.map((habit) => {
+        if (habit.id !== updatingHabitContent.id) return habit;
+        else return updatingHabitContent;
+      });
+      setHabits(updatedHabits);
+    },
+    [habits],
+  );
+
+  //  TODO: useReducer
+  const habitHandlers = {
+    createHabit: handleCreateHabit,
+    updateHabit: handleUpdateHabit,
+  };
+
   return (
     <HabitContext.Provider value={habits}>
-      <HabitHandleContext.Provider value={handleCreateHabit}>
+      <HabitHandleContext.Provider value={habitHandlers}>
         {children}
       </HabitHandleContext.Provider>
     </HabitContext.Provider>

@@ -20,14 +20,19 @@ export type PeriodHandleContextType =
   | ((direction: 'prev' | 'next') => void)
   | null;
 
-export type ModalContextType = boolean | null;
-export type ModalHandleContextType = (() => void) | null;
+export type ModalContextType = 'create' | 'update' | 'delete' | null;
+export type ModalHandleContextType = {
+  openModal: (modalType: ModalContextType) => void;
+  closeModal: () => void;
+} | null;
+
 export type TooltipContextType = Habit['id'] | null;
 export type TooltipHandleContextType = React.Dispatch<
   React.SetStateAction<Habit['id'] | null>
 > | null;
 
 export type HabitContextType = Habit[];
-export type HabitHandleContextType =
-  | ((newHabit: Omit<Habit, 'id'>) => void)
-  | null;
+export type HabitHandleContextType = {
+  createHabit: (newHabitContent: Omit<Habit, 'id'>) => void;
+  updateHabit: (updatingHabitContent: Habit) => void;
+} | null;
