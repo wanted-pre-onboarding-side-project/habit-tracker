@@ -1,5 +1,6 @@
 import { useModalHandle } from 'contexts/ModalContext';
 import { useEffect, useState } from 'react';
+import HabitCreateForm from './HabitForm';
 import styles from './Modal.module.css';
 
 const Modal = () => {
@@ -16,7 +17,7 @@ const Modal = () => {
     <>
       <div className={styles.backdrop} onClick={closeModal} />
       <div className={modalClassNames}>
-        this is Modal
+        <HabitCreateForm onClose={closeModal} />
         <button onClick={closeModal}>close</button>
       </div>
     </>

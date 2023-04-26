@@ -1,0 +1,9 @@
+.habitForm {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.habitForm textarea {
+  resize: none;
+}
