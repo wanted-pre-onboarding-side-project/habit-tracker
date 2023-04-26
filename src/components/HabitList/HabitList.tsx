@@ -4,7 +4,8 @@ import styles from './HabitList.module.css';
 import useHabitList from './useHabitList';
 
 const HabitList = () => {
-  const { weekData, habits, getTypeOfButton, toggleComplete } = useHabitList();
+  const { weekData, habits, getTypeOfButton, getAchieveRate, toggleComplete } =
+    useHabitList();
   const { toggleModal, changeModalComponent } = useModalHandleContext();
 
   return (
@@ -43,7 +44,7 @@ const HabitList = () => {
               ></button>
             ))}
           </div>
-          <div className={styles.gridRowEnd}></div>
+          <div className={styles.gridRowEnd}>{getAchieveRate(item)}</div>
         </div>
       ))}
     </div>

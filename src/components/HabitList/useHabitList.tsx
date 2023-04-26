@@ -32,7 +32,20 @@ const useHabitList = () => {
     dispatch({ type: 'UPDATE', payload: item });
   };
 
-  return { weekData, habits, getTypeOfButton, toggleComplete };
+  const getAchieveRate = (item: Habit) => {
+    const achieveRate = { complete: 0, total: 0 };
+
+    Object.entries(item.recordedDates)
+      .filter(([date]) => isSameWeek(date, selectedDate))
+      .forEach(([_, status]) => {
+        achieveRate.total++;
+        status === 'completed' && achieveRate.complete++;
+      });
+
+    return `${achieveRate.complete} / ${achieveRate.total}`;
+  };
+
+  return { weekData, habits, getTypeOfButton, getAchieveRate, toggleComplete };
 };
 
 export default useHabitList;
