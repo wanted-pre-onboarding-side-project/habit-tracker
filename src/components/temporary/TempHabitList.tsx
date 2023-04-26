@@ -1,4 +1,4 @@
-import { useHabits } from "contexts/HabitContext";
+import { useHabits } from 'contexts/HabitContext';
 
 const TempHabitList = () => {
   const habits = useHabits();
@@ -6,11 +6,11 @@ const TempHabitList = () => {
   return (
     <div
       style={{
-        border: "solid 2px grey",
-        width: "50vw",
-        marginTop: "2vh",
-        height: "30vh",
-        overflowY: "scroll",
+        border: 'solid 2px grey',
+        width: '50vw',
+        marginTop: '2vh',
+        height: '30vh',
+        overflowY: 'scroll',
       }}
     >
       <h3>temp habit list</h3>
