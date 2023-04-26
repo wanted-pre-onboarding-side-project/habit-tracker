@@ -7,6 +7,8 @@ import HabitProvider from 'contexts/HabitContextProvider';
 import ModalPortal from 'components/Modal/ModalPortal';
 import './setupDayjs.ts';
 
+import './styles/global.css';
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
