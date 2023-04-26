@@ -1,18 +1,38 @@
 import { useHabits } from 'contexts/HabitContext';
+import { usePeriod, useRecords } from 'contexts/RecordContext';
+import { isBetween } from 'lib/utils/dateUtils';
 import styles from '../Controller.module.css';
 
 const ProgressBar = () => {
   const habits = useHabits();
+  const records = useRecords();
+  const period = usePeriod();
+
   const weeklyChecksLength = habits.reduce(
     (prev, curr) => prev + curr.days.length,
     0,
   );
-  //  금주 check 개수는 임시로 생성
-  const tempAchieveChecksLength = weeklyChecksLength > 5 ? 5 : 0;
+
+  const currentHabitsIdList = habits.map((habit) => habit.id);
+
+  const currentPeriodValidRecords = records
+    .filter((record) => currentHabitsIdList.includes(record.habitId))
+    .map((record) => {
+      return {
+        records: record.records.filter((recordDateString) =>
+          isBetween(recordDateString, period.start, period.end),
+        ),
+      };
+    });
+
+  const achieveChecksLength = currentPeriodValidRecords.reduce(
+    (sum, cur) => sum + cur.records.length,
+    0,
+  );
 
   const achieveRate = !weeklyChecksLength
     ? '0%'
-    : Math.ceil((tempAchieveChecksLength / weeklyChecksLength) * 100) + '%';
+    : Math.ceil((achieveChecksLength / weeklyChecksLength) * 100) + '%';
 
   return (
     <div

@@ -97,3 +97,14 @@ export function isFutureDate(targetDate: ObjectifiedDate) {
   const target = dayjs(targetDate.origin);
   return target.isAfter(now);
 }
+
+export function isBetween(
+  targetDate: string,
+  from: ObjectifiedDate,
+  to: ObjectifiedDate,
+) {
+  const start = dayjs(from.origin);
+  const end = dayjs(to.origin);
+
+  return dayjs(targetDate).isBetween(start, end, null, '[]');
+}
