@@ -1,9 +1,8 @@
-import './HabitTracker.css';
-import Header from 'components/Header';
 import Controller from 'components/controller/Controller';
 import DashBoard from 'components/dashBoard/Dashboard';
-import TempHabitCreateForm from 'components/temporary/TempHabitCreateForm';
-import TempHabitList from 'components/temporary/TempHabitList';
+import Header from 'components/Header';
+import Overlays from 'components/overlay/Overlays';
+import './HabitTracker.css';
 
 const HabitTracker = () => {
   return (
@@ -11,10 +10,7 @@ const HabitTracker = () => {
       <Header />
       <Controller />
       <DashBoard />
-      <div className="tempComponentsLayout">
-        <TempHabitCreateForm />
-        <TempHabitList />
-      </div>
+      <Overlays />
     </div>
   );
 };

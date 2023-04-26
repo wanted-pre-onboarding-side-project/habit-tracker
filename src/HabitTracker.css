@@ -1,3 +1,7 @@
+body {
+  overflow: hidden;
+}
+
 .HabitTracker {
   position: relative;
   margin: 2vh 2vw 2vh 2vw;
