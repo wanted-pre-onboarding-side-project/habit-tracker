@@ -1,5 +1,4 @@
 import { HabitProvider } from 'contexts/HabitContextProvider';
-import { ModalProvider } from 'contexts/ModalContextProvider';
 import { RecordProvider } from 'contexts/RecordContextProvider';
 import HabitTracker from 'HabitTracker';
 import ReactDOM from 'react-dom/client';
@@ -12,9 +11,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <HabitProvider>
     <RecordProvider>
-      <ModalProvider>
-        <HabitTracker />
-      </ModalProvider>
+      <HabitTracker />
     </RecordProvider>
   </HabitProvider>,
 );

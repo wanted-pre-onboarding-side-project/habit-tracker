@@ -6,19 +6,21 @@ import styles from './HabitForm.module.css';
 
 const HabitCreateForm = ({ onClose }: { onClose: () => void }) => {
   const formRef = useRef<HTMLFormElement>(null);
-  const handleCreateHabit = useHabitsHandle();
+  const { handleCreateHabit } = useHabitsHandle();
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     if (!formRef.current) return;
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    // TODO 유효성검사
 
+    // TODO 유효성검사
     handleCreateHabit({
       name: formData.get('habitName') as string,
       description: formData.get('habitDescription') as string,
       days: formData.getAll('habitDays') as Day[],
     });
+
+    // TODO  : slide in 애니메이션 적용
     onClose();
   };
   return (

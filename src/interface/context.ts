@@ -21,14 +21,11 @@ export type PeriodHandleContextType =
   | ((direction: 'prev' | 'next') => void)
   | null;
 
-export type ModalContextType = boolean | null;
-
-export type ModalHandleContextType = (() => void) | null;
-
 export type HabitContextType = Habit[];
-export type HabitHandleContextType =
-  | ((newHabit: Omit<Habit, 'id'>) => void)
-  | null;
+export type HabitHandleContextType = {
+  handleCreateHabit: (newHabit: Omit<Habit, 'id'>) => void;
+  handleDeleteHabit: (deleteHabitId: Habit['id']) => void;
+} | null;
 
 export type RecordsContextType = HabitRecord[] | null;
 export type RecordsHandleContextType =

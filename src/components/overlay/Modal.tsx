@@ -1,39 +1,26 @@
-import { useModalHandle } from 'contexts/ModalContext';
 import { useEffect, useState } from 'react';
-import HabitCreateForm from './HabitForm';
+import { createPortal } from 'react-dom';
 import styles from './Modal.module.css';
 
-const Modal = () => {
-  const toggleModal = useModalHandle();
-
-  const { modalClassNames, removeModalOpenClassname } = useModalClassname();
-
-  const closeModal = () => {
-    removeModalOpenClassname();
-    toggleModal();
-  };
-
-  return (
-    <>
-      <div className={styles.backdrop} onClick={closeModal} />
-      <div className={modalClassNames}>
-        <HabitCreateForm onClose={closeModal} />
-        <button onClick={closeModal}>close</button>
-      </div>
-    </>
-  );
-};
-
-export default Modal;
-
-// TODO : hook 분리
-const useModalClassname = () => {
+const Modal = ({
+  isOpen,
+  onClose,
+  children,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+}) => {
   const [modalClassNames, setModalClassNames] = useState([
     styles.modalContainer,
   ]);
+
+  // TODO  : slide in 애니메이션 적용
   useEffect(() => {
-    setModalClassNames((prev) => [...prev, styles.open]);
-  }, []);
+    if (!isOpen) {
+      setModalClassNames((prev) => [...prev, styles.open]);
+    }
+  }, [isOpen]);
 
   const removeModalOpenClassname = () => {
     setModalClassNames((prev) =>
@@ -41,8 +28,26 @@ const useModalClassname = () => {
     );
   };
 
-  return {
-    modalClassNames: modalClassNames.join(' '),
-    removeModalOpenClassname,
+  const closeModal = () => {
+    removeModalOpenClassname();
+    onClose();
   };
+
+  if (!isOpen) return null;
+  return createPortal(
+    <div className={modalClassNames.join(' ')} onClick={closeModal}>
+      <div
+        className={styles.modal}
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
+        {children}
+        <button onClick={closeModal}>close</button>
+      </div>
+    </div>,
+    document.body,
+  );
 };
+
+export default Modal;

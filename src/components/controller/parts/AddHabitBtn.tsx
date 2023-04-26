@@ -1,19 +1,31 @@
-import { useModalHandle } from 'contexts/ModalContext';
+import HabitCreateForm from 'components/overlay/HabitForm';
+import Modal from 'components/overlay/Modal';
+import { useState } from 'react';
 import styles from '../Controller.module.css';
 
 const AddHabitBtn = () => {
-  //  TODO
-  //  모달 만들고 나면 create 모달임을 action type에 넣어 전달한다.
+  const [isOpen, setIsOpen] = useState(false);
 
-  const toggleModal = useModalHandle();
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setTimeout(() => setIsOpen(false), 500);
+  };
 
   return (
-    <button
-      className={`${styles.AddHabitBtn} AddHabitBtnLayout`}
-      onClick={toggleModal}
-    >
-      + 습관 추가하기
-    </button>
+    <>
+      <button
+        className={`${styles.AddHabitBtn} AddHabitBtnLayout`}
+        onClick={openModal}
+      >
+        + 습관 추가하기
+      </button>
+      <Modal isOpen={isOpen} onClose={closeModal}>
+        <HabitCreateForm onClose={closeModal} />
+      </Modal>
+    </>
   );
 };
 
