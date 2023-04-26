@@ -1,12 +1,12 @@
-import { useHabitsHandle } from 'contexts/HabitContext';
-import { useModalHandle } from 'contexts/ModalContext';
+import { useHabitsHandleContext } from 'contexts/HabitContext';
+import { useModalHandleContext } from 'contexts/ModalContext';
 import useHabitInputs from 'lib/hooks/useHabitInputs';
 
 const DAYS = ['월', '화', '수', '목', '금', '토', '일'];
 
 const CreateHabitForm = () => {
-  const toggleModal = useModalHandle();
-  const handleCreateHabit = useHabitsHandle();
+  const toggleModal = useModalHandleContext();
+  const handleCreateHabit = useHabitsHandleContext();
   const [habitObject, onChangeName, onChangeDesc, onChangeDays] =
     useHabitInputs('', '', []);
 

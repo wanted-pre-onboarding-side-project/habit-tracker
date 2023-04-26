@@ -1,10 +1,10 @@
 import { getToday } from 'lib/utils/dateUtils';
-import { useHabits } from 'contexts/HabitContext';
+import { useHabitsContext } from 'contexts/HabitContext';
 import styles from './Dashboard.module.css';
 import HabitCard from './parts/HabitCard';
 
 const DashBoard = () => {
-  const habits = useHabits();
+  const habits = useHabitsContext();
 
   return (
     <div className={`${styles.HabitDashBoard} HabitDashBoardLayout`}>

@@ -1,11 +1,11 @@
-import { usePeriodHandle } from 'contexts/RecordContext';
-import { usePeriod } from 'contexts/RecordContext';
+import { usePeriodHandleContext } from 'contexts/RecordContext';
+import { usePeriodContext } from 'contexts/RecordContext';
 import { isLatestWeek } from 'lib/utils/dateUtils';
 import styles from '../Controller.module.css';
 
 const NavBtn = () => {
-  const movePeriod = usePeriodHandle();
-  const period = usePeriod();
+  const movePeriod = usePeriodHandleContext();
+  const period = usePeriodContext();
 
   const handleClickNext = () => {
     if (!isLatestWeek(period.end)) movePeriod('next');

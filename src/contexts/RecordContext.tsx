@@ -7,7 +7,7 @@ import type {
 export const PeriodContext = createContext<PeriodContextType>(null);
 export const PeriodHandleContext = createContext<PeriodHandleContextType>(null);
 
-export const usePeriod = () => {
+export const usePeriodContext = () => {
   const context = useContext(PeriodContext);
   if (!context)
     throw new Error('<PeriodContext.Provider>가 제공되지 않았습니다.');
@@ -15,7 +15,7 @@ export const usePeriod = () => {
   return context;
 };
 
-export const usePeriodHandle = () => {
+export const usePeriodHandleContext = () => {
   const context = useContext(PeriodHandleContext);
   if (!context)
     throw new Error('<PeriodHandleContext.Provider>가 제공되지 않았습니다.');

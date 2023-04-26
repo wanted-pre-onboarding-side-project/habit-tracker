@@ -7,9 +7,9 @@ import type {
 export const HabitContext = createContext<HabitContextType>([]);
 export const HabitHandleContext = createContext<HabitHandleContextType>(null);
 
-export const useHabits = () => useContext(HabitContext);
+export const useHabitsContext = () => useContext(HabitContext);
 
-export const useHabitsHandle = () => {
+export const useHabitsHandleContext = () => {
   const context = useContext(HabitHandleContext);
 
   if (!context)

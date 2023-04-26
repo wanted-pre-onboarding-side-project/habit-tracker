@@ -1,7 +1,7 @@
-import { useHabits } from 'contexts/HabitContext';
+import { useHabitsContext } from 'contexts/HabitContext';
 
 const TableBody = () => {
-  const habits = useHabits();
+  const habits = useHabitsContext();
 
   return (
     <tbody>

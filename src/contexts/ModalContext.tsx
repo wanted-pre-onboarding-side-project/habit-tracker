@@ -7,7 +7,7 @@ import type {
 export const ModalContext = createContext<ModalContextType>(null);
 export const ModalHandleContext = createContext<ModalHandleContextType>(null);
 
-export const useModal = () => {
+export const useModalContext = () => {
   const context = useContext(ModalContext);
 
   if (context === null)
@@ -16,7 +16,7 @@ export const useModal = () => {
   return context;
 };
 
-export const useModalHandle = () => {
+export const useModalHandleContext = () => {
   const context = useContext(ModalHandleContext);
 
   if (!context)

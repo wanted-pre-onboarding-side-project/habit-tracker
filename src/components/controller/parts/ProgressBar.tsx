@@ -1,8 +1,8 @@
-import { useHabits } from 'contexts/HabitContext';
+import { useHabitsContext } from 'contexts/HabitContext';
 import styles from '../Controller.module.css';
 
 const ProgressBar = () => {
-  const habits = useHabits();
+  const habits = useHabitsContext();
   const weeklyChecksLength = habits.reduce(
     (prev, curr) => prev + curr.days.length,
     0,

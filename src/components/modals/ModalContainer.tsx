@@ -1,9 +1,9 @@
-import { useModal } from 'contexts/ModalContext';
+import { useModalContext } from 'contexts/ModalContext';
 import CreateHabitForm from './modalForms/CreateHabitForm';
 // TODO: lazy import
 
 const ModalContainer = () => {
-  const isModalOpen = useModal();
+  const isModalOpen = useModalContext();
 
   if (!isModalOpen) return null;
 
