@@ -12,10 +12,11 @@ const CreateHabitForm = () => {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     createHabit(habitObject);
+    closeModal();
   };
 
   return (
-    <form onSubmit={(e) => onSubmit(e)}>
+    <form onSubmit={onSubmit}>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <span>name</span>
         <input type="text" placeholder="name" onChange={onChangeName} />

@@ -22,10 +22,11 @@ const UpdateHabitForm = () => {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     updateHabit({ id: tooltipId, ...habitObject });
+    closeModal();
   };
 
   return (
-    <form onSubmit={(e) => onSubmit(e)}>
+    <form onSubmit={onSubmit}>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <span>name</span>
         <input
