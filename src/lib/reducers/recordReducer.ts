@@ -26,19 +26,6 @@ export const recordReducer = (
       return [...state, ...initiating];
     }
 
-    case 'CREATE': {
-      const checkedDays: WeekRecord['checkedDays'] = {};
-      for (const day of action.value.days) checkedDays[day] = false;
-
-      return [
-        ...state,
-        {
-          habitId: action.value.habitId,
-          checkedDays,
-        },
-      ];
-    }
-
     case 'MODIFY': {
       return state.map((record) => {
         if (record.habitId !== action.value.habitId) return record;

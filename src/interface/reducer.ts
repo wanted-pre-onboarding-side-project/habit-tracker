@@ -7,7 +7,6 @@ export type habitActionType =
 
 export type recordActionType =
   | { type: 'INIT'; value: { habits: Habit[] } }
-  | { type: 'CREATE'; value: { habitId: Habit['id']; days: Day[] } }
   | { type: 'MODIFY'; value: { habitId: Habit['id']; updatedDays: Day[] } }
   | {
       type: 'CHECK';
