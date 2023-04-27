@@ -56,7 +56,7 @@
 }
 
 .gridRowItem[data-type='completed'] {
-  background-color: #111;
+  background-color: #007bff;
   cursor: pointer;
   pointer-events: auto;
 }
