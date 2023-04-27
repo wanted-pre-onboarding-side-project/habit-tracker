@@ -6,3 +6,8 @@ export interface Habit {
   description: string;
   days: Day[];
 }
+
+export interface WeekRecord {
+  habitId: Habit['id'];
+  checkedDays: Partial<{ [key in Day]: boolean }>;
+}
