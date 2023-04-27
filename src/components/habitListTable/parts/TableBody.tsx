@@ -2,6 +2,7 @@ import { useHabitsContext } from 'contexts/HabitContext';
 import { useTooltipContext } from 'contexts/ModalContext';
 import { useTooltipHandleContext } from 'contexts/ModalContext';
 import Tooltip from 'components/modals/modalForms/Tooltip';
+import { ALL_DAYS } from 'constant';
 
 const TableBody = () => {
   const habits = useHabitsContext();
@@ -10,23 +11,19 @@ const TableBody = () => {
 
   return (
     <tbody>
-      {habits.map((habit) => (
-        <tr key={habit.id}>
-          <td onClick={() => setTooltipId(habit.id)}>{habit.name}</td>
-          {tooltipId === habit.id ? (
+      {habits.map(({ id, name, days }) => (
+        <tr key={id}>
+          <td onClick={() => setTooltipId(id)}>{name}</td>
+          {tooltipId === id ? (
             <td>
               <Tooltip />
             </td>
           ) : (
             <td></td>
           )}
-          <td>{habit.days.includes('월') && <input type="checkbox" />}</td>
-          <td>{habit.days.includes('화') && <input type="checkbox" />}</td>
-          <td>{habit.days.includes('수') && <input type="checkbox" />}</td>
-          <td>{habit.days.includes('목') && <input type="checkbox" />}</td>
-          <td>{habit.days.includes('금') && <input type="checkbox" />}</td>
-          <td>{habit.days.includes('토') && <input type="checkbox" />}</td>
-          <td>{habit.days.includes('일') && <input type="checkbox" />}</td>
+          {ALL_DAYS.map((DAY) => (
+            <td key={DAY}>{days.includes(DAY) && <input type="checkbox" />}</td>
+          ))}
           <td>some / all</td>
         </tr>
       ))}

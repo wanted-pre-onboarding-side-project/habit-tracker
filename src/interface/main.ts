@@ -1,4 +1,7 @@
-export type Day = '월' | '화' | '수' | '목' | '금' | '토' | '일';
+import { ALL_DAYS } from 'constant';
+
+const ALL_DAYS_ = [...ALL_DAYS] as const;
+export type Day = (typeof ALL_DAYS_)[number];
 
 export interface Habit {
   id: number;

@@ -1,8 +1,7 @@
 import { useHabitsHandleContext } from 'contexts/HabitContext';
 import { useModalHandleContext } from 'contexts/ModalContext';
 import useHabitInputs from 'lib/hooks/useHabitInputs';
-
-const DAYS = ['월', '화', '수', '목', '금', '토', '일'];
+import { ALL_DAYS } from 'constant';
 
 const CreateHabitForm = () => {
   const { closeModal } = useModalHandleContext();
@@ -24,7 +23,7 @@ const CreateHabitForm = () => {
         <textarea placeholder="description" onChange={onChangeDesc}></textarea>
       </div>
       <div style={{ display: 'flex' }}>
-        {DAYS.map((day) => (
+        {ALL_DAYS.map((day) => (
           <label key={day}>
             <div>{day}</div>
             <input

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ALL_DAYS } from 'constant';
 import type { Habit, Day } from 'interface/main';
 
 const useHabitInputs = (
@@ -14,9 +15,7 @@ const useHabitInputs = (
   const [name, setName] = useState(initName);
   const [description, setDescription] = useState(initDesc);
   const [days, setDays] = useState<Day[]>(
-    initDays.length === 0
-      ? ['월', '화', '수', '목', '금', '토', '일']
-      : initDays,
+    initDays.length === 0 ? (ALL_DAYS as Day[]) : initDays,
   );
 
   const onChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {

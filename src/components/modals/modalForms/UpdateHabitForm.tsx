@@ -3,9 +3,8 @@ import { useHabitsHandleContext } from 'contexts/HabitContext';
 import { useModalHandleContext } from 'contexts/ModalContext';
 import { useTooltipContext } from 'contexts/ModalContext';
 import useHabitInputs from 'lib/hooks/useHabitInputs';
+import { ALL_DAYS } from 'constant';
 import type { Habit, Day } from 'interface/main';
-
-const DAYS = ['월', '화', '수', '목', '금', '토', '일'];
 
 const UpdateHabitForm = () => {
   const { closeModal } = useModalHandleContext();
@@ -43,7 +42,7 @@ const UpdateHabitForm = () => {
         ></textarea>
       </div>
       <div style={{ display: 'flex' }}>
-        {DAYS.map((day) => (
+        {ALL_DAYS.map((day) => (
           <label key={day}>
             <div>{day}</div>
             <input
