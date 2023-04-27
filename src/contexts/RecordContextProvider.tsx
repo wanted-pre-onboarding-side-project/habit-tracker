@@ -3,7 +3,12 @@ import { getLatestPeriod, getChangedPeriod } from 'lib/utils/dateUtils';
 import useLocalStorageReducer from 'lib/hooks/useLocalStorageReducer';
 import { recordReducer } from 'lib/reducers/recordReducer';
 import { useHabitsContext } from './HabitContext';
-import { PeriodContext, PeriodHandleContext } from './RecordContext';
+import {
+  PeriodContext,
+  PeriodHandleContext,
+  RecordContext,
+} from './RecordContext';
+import type { WeekRecord } from 'interface/main';
 
 export const RecordProvider = ({ children }: { children: ReactNode }) => {
   const habits = useHabitsContext();
@@ -27,7 +32,9 @@ export const RecordProvider = ({ children }: { children: ReactNode }) => {
   return (
     <PeriodContext.Provider value={period}>
       <PeriodHandleContext.Provider value={movePeriod}>
-        {children}
+        <RecordContext.Provider value={records as WeekRecord[]}>
+          {children}
+        </RecordContext.Provider>
       </PeriodHandleContext.Provider>
     </PeriodContext.Provider>
   );
