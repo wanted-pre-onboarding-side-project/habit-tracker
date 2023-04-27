@@ -1,4 +1,4 @@
-import { Day, Habit } from './main';
+import type { Day, Habit } from './main';
 
 export interface ObjectifiedDate {
   year: number;

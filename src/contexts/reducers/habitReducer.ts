@@ -13,15 +13,13 @@ export const habitReducer = (state: Habit[], action: habitActionType) => {
       ];
 
     case 'UPDATE':
-      return [
-        ...state.map((habit) => {
-          if (habit.id !== action.value.id) return habit;
-          else return action.value;
-        }),
-      ];
+      return state.map((habit) => {
+        if (habit.id !== action.value.id) return habit;
+        else return action.value;
+      });
 
     case 'DELETE':
-      return [...state.filter((habit) => habit.id !== action.value)];
+      return state.filter((habit) => habit.id !== action.value);
 
     default:
       throw Error('정의 되지 않은 action type입니다.');
