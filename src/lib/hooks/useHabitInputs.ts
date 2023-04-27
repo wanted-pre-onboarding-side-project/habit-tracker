@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Habit, Day } from 'interface/main';
+import type { Habit, Day } from 'interface/main';
 
 const useHabitInputs = (
   initName: string,

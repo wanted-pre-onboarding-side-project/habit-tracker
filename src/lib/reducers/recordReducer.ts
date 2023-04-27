@@ -1,5 +1,5 @@
-import { WeekRecord, Day } from 'interface/main';
-import { recordActionType } from 'interface/reducer';
+import type { WeekRecord, Day } from 'interface/main';
+import type { recordActionType } from 'interface/reducer';
 
 export const recordReducer = (
   state: WeekRecord[],

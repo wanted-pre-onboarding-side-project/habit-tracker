@@ -1,4 +1,4 @@
-import { useState, ReactNode, useMemo, useCallback } from 'react';
+import { useState, ReactNode, useMemo } from 'react';
 import {
   ModalContext,
   ModalHandleContext,

@@ -1,5 +1,5 @@
-import { Habit } from 'interface/main';
-import { habitActionType } from 'interface/reducer';
+import type { Habit } from 'interface/main';
+import type { habitActionType } from 'interface/reducer';
 
 export const habitReducer = (state: Habit[], action: habitActionType) => {
   switch (action.type) {

@@ -1,10 +1,10 @@
-import { Habit, Day } from 'interface/main';
 import {
   HABIT_NAME_MIN_LENGTH,
   HABIT_NAME_MAX_LENGTH,
   HABIT_DESC_MIN_LENGTH,
   HABIT_DESC_MAX_LENGTH,
 } from 'constant';
+import type { Habit, Day } from 'interface/main';
 
 /** min, max 값과 같아도 유효합니다.*/
 const isValidWordsLength = (words: string, min: number, max: number) => {
