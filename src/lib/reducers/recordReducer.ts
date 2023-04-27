@@ -84,7 +84,7 @@ export const recordReducer = (
       });
 
     case 'DELETE':
-      return state.filter((record) => record.habitId !== action.value);
+      return state.filter((record) => record.habitId !== action.value.habitId);
 
     default:
       throw Error('정의 되지 않은 action type입니다.');

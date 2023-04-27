@@ -40,4 +40,5 @@ export type HabitHandleContextType = {
 export type RecordHandleContextType = {
   checkDay: (habitId: Habit['id'], day: Day) => void;
   unCheckDay: (habitId: Habit['id'], day: Day) => void;
+  deleteRecord: (habitId: Habit['id']) => void;
 } | null;

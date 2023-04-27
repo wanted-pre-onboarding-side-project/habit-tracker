@@ -36,6 +36,8 @@ export const RecordProvider = ({ children }: { children: ReactNode }) => {
         dispatch({ type: 'CHECK', value: { habitId, day } }),
       unCheckDay: (habitId: Habit['id'], day: Day) =>
         dispatch({ type: 'UN_CHECK', value: { habitId, day } }),
+      deleteRecord: (habitId: Habit['id']) =>
+        dispatch({ type: 'DELETE', value: { habitId } }),
     }),
     [dispatch],
   );

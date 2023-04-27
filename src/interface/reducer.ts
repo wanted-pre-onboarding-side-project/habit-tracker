@@ -17,7 +17,7 @@ export type recordActionType =
       type: 'UN_CHECK';
       value: { habitId: Habit['id']; day: Day };
     }
-  | { type: 'DELETE'; value: Habit['id'] };
+  | { type: 'DELETE'; value: { habitId: Habit['id'] } };
 
 export type habitReducerType = (
   state: Habit[],
