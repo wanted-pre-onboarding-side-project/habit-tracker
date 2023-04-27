@@ -1,8 +1,11 @@
 import { useReducer, useEffect } from 'react';
-import { habitReducer } from 'contexts/reducers/habitReducer';
+import type { habitReducerType, recordReducerType } from 'interface/reducer';
 
-const useLocalStorageReducer = (key: string) => {
-  const [state, dispatch] = useReducer(habitReducer, getSavedValue(key));
+const useLocalStorageReducer = (
+  key: string,
+  reducer: habitReducerType | recordReducerType,
+) => {
+  const [state, dispatch] = useReducer(reducer, getSavedValue(key));
 
   useEffect(() => {
     localStorage.setItem(key, JSON.stringify(state));

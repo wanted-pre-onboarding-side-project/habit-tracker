@@ -1,4 +1,4 @@
-import type { Habit, Day } from './main';
+import type { Habit, Day, WeekRecord } from './main';
 
 export type habitActionType =
   | { type: 'CREATE'; value: Omit<Habit, 'id'> }
@@ -17,3 +17,13 @@ export type recordActionType =
       value: { habitId: Habit['id']; day: Day };
     }
   | { type: 'DELETE'; value: Habit['id'] };
+
+export type habitReducerType = (
+  state: Habit[],
+  action: habitActionType,
+) => Habit[];
+
+export type recordReducerType = (
+  state: WeekRecord[],
+  action: recordActionType,
+) => WeekRecord[];

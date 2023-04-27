@@ -3,11 +3,15 @@ import { isValid } from 'lib/utils/validator';
 import useLocalStorageReducer from 'lib/hooks/useLocalStorageReducer';
 import { HabitContext, HabitHandleContext } from './HabitContext';
 import { useModalHandleContext } from './ModalContext';
+import { habitReducer } from './reducers/habitReducer';
 import type { Habit } from 'interface/main';
 
 export const HabitProvider = ({ children }: { children: ReactNode }) => {
   const { closeModal } = useModalHandleContext();
-  const { state: habits, dispatch } = useLocalStorageReducer('habits');
+  const { state: habits, dispatch } = useLocalStorageReducer(
+    'habits',
+    habitReducer,
+  );
 
   const habitHandlers = useMemo(
     () => ({
@@ -32,7 +36,7 @@ export const HabitProvider = ({ children }: { children: ReactNode }) => {
   );
 
   return (
-    <HabitContext.Provider value={habits}>
+    <HabitContext.Provider value={habits as Habit[]}>
       <HabitHandleContext.Provider value={habitHandlers}>
         {children}
       </HabitHandleContext.Provider>
