@@ -1,7 +1,7 @@
-import { Habit } from 'interface/main';
 import { AiOutlineClose } from 'react-icons/ai';
 import useModal from './useModal';
 import styles from './Modal.module.css';
+import type { Habit } from 'interface/main';
 
 const Modal = ({ habitToUpdate }: { habitToUpdate?: Habit }) => {
   const {

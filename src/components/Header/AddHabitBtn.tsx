@@ -1,6 +1,6 @@
+import { GoPlus } from 'react-icons/go';
 import { useModalHandleContext } from 'contexts/ModalContext';
 import Modal from 'components/Modal/Modal';
-import { GoPlus } from 'react-icons/go';
 import styles from './Header.module.css';
 
 const AddHabitBtn = () => {
