@@ -6,6 +6,27 @@ export const recordReducer = (
   action: recordActionType,
 ) => {
   switch (action.type) {
+    // 언제? period바뀔 시 habit의 수량과 record의 수량을 비교. -> (차이가 나면) habit[] 순회 하면서 id 비는 것 record 생성(초기값 생성 시에 하면 일요일 자정 넘어서 월요일 되는 때엔 동작 안함)
+    case 'INIT': {
+      const { habits } = action.value;
+      if (state.length === habits.length) return state;
+
+      const existingRecordIDs = state.map((record) => record.habitId);
+
+      const initiating = habits.reduce((prev: WeekRecord[], habit) => {
+        if (!existingRecordIDs.includes(habit.id)) {
+          const checkedDays: WeekRecord['checkedDays'] = {};
+          for (const day of habit.days) checkedDays[day] = false;
+
+          prev.push({ habitId: habit.id, checkedDays });
+        }
+
+        return prev;
+      }, []);
+
+      return [...state, ...initiating];
+    }
+
     case 'CREATE': {
       const checkedDays: WeekRecord['checkedDays'] = {};
       for (const day of action.value.days) checkedDays[day] = false;
