@@ -2,6 +2,7 @@ import { useHabitsContext } from 'contexts/HabitContext';
 import { useHabitsHandleContext } from 'contexts/HabitContext';
 import { useModalHandleContext } from 'contexts/ModalContext';
 import { useTooltipContext } from 'contexts/ModalContext';
+import { useRecordHandleContext } from 'contexts/RecordContext';
 import useHabitInputs from 'lib/hooks/useHabitInputs';
 import { ALL_DAYS } from 'constant';
 import type { Habit, Day } from 'interface/main';
@@ -11,6 +12,7 @@ const UpdateHabitForm = () => {
   const tooltipId = useTooltipContext() as Habit['id'];
   const habits = useHabitsContext();
   const { updateHabit } = useHabitsHandleContext();
+  const { modifyRecord } = useRecordHandleContext();
   const {
     name: initName,
     description: initDesc,
@@ -22,6 +24,7 @@ const UpdateHabitForm = () => {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     updateHabit({ id: tooltipId, ...habitObject });
+    modifyRecord(tooltipId, habitObject.days);
     closeModal();
   };
 
