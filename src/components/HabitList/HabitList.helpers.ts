@@ -3,7 +3,6 @@ import {
   getFormattedString,
   getEdgePointDate,
   getCalculatedDate,
-  compareDate,
 } from 'lib/utils/dateUtils';
 
 export const getWeekData = (date: Date) => {
@@ -14,12 +13,4 @@ export const getWeekData = (date: Date) => {
       getCalculatedDate(startOfWeek, 'ADD', index, 'day'),
     ),
   }));
-};
-
-export const isSameWeek = (date1: Date | string, date2: Date | string) => {
-  return compareDate(date1, 'isSame', date2, 'week');
-};
-
-export const isAfterDay = (date1: string | Date, date2: string | Date) => {
-  return compareDate(date1, 'isAfter', date2, 'day');
 };

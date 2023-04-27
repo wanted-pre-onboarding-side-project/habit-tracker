@@ -1,18 +1,18 @@
 import React from 'react';
 import { useHabitDispatchContext } from 'contexts/HabitContext';
 import { TOGGLE_BY_HEIGHT } from 'constant';
-import { getFormattedString } from 'lib/utils/dateUtils';
-import { getToday } from 'lib/utils/dateUtils';
+import { getRecordedDate } from 'lib/helpers/dateHelpers';
 import type { Habit } from 'interface/main';
 
 const useHabitCard = (habit: Habit) => {
-  const cardRef = React.useRef<HTMLDivElement>(null);
   const [isLongToFold, setIsLongToFold] = React.useState<boolean>(false);
   const [isFold, setIsFold] = React.useState<boolean>(true);
+  const cardRef = React.useRef<HTMLDivElement>(null);
   const dispatch = useHabitDispatchContext();
+
+  const todayRecordedDate = getRecordedDate(new Date());
   const foldButtonContent = isFold ? '더보기' : '닫기';
-  const completed =
-    habit.recordedDates[getFormattedString(getToday().origin)] === 'completed';
+  const completed = habit.recordedDates[todayRecordedDate] === 'completed';
   const completeButtonContent = completed ? '취소' : '완료';
 
   React.useEffect(() => {
@@ -26,9 +26,8 @@ const useHabitCard = (habit: Habit) => {
 
   const toggleComplete = () => {
     const clonedHabit = { ...habit };
-    clonedHabit.recordedDates[getFormattedString(getToday().origin)] =
-      clonedHabit.recordedDates[getFormattedString(getToday().origin)] ===
-      'inactive'
+    clonedHabit.recordedDates[todayRecordedDate] =
+      clonedHabit.recordedDates[todayRecordedDate] === 'inactive'
         ? 'completed'
         : 'inactive';
 

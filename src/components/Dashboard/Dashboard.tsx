@@ -1,12 +1,12 @@
-import { getToday } from 'lib/utils/dateUtils';
 import { useHabitStateContext } from 'contexts/HabitContext';
+import { getDayword } from 'lib/helpers/dateHelpers';
 import styles from './Dashboard.module.css';
 import HabitCard from './HabitCard/HabitCard';
 
 const DashBoard = () => {
   const habits = useHabitStateContext();
   const todayHabits = habits.filter((habit) =>
-    habit.routineDays.includes(getToday().dayWord),
+    habit.routineDays.includes(getDayword(new Date())),
   );
 
   return (

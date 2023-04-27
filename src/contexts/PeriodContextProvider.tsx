@@ -4,7 +4,7 @@ import {
   getWeekBeforeDate,
   getWeekAfterDate,
   isSameWeek,
-} from './PeriodContext.helpers';
+} from 'lib/helpers/dateHelpers';
 import { PeriodStateContext, PeriodHandleContext } from './PeriodContext';
 
 const PeriodProvider = ({ children }: { children: ReactNode }) => {

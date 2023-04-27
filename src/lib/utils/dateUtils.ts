@@ -1,44 +1,7 @@
 import dayjs from 'dayjs';
-import type { Day, ObjectifiedDate } from 'interface/main';
 
-const dayNumToWord = (dayNum: number): Day => {
-  switch (dayNum) {
-    case 0:
-      return '일';
-    case 1:
-      return '월';
-    case 2:
-      return '화';
-    case 3:
-      return '수';
-    case 4:
-      return '목';
-    case 5:
-      return '금';
-    case 6:
-      return '토';
-    default:
-      throw new Error('dayjs의 day value가 0~6이 아닙니다.');
-  }
-};
-
-export const objectifyDate = (dateObj: dayjs.Dayjs): ObjectifiedDate => {
-  return {
-    origin: dateObj.toDate(),
-    year: dateObj.get('year'),
-    month: dateObj.get('month') + 1,
-    date: dateObj.get('date'),
-    day: dateObj.get('day'),
-    dayWord: dayNumToWord(dateObj.get('day')),
-    hour: dateObj.get('hour'),
-    minute: dateObj.get('minute'),
-  };
-};
-
-export const getToday = () => {
-  const now = dayjs(new Date());
-
-  return objectifyDate(now);
+export const getUnitOfDate = (date: Date, unit: dayjs.UnitType) => {
+  return dayjs(date).get(unit);
 };
 
 export const getFormattedString = (date: Date, formatString?: string) => {

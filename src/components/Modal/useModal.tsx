@@ -3,7 +3,7 @@ import { WEEK_DAYS } from 'constant';
 import { Day, Habit } from 'interface/main';
 import { useHabitDispatchContext } from 'contexts/HabitContext';
 import { useModalHandleContext } from 'contexts/ModalContext';
-import dayjs from 'dayjs';
+import { getDayword, getRecordedDate } from 'lib/helpers/dateHelpers';
 
 const useModal = (habitToUpdate?: Habit) => {
   const dispatch = useHabitDispatchContext();
@@ -41,15 +41,15 @@ const useModal = (habitToUpdate?: Habit) => {
   };
 
   const addHabit = () => {
-    const now = dayjs().get('day');
-    const now2 = dayjs().format('YYYY-MM-DD');
+    const nowDate = new Date();
+
     const payload: Habit = {
       id: Math.ceil(Math.random() * 10000),
       name,
       description,
       routineDays,
-      recordedDates: routineDays.includes(WEEK_DAYS[now - 1])
-        ? { [now2]: 'inactive' }
+      recordedDates: routineDays.includes(getDayword(nowDate))
+        ? { [getRecordedDate(nowDate)]: 'inactive' }
         : {},
     };
 

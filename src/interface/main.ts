@@ -11,14 +11,3 @@ export interface Habit {
     [key: string]: 'inactive' | 'completed';
   };
 }
-
-export interface ObjectifiedDate {
-  year: number;
-  month: number;
-  date: number;
-  day: number;
-  dayWord: Day;
-  hour: number;
-  minute: number;
-  origin: Date;
-}
