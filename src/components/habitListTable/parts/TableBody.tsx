@@ -32,7 +32,7 @@ const TableBody = () => {
   return (
     <tbody>
       {!habits.length && <EmptyImageRender />}
-      {habits.map(({ id, name, days }) => (
+      {habits.map(({ id, name, days }, idx) => (
         <tr key={id}>
           <td onClick={() => setTooltipId(id)}>{name}</td>
           <td>{tooltipId === id && <Tooltip />}</td>
@@ -48,7 +48,14 @@ const TableBody = () => {
               )}
             </td>
           ))}
-          <td>some / all</td>
+          <td>
+            {
+              Object.values(records[idx].checkedDays).filter((isTrue) =>
+                Boolean(isTrue),
+              ).length
+            }
+            /{Object.keys(records[idx].checkedDays).length}
+          </td>
         </tr>
       ))}
     </tbody>
