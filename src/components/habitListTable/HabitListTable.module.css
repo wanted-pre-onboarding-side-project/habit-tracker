@@ -5,3 +5,7 @@
 .HabitListTable table {
   width: 100%;
 }
+
+.DisabledCheckbox {
+  cursor: not-allowed;
+}
