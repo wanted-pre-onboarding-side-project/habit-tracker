@@ -5,6 +5,7 @@ import { useRecordContext } from 'contexts/RecordContext';
 import { useRecordHandleContext } from 'contexts/RecordContext';
 import Tooltip from 'components/modals/modalForms/Tooltip';
 import { ALL_DAYS } from 'constant';
+import EmptyImageRender from './EmptyHabitsIMG';
 import type { Habit, Day } from 'interface/main';
 
 const TableBody = () => {
@@ -30,6 +31,7 @@ const TableBody = () => {
 
   return (
     <tbody>
+      {!habits.length && <EmptyImageRender />}
       {habits.map(({ id, name, days }) => (
         <tr key={id}>
           <td onClick={() => setTooltipId(id)}>{name}</td>
