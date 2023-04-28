@@ -56,8 +56,8 @@ const TableBody = () => {
             </td>
           ))}
           <td>
-            {`${getAcheiveRecord(records[idx].checkedDays).checked} / ${
-              getAcheiveRecord(records[idx].checkedDays).total
+            {`${getAcheiveRecord(records[idx]?.checkedDays).checked} / ${
+              getAcheiveRecord(records[idx]?.checkedDays).total
             }`}
           </td>
         </tr>

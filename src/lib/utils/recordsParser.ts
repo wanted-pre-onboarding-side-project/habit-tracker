@@ -1,10 +1,10 @@
 import { WeekRecord } from 'interface/main';
 
-const countCheckedDays = (checkedDays: WeekRecord['checkedDays']) => {
+const countCheckedDays = (checkedDays: WeekRecord['checkedDays'] = {}) => {
   return Object.values(checkedDays).filter((isTrue) => Boolean(isTrue)).length;
 };
 
-const countTotalDays = (checkedDays: WeekRecord['checkedDays']) => {
+const countTotalDays = (checkedDays: WeekRecord['checkedDays'] = {}) => {
   return Object.keys(checkedDays).length;
 };
 
