@@ -1,7 +1,7 @@
 import type { Habit, Day, WeekRecord } from './main';
 
 export type habitActionType =
-  | { type: 'CREATE'; value: Omit<Habit, 'id'> }
+  | { type: 'CREATE'; value: Omit<Habit, 'id' | 'createdAt'> }
   | { type: 'UPDATE'; value: Habit }
   | { type: 'DELETE'; value: Habit['id'] };
 

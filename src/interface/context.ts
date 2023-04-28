@@ -32,7 +32,7 @@ export type TooltipHandleContextType = React.Dispatch<
 > | null;
 
 export type HabitHandleContextType = {
-  createHabit: (newHabitContent: Omit<Habit, 'id'>) => void;
+  createHabit: (newHabitContent: Omit<Habit, 'id' | 'createdAt'>) => void;
   updateHabit: (updatingHabitContent: Habit) => void;
   deleteHabit: (habitId: Habit['id']) => void;
 } | null;

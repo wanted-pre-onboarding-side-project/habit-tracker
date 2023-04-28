@@ -8,6 +8,7 @@ export interface Habit {
   name: string;
   description: string;
   days: Day[];
+  createdAt: number; // new Date().getTime()
 }
 
 export interface WeekRecord {

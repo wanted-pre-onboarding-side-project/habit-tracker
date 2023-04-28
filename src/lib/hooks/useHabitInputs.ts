@@ -7,7 +7,7 @@ const useHabitInputs = (
   initDesc: string,
   initDays: Day[],
 ): [
-  Omit<Habit, 'id'>,
+  Omit<Habit, 'id' | 'createdAt'>,
   (event: React.ChangeEvent<HTMLInputElement>) => void,
   (event: React.ChangeEvent<HTMLTextAreaElement>) => void,
   (event: React.ChangeEvent<HTMLInputElement>) => void,

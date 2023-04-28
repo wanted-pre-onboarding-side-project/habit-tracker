@@ -18,7 +18,9 @@ const isEmptyDays = (days: Day[]) => {
   return false;
 };
 
-const getHabitValidityReport = (habit: Omit<Habit, 'id'>): string | null => {
+const getHabitValidityReport = (
+  habit: Omit<Habit, 'id' | 'createdAt'>,
+): string | null => {
   const { name, description: desc, days } = habit;
   if (!isValidWordsLength(name, HABIT_NAME_MIN_LENGTH, HABIT_NAME_MAX_LENGTH))
     return `이름은 ${HABIT_NAME_MIN_LENGTH}글자 이상 ${HABIT_NAME_MAX_LENGTH}글자 이하여야 합니다.`;
@@ -29,7 +31,7 @@ const getHabitValidityReport = (habit: Omit<Habit, 'id'>): string | null => {
   return null;
 };
 
-export const isValid = (habit: Habit | Omit<Habit, 'id'>) => {
+export const isValid = (habit: Habit | Omit<Habit, 'id' | 'createdAt'>) => {
   const validatorReport = getHabitValidityReport(habit);
   if (validatorReport) {
     alert(validatorReport);

@@ -13,7 +13,7 @@ export const HabitProvider = ({ children }: { children: ReactNode }) => {
 
   const habitHandlers = useMemo(
     () => ({
-      createHabit: (newHabitContent: Omit<Habit, 'id'>) => {
+      createHabit: (newHabitContent: Omit<Habit, 'id' | 'createdAt'>) => {
         if (isValid(newHabitContent)) {
           dispatch({ type: 'CREATE', value: newHabitContent });
         }

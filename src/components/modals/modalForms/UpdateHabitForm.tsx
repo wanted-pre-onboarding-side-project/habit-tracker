@@ -17,13 +17,14 @@ const UpdateHabitForm = () => {
     name: initName,
     description: initDesc,
     days: initDays,
+    createdAt,
   } = habits[tooltipId];
   const [habitObject, onChangeName, onChangeDesc, onChangeDays] =
     useHabitInputs(initName, initDesc, initDays);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    updateHabit({ id: tooltipId, ...habitObject });
+    updateHabit({ id: tooltipId, ...habitObject, createdAt });
     modifyRecord(tooltipId, habitObject.days);
     closeModal();
   };

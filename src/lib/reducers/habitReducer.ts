@@ -1,3 +1,4 @@
+import { getLatestPeriod } from 'lib/utils/dateUtils';
 import type { Habit } from 'interface/main';
 import type { habitActionType } from 'interface/reducer';
 
@@ -9,6 +10,7 @@ export const habitReducer = (state: Habit[], action: habitActionType) => {
         {
           id: state.length < 1 ? 0 : state[state.length - 1].id + 1,
           ...action.value,
+          createdAt: getLatestPeriod().start.origin.getTime(),
         },
       ];
 
