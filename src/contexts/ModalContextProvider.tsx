@@ -1,4 +1,5 @@
 import { useState, ReactNode, useMemo } from 'react';
+import { flushSync } from 'react-dom';
 import {
   ModalContext,
   ModalHandleContext,
@@ -14,7 +15,12 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
 
   const modalHandlers = useMemo(
     () => ({
-      openModal: (modalType: ModalContextType) => setModalState(modalType),
+      openModal: (modalType: ModalContextType) => {
+        flushSync(() => {
+          setModalState(() => null);
+        });
+        setModalState(() => modalType);
+      },
       closeModal: () => setModalState(null),
     }),
     [],

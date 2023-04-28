@@ -1,13 +1,12 @@
+import { CSSTransition } from 'react-transition-group';
 import { useModalContext } from 'contexts/ModalContext';
 import CreateHabitForm from './modalForms/CreateHabitForm';
 import UpdateHabitForm from './modalForms/UpdateHabitForm';
 import DeleteDialog from './modalForms/DeleteDialog';
-// TODO: lazy import
+import './ModalAnimation.css';
 
 const ModalContainer = () => {
   const modalState = useModalContext();
-
-  if (!modalState) return null;
 
   const selectedModal =
     modalState === 'create' ? (
@@ -18,7 +17,21 @@ const ModalContainer = () => {
       <DeleteDialog />
     );
 
-  return <div className="ModalContainerLayout">{selectedModal}</div>;
+  return (
+    <div className="ModalContainerLayout">
+      <CSSTransition
+        in={!!modalState}
+        timeout={{ enter: 1_000 }}
+        mountOnEnter
+        unmountOnExit
+        classNames={
+          !!modalState && modalState !== 'delete' ? 'DrawerRight' : ''
+        }
+      >
+        {selectedModal}
+      </CSSTransition>
+    </div>
+  );
 };
 
 export default ModalContainer;
