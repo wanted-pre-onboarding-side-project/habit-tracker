@@ -3,6 +3,7 @@ import { useTooltipContext } from 'contexts/ModalContext';
 import { useTooltipHandleContext } from 'contexts/ModalContext';
 import { useRecordContext } from 'contexts/RecordContext';
 import { useRecordHandleContext } from 'contexts/RecordContext';
+import { getAcheiveRecord } from 'lib/utils/recordsParser';
 import Tooltip from 'components/modals/modalForms/Tooltip';
 import { ALL_DAYS } from 'constant';
 import { isFutureDay } from 'lib/utils/dateUtils';
@@ -55,12 +56,9 @@ const TableBody = () => {
             </td>
           ))}
           <td>
-            {
-              Object.values(records[idx].checkedDays).filter((isTrue) =>
-                Boolean(isTrue),
-              ).length
-            }
-            /{Object.keys(records[idx].checkedDays).length}
+            {`${getAcheiveRecord(records[idx].checkedDays).checked} / ${
+              getAcheiveRecord(records[idx].checkedDays).total
+            }`}
           </td>
         </tr>
       ))}

@@ -1,18 +1,14 @@
-import { useHabitsContext } from 'contexts/HabitContext';
+import { useRecordContext } from 'contexts/RecordContext';
+import { getAcheiveRecords } from 'lib/utils/recordsParser';
 import styles from '../Controller.module.css';
 
 const ProgressBar = () => {
-  const habits = useHabitsContext();
-  const weeklyChecksLength = habits.reduce(
-    (prev, curr) => prev + curr.days.length,
-    0,
-  );
-  //  금주 check 개수는 임시로 생성
-  const tempAchieveChecksLength = weeklyChecksLength > 5 ? 5 : 0;
+  const records = useRecordContext();
+  const achievedRecords = getAcheiveRecords(records);
 
-  const achieveRate = !weeklyChecksLength
-    ? '0%'
-    : Math.ceil((tempAchieveChecksLength / weeklyChecksLength) * 100) + '%';
+  const achievedRate = Math.ceil(
+    (achievedRecords.checked / achievedRecords.total) * 100,
+  );
 
   return (
     <div
@@ -24,14 +20,14 @@ const ProgressBar = () => {
     >
       <div
         style={{
-          width: achieveRate,
+          width: achievedRate,
           height: '3vh',
           backgroundColor: 'cyan',
           textAlign: 'center',
           lineHeight: '3vh',
         }}
       >
-        {achieveRate}
+        {achievedRate}%
       </div>
     </div>
   );
