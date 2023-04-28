@@ -82,3 +82,17 @@ export const isLatestWeek = (currentPeriodEnd: ObjectifiedDate) => {
 
   return endDate.isSameOrAfter(now);
 };
+
+export const isFutureDay = (day: Day): boolean => {
+  let thisDay = dayjs(new Date()).day();
+  const futureDays: Day[] = [];
+  // 기준일이 일요일이면 futureDays === [] 이라서 항상 return false
+  if (thisDay === 0) return false;
+  else {
+    while (++thisDay <= 6) {
+      futureDays.push(dayNumToWord(thisDay));
+    }
+    futureDays.push('일'); //  일요일이 7이 아니고 0이라서 따로 주입
+  }
+  return futureDays.includes(day);
+};
