@@ -30,6 +30,7 @@ const HabitList = () => {
               <button
                 key={day.label}
                 className={styles.gridRowItem}
+                disabled={!getTypeOfButton(item, day)}
                 data-type={getTypeOfButton(item, day)}
                 onClick={() => toggleComplete(item, day)}
               ></button>

@@ -45,20 +45,14 @@
   text-align: center;
   transition: background-color 0.5s;
   background-color: transparent;
-  cursor: default;
-  pointer-events: none;
 }
 
 .gridRowItem[data-type='inactive'] {
   background-color: #ddd;
-  cursor: pointer;
-  pointer-events: auto;
 }
 
 .gridRowItem[data-type='completed'] {
   background-color: #007bff;
-  cursor: pointer;
-  pointer-events: auto;
 }
 
 .gridRowItem[data-type='future'] {
