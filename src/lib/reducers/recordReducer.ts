@@ -6,24 +6,32 @@ export const recordReducer = (
   action: recordActionType,
 ) => {
   switch (action.type) {
-    case 'INIT': {
-      const { habits } = action.value;
-      if (state.length === habits.length) return state;
+    case 'SET_FROM_LOCALSTORAGE': {
+      const { key } = action.value;
+      const getLocalStorage = localStorage.getItem(key);
+
+      if (getLocalStorage === null) return [];
+      else return JSON.parse(getLocalStorage);
+    }
+
+    case 'SYNC_WITH_HABITS': {
+      const { habits, periodStart } = action.value;
 
       const existingRecordIDs = state.map((record) => record.habitId);
+      const isCreatedBefore = (createdAt: number) => createdAt <= periodStart;
 
-      const initiating = habits.reduce((prev: WeekRecord[], habit) => {
+      const toBeSynced = habits.reduce((prev: WeekRecord[], habit) => {
         if (!existingRecordIDs.includes(habit.id)) {
-          const checkedDays: WeekRecord['checkedDays'] = {};
-          for (const day of habit.days) checkedDays[day] = false;
-
-          prev.push({ habitId: habit.id, checkedDays });
+          if (isCreatedBefore(habit.createdAt)) {
+            const checkedDays: WeekRecord['checkedDays'] = {};
+            for (const day of habit.days) checkedDays[day] = false;
+            prev.push({ habitId: habit.id, checkedDays });
+          }
         }
-
         return prev;
       }, []);
 
-      return [...state, ...initiating];
+      return [...state, ...toBeSynced];
     }
 
     case 'MODIFY': {

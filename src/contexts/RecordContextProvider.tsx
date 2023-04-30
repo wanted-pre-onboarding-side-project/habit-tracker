@@ -14,21 +14,31 @@ import type { Habit, Day, WeekRecord } from 'interface/main';
 export const RecordProvider = ({ children }: { children: ReactNode }) => {
   const habits = useHabitsContext();
   const [period, setPeriod] = useState(getLatestPeriod());
+  const recordKey = String(period.start.origin.getTime());
   const { state: records, dispatch } = useLocalStorageReducer(
-    'records',
+    recordKey,
     recordReducer,
   );
 
   const movePeriod = useCallback(
-    (direction: 'prev' | 'next') => {
-      setPeriod(getChangedPeriod(period, direction));
-    },
+    (direction: 'prev' | 'next') =>
+      setPeriod(getChangedPeriod(period, direction)),
     [period],
   );
 
   useEffect(() => {
-    dispatch({ type: 'INIT', value: { habits } });
-  }, [period, dispatch, habits]);
+    dispatch({
+      type: 'SET_FROM_LOCALSTORAGE',
+      value: { key: recordKey },
+    });
+  }, [recordKey, dispatch]);
+
+  useEffect(() => {
+    dispatch({
+      type: 'SYNC_WITH_HABITS',
+      value: { habits, periodStart: period.start.origin.getTime() },
+    });
+  }, [habits, dispatch, period]);
 
   const recordHandlers = useMemo(
     () => ({

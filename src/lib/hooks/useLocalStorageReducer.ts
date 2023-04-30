@@ -9,7 +9,7 @@ const useLocalStorageReducer = (
 
   useEffect(() => {
     localStorage.setItem(key, JSON.stringify(state));
-  }, [state, key]);
+  }, [state]);
 
   return { state, dispatch };
 };

@@ -11,13 +11,11 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 root.render(
-  <React.StrictMode>
-    <ModalProvider>
-      <HabitProvider>
-        <RecordProvider>
-          <HabitTracker />
-        </RecordProvider>
-      </HabitProvider>
-    </ModalProvider>
-  </React.StrictMode>,
+  <ModalProvider>
+    <HabitProvider>
+      <RecordProvider>
+        <HabitTracker />
+      </RecordProvider>
+    </HabitProvider>
+  </ModalProvider>,
 );
