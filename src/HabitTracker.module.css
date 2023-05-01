@@ -2,8 +2,6 @@ body {
   margin: 0;
 }
 
-.HabitTracker {
-  height: 96vh;
-  padding: 2vh 2vw;
-  box-sizing: border-box;
+.HabitTracker > div:nth-child(1) {
+  margin-left: 100px;
 }

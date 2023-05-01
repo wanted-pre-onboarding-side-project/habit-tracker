@@ -1,8 +1,7 @@
 .HabitTrackerLayout {
   display: grid;
-  grid-template-columns: 2.5fr 1fr;
-  grid-template-rows: 0.2fr 0.8fr 3fr;
-  gap: 3%;
+  grid-template-columns: 75vw 25vw;
+  grid-template-rows: 5vh 20vh 75vh;
 }
 
 .HabitHeaderLayout {

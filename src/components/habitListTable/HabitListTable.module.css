@@ -1,9 +1,11 @@
 .HabitListTable {
   overflow-y: scroll;
+  height: 90%;
+  width: 90%;
+  margin: auto;
 }
 
 .HabitListTable table {
-  width: 100%;
   text-align: center;
   width: 100%;
 }
