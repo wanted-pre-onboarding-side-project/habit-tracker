@@ -20,12 +20,12 @@
 .HabitCard {
   border: solid 2px grey;
   border-radius: 10px;
-  padding: 2vh 1vw 2vh 1vw;
+  padding: 1vh 1vw;
   margin-bottom: 2vh;
 }
 
 .HabitCard > * {
-  margin: 3%;
+  margin: 2%;
 }
 
 .HabitCard > button {
@@ -37,7 +37,7 @@
 }
 
 .ShortDescCardStyle {
-  height: 11vh;
+  height: 50px;
   text-overflow: ellipsis;
   overflow: hidden;
 }

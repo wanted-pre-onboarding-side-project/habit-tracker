@@ -31,7 +31,7 @@ const HabitCard = ({ habit }: { habit: Habit }) => {
       </button>
       {isLongToFold && (
         <button onClick={() => setIsFold((prev) => !prev)}>
-          toggle: desc Open or Close
+          {isFold ? '펼치기' : '접기'}
         </button>
       )}
     </div>

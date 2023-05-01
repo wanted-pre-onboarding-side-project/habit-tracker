@@ -8,10 +8,12 @@ const HabitListTable = () => {
   const columnStyle = (
     <colgroup>
       {Array.from(Array(COLUMN_LENGTH).keys()).map((key, idx) => {
-        const TODAY_INDEX = WEEK_COLUMN_OFFSET + new Date().getDay();
-        if (idx + 1 === TODAY_INDEX)
-          return <col key={key} style={{ backgroundColor: 'red' }} />;
-        else return <col key={key} />;
+        const todayIdx = WEEK_COLUMN_OFFSET + new Date().getDay();
+        if (idx + 1 === todayIdx)
+          return (
+            <col key={key} style={{ width: '10%', backgroundColor: 'red' }} />
+          );
+        else return <col key={key} style={{ width: '10%' }} />;
       })}
     </colgroup>
   );
