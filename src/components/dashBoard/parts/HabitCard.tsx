@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useLayoutEffect } from 'react';
 import { useRecordHandleContext } from 'contexts/RecordContext';
 import { getToday } from 'lib/utils/dateUtils';
 import { TOGGLE_BY_HEIGHT } from 'constant';
@@ -13,12 +13,12 @@ const HabitCard = ({ habit }: { habit: Habit }) => {
   useEffect(() => {
     if (cardRef.current && cardRef.current.offsetHeight > TOGGLE_BY_HEIGHT)
       setIsLongToFold(true);
-  }, []);
+  }, [habit]);
 
   const [isFold, setIsFold] = useState<boolean>(true);
   const [descStyle, setDescStyle] = useState<string | undefined>();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setDescStyle(isFold ? styles.ShortDescCardStyle : undefined);
   }, [isFold]);
 

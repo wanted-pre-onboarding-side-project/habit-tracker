@@ -1,4 +1,4 @@
-export const TOGGLE_BY_HEIGHT = 100;
+export const TOGGLE_BY_HEIGHT = 150; // pixels, not words length
 
 /** offset in day*/
 export const PERIOD_CHANGE_OFFSET = 7;
