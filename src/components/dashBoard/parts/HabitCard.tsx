@@ -1,9 +1,12 @@
 import { useRef, useEffect, useState } from 'react';
+import { useRecordHandleContext } from 'contexts/RecordContext';
+import { getToday } from 'lib/utils/dateUtils';
 import { TOGGLE_BY_HEIGHT } from 'constant';
 import styles from '../Dashboard.module.css';
 import type { Habit } from 'interface/main';
 
 const HabitCard = ({ habit }: { habit: Habit }) => {
+  const { checkDay } = useRecordHandleContext();
   const cardRef = useRef<HTMLDivElement>(null);
   const [isLongToFold, setIsLongToFold] = useState<boolean>(false);
 
@@ -23,7 +26,9 @@ const HabitCard = ({ habit }: { habit: Habit }) => {
     <div ref={cardRef} className={styles.HabitCard}>
       <div>{habit.name}</div>
       <div className={descStyle}>{habit.description}</div>
-      <button onClick={() => alert('yet no record context')}>완료</button>
+      <button onClick={() => checkDay(habit.id, getToday().dayWord)}>
+        완료
+      </button>
       {isLongToFold && (
         <button onClick={() => setIsFold((prev) => !prev)}>
           toggle: desc Open or Close
