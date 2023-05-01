@@ -38,4 +38,14 @@
   position: relative;
   width: 95%;
   left: 3%;
+  height: 3vh;
+  background-color: lightgray;
+}
+
+.Progressed {
+  width: var(--achieved-rate);
+  height: 3vh;
+  background-color: cyan;
+  text-align: center;
+  line-height: 3vh;
 }
