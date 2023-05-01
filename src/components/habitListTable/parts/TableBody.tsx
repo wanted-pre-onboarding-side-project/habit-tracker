@@ -7,7 +7,7 @@ import { usePeriodContext } from 'contexts/RecordContext';
 import { getAcheiveRecord } from 'lib/utils/recordsParser';
 import Tooltip from 'components/modals/modalForms/Tooltip';
 import { ALL_DAYS } from 'constant';
-import { isFutureDay } from 'lib/utils/dateUtils';
+import { isFutureDay, isLatestWeek } from 'lib/utils/dateUtils';
 import styles from '../HabitListTable.module.css';
 import EmptyImageRender from './EmptyHabitsIMG';
 import type { Habit, Day } from 'interface/main';
@@ -51,13 +51,15 @@ const TableBody = () => {
                 {days.includes(DAY) && (
                   <input
                     className={
-                      isFutureDay(DAY) ? `${styles.DisabledCheckbox}` : ``
+                      isFutureDay(DAY) || !isLatestWeek(period.end)
+                        ? `${styles.DisabledCheckbox}`
+                        : ``
                     }
                     type="checkbox"
                     name={DAY}
-                    defaultChecked={isCheckedDay(id, DAY)}
+                    checked={isCheckedDay(id, DAY)}
                     onChange={(e) => onChangeCheckbox(e, id)}
-                    disabled={isFutureDay(DAY)}
+                    disabled={isFutureDay(DAY) || !isLatestWeek(period.end)}
                   />
                 )}
               </td>
