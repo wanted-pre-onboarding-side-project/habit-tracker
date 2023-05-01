@@ -17,6 +17,8 @@ const ModalContainer = () => {
       <DeleteDialog />
     );
 
+  if (modalState === null) return null;
+
   return (
     <div className="ModalContainerLayout">
       <CSSTransition
