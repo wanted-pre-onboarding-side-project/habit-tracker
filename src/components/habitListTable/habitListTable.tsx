@@ -3,17 +3,23 @@ import TableBody from './parts/TableBody';
 import styles from './HabitListTable.module.css';
 
 const HabitListTable = () => {
-  const COLUMN_LENGTH = 10; // total table column length
-  const WEEK_COLUMN_OFFSET = 2; //  Mon ~ Sun column exist after
+  const COLUMN_LENGTH = 9; // total table column length
+  const WEEK_COLUMN_OFFSET = 1; //  Mon ~ Sun column exist after
   const columnStyle = (
     <colgroup>
       {Array.from(Array(COLUMN_LENGTH).keys()).map((key, idx) => {
         const todayIdx = WEEK_COLUMN_OFFSET + new Date().getDay();
-        if (idx + 1 === todayIdx)
+        if (idx === 0) return <col key={key} className={styles.NameColumn} />;
+        else if (idx + 1 === todayIdx)
           return (
-            <col key={key} style={{ width: '10%', backgroundColor: 'red' }} />
+            <col
+              key={key}
+              className={`${styles.DayColumn} ${styles.TodayColumn}`}
+            />
           );
-        else return <col key={key} style={{ width: '10%' }} />;
+        else if (idx === COLUMN_LENGTH - 1)
+          return <col key={key} className={styles.AchieveRateColumn} />;
+        else return <col key={key} className={styles.DayColumn} />;
       })}
     </colgroup>
   );

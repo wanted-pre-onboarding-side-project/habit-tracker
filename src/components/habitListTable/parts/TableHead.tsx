@@ -5,7 +5,6 @@ const TableHead = () => {
     <thead>
       <tr>
         <th>habit name</th>
-        <th>{/* tooltip */}</th>
         {ALL_DAYS.map((DAY) => (
           <th key={DAY}>{DAY}</th>
         ))}

@@ -44,8 +44,10 @@ const TableBody = () => {
         .filter(({ createdAt }) => isWithinPeriod(createdAt))
         .map(({ id, name, days }, idx) => (
           <tr key={id}>
-            <td onClick={() => setTooltipId(id)}>{name}</td>
-            <td>{tooltipId === id && <Tooltip />}</td>
+            <td onClick={() => setTooltipId(id)}>
+              {name}
+              {tooltipId === id && <Tooltip />}
+            </td>
             {ALL_DAYS.map((DAY) => (
               <td key={DAY}>
                 {days.includes(DAY) && (

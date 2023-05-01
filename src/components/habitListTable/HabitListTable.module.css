@@ -4,8 +4,26 @@
 
 .HabitListTable table {
   width: 100%;
+  text-align: center;
+  width: 100%;
 }
 
 .DisabledCheckbox {
   cursor: not-allowed;
+}
+
+.NameColumn {
+  width: 15%;
+}
+
+.DayColumn {
+  width: 10%;
+}
+
+.TodayColumn {
+  background-color: red;
+}
+
+.AchieveRateColumn {
+  width: 10%;
 }

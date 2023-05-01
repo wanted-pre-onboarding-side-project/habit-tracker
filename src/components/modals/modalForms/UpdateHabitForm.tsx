@@ -18,7 +18,7 @@ const UpdateHabitForm = () => {
     description: initDesc,
     days: initDays,
     createdAt,
-  } = habits[tooltipId];
+  } = habits.find(({ id }) => id === tooltipId) as Habit;
   const [habitObject, onChangeName, onChangeDesc, onChangeDays] =
     useHabitInputs(initName, initDesc, initDays);
 

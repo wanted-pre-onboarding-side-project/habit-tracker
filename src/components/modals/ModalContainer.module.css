@@ -1,0 +1,15 @@
+.TooltipModal {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  margin-top: -5px;
+  margin-left: 9%;
+}
+
+.TooltipModal button {
+  border: solid 2px grey;
+  border-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 4vh;
+}
