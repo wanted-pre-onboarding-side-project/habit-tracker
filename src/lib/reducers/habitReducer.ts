@@ -8,7 +8,7 @@ export const habitReducer = (state: Habit[], action: habitActionType) => {
       return [
         ...state,
         {
-          id: state.length < 1 ? 0 : state[state.length - 1].id + 1,
+          id: new Date().getTime(),
           ...action.value,
           createdAt: getLatestPeriod().start.origin.getTime(),
         },

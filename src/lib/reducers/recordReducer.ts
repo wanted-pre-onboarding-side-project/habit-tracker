@@ -17,7 +17,14 @@ export const recordReducer = (
     case 'SYNC_WITH_HABITS': {
       const { habits, periodStart } = action.value;
 
-      const existingRecordIDs = state.map((record) => record.habitId);
+      const existingHaibtIDs = habits.map((habit) => habit.id);
+      const filteredByHabits = state.filter(({ habitId }) =>
+        existingHaibtIDs.includes(habitId),
+      );
+
+      const existingRecordIDs = filteredByHabits.map(
+        (record) => record.habitId,
+      );
       const isCreatedBefore = (createdAt: number) => createdAt <= periodStart;
 
       const toBeSynced = habits.reduce((prev: WeekRecord[], habit) => {
@@ -31,7 +38,7 @@ export const recordReducer = (
         return prev;
       }, []);
 
-      return [...state, ...toBeSynced];
+      return [...filteredByHabits, ...toBeSynced];
     }
 
     case 'MODIFY': {
