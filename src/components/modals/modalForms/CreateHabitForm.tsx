@@ -2,6 +2,7 @@ import { useHabitsHandleContext } from 'contexts/HabitContext';
 import { useModalHandleContext } from 'contexts/ModalContext';
 import useHabitInputs from 'lib/hooks/useHabitInputs';
 import { ALL_DAYS } from 'constant';
+import styles from '../ModalContainer.module.css';
 
 const CreateHabitForm = () => {
   const { closeModal } = useModalHandleContext();
@@ -16,14 +17,17 @@ const CreateHabitForm = () => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <span>name</span>
+    <form onSubmit={onSubmit} className={styles.CreateHabitForm}>
+      <div>
+        <p>name</p>
         <input type="text" placeholder="name" onChange={onChangeName} />
-        <span>description</span>
+      </div>
+      <div>
+        <p>description</p>
         <textarea placeholder="description" onChange={onChangeDesc}></textarea>
       </div>
-      <div style={{ display: 'flex' }}>
+
+      <div>
         {ALL_DAYS.map((day) => (
           <label key={day}>
             <div>{day}</div>
@@ -36,10 +40,13 @@ const CreateHabitForm = () => {
           </label>
         ))}
       </div>
-      <button type="submit">생성</button>
-      <button type="button" onClick={closeModal}>
-        취소
-      </button>
+
+      <div>
+        <button type="submit">생성</button>
+        <button type="button" onClick={closeModal}>
+          취소
+        </button>
+      </div>
     </form>
   );
 };

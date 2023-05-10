@@ -5,6 +5,7 @@ import { useTooltipContext } from 'contexts/ModalContext';
 import { useRecordHandleContext } from 'contexts/RecordContext';
 import useHabitInputs from 'lib/hooks/useHabitInputs';
 import { ALL_DAYS } from 'constant';
+import styles from '../ModalContainer.module.css';
 import type { Habit, Day } from 'interface/main';
 
 const UpdateHabitForm = () => {
@@ -30,23 +31,26 @@ const UpdateHabitForm = () => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <span>name</span>
+    <form onSubmit={onSubmit} className={styles.CreateHabitForm}>
+      <div>
+        <p>name</p>
         <input
           type="text"
           placeholder="name"
           defaultValue={initName}
           onChange={onChangeName}
         />
-        <span>description</span>
+      </div>
+      <div>
+        <p>description</p>
         <textarea
           placeholder="description"
           defaultValue={initDesc}
           onChange={onChangeDesc}
         ></textarea>
       </div>
-      <div style={{ display: 'flex' }}>
+
+      <div>
         {ALL_DAYS.map((day) => (
           <label key={day}>
             <div>{day}</div>
@@ -59,10 +63,13 @@ const UpdateHabitForm = () => {
           </label>
         ))}
       </div>
-      <button type="submit">수정</button>
-      <button type="button" onClick={closeModal}>
-        닫기
-      </button>
+
+      <div>
+        <button type="submit">수정</button>
+        <button type="button" onClick={closeModal}>
+          닫기
+        </button>
+      </div>
     </form>
   );
 };

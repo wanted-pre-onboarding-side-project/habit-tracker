@@ -1,3 +1,16 @@
+.modal_container {
+  position: relative;
+  border: solid 2px grey;
+  border-radius: 10px;
+  background-color: white;
+  height: 98%;
+  width: 100%;
+  margin: auto;
+  padding: 8%;
+  right: 10px;
+  box-sizing: border-box;
+}
+
 .TooltipModal {
   display: flex;
   flex-direction: column;
@@ -12,4 +25,98 @@
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   height: 4vh;
+}
+
+.CreateHabitForm {
+  height: 100%;
+  display: flex;
+  gap: 3%;
+  flex-direction: column;
+  justify-content: center;
+}
+.CreateHabitForm > div:nth-child(1) {
+  flex: 1 0 0px;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.CreateHabitForm > div:nth-child(1) > p {
+  font-size: 1.5rem;
+  margin: 1rem;
+}
+
+.CreateHabitForm > div:nth-child(1) > input {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  font-size: 1.2rem;
+}
+
+.CreateHabitForm > div:nth-child(2) {
+  flex: 4 0 0px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.CreateHabitForm > div:nth-child(2) > p {
+  font-size: 1.5rem;
+  margin: 1rem;
+}
+.CreateHabitForm > div:nth-child(2) > textarea {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  font-size: 1.2rem;
+}
+
+.CreateHabitForm > div:nth-child(3) {
+  flex: 1 0 0px;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 1.5rem;
+}
+
+.CreateHabitForm > div:nth-child(3) input[type='checkbox'] {
+  border-color: red;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  margin-top: 20px;
+  padding: 0;
+}
+
+.CreateHabitForm > div:nth-child(4) {
+  flex: 1 0 0px;
+  display: flex;
+  min-height: 100px;
+  justify-content: space-around;
+}
+.CreateHabitForm > div:nth-child(4) button {
+  width: 100%;
+  margin: 5% 5%;
+  font-size: 1.5rem;
+}
+
+.DeleteDialog {
+  height: 30%;
+  max-height: 200px;
+  border: solid 2px grey;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.DeleteDialog > div {
+  display: flex;
+  width: 100%;
+}
+.DeleteDialog > div > button {
+  width: 100%;
+  margin: 5% 10%;
+  font-size: 1.5rem;
 }
