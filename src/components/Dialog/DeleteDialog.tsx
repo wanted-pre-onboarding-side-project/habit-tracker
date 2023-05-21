@@ -4,15 +4,15 @@ import Dialog from './Dialog';
 import type { Habit } from 'interface/main';
 
 const DeleteDialog = ({ habit }: { habit: Habit }) => {
-  const { toggleModal } = useModalHandleContext();
+  const { closeModal } = useModalHandleContext();
   const dispatch = useHabitDispatchContext();
 
   return (
     <Dialog
-      onCancel={toggleModal}
+      onCancel={closeModal}
       onConfirm={() => {
         dispatch({ type: 'DELETE', payload: habit });
-        toggleModal();
+        closeModal();
       }}
     />
   );

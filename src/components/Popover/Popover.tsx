@@ -17,6 +17,7 @@ const HabitPopover = ({ habit }: { habit: Habit }) => {
         <div className={styles.innerContainer}>
           <button
             onClick={() => {
+              togglePopover();
               openModal(<Modal habitToUpdate={habit} />);
             }}
           >
@@ -24,6 +25,7 @@ const HabitPopover = ({ habit }: { habit: Habit }) => {
           </button>
           <button
             onClick={() => {
+              togglePopover();
               openModal(<DeleteDialog habit={habit} />);
             }}
           >

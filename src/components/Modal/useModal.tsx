@@ -7,7 +7,7 @@ import { getDayword, getRecordedDate } from 'lib/helpers/dateHelpers';
 
 const useModal = (habitToUpdate?: Habit) => {
   const dispatch = useHabitDispatchContext();
-  const { toggleModal } = useModalHandleContext();
+  const { closeModal } = useModalHandleContext();
   const [name, setName] = React.useState<string>(habitToUpdate?.name || '');
   const [description, setDescription] = React.useState<string>(
     habitToUpdate?.description || '',
@@ -54,7 +54,6 @@ const useModal = (habitToUpdate?: Habit) => {
     };
 
     dispatch({ type: 'ADD', payload });
-    closeModal();
   };
 
   const editHabit = () => {
@@ -73,12 +72,6 @@ const useModal = (habitToUpdate?: Habit) => {
     };
 
     dispatch({ type: 'UPDATE', payload });
-    closeModal();
-  };
-
-  const closeModal = () => {
-    toggleModal();
-    reset();
   };
 
   return {
@@ -92,6 +85,7 @@ const useModal = (habitToUpdate?: Habit) => {
     addHabit,
     editHabit,
     closeModal,
+    reset,
   };
 };
 

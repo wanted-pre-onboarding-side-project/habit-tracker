@@ -5,8 +5,8 @@ export const ModalStateContext = createContext<{
   modalComponent: React.ReactElement;
 } | null>(null);
 export const ModalHandleContext = createContext<{
-  toggleModal: () => void;
-  changeModalComponent: (component: React.ReactElement) => void;
+  openModal: (modal: JSX.Element) => void;
+  closeModal: () => void;
 } | null>(null);
 
 export const useModalStateContext = () => {

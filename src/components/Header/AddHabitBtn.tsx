@@ -4,15 +4,14 @@ import Modal from 'components/Modal/Modal';
 import styles from './Header.module.css';
 
 const AddHabitBtn = () => {
-  const { toggleModal, changeModalComponent } = useModalHandleContext();
+  const { openModal } = useModalHandleContext();
 
   return (
     <>
       <button
         className={styles.addHabitBtn}
         onClick={() => {
-          toggleModal();
-          changeModalComponent(<Modal />);
+          openModal(<Modal />);
         }}
       >
         <GoPlus size={18} />

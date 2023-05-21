@@ -15,6 +15,7 @@ const Modal = ({ habitToUpdate }: { habitToUpdate?: Habit }) => {
     addHabit,
     editHabit,
     closeModal,
+    reset,
   } = useModal(habitToUpdate);
 
   return (
@@ -53,11 +54,25 @@ const Modal = ({ habitToUpdate }: { habitToUpdate?: Habit }) => {
         </div>
         <div className={styles.buttonContainer}>
           {habitToUpdate ? (
-            <button onClick={editHabit} className={styles.confirmButton}>
+            <button
+              onClick={() => {
+                editHabit();
+                closeModal();
+                reset();
+              }}
+              className={styles.confirmButton}
+            >
               수정하기
             </button>
           ) : (
-            <button onClick={addHabit} className={styles.confirmButton}>
+            <button
+              onClick={() => {
+                addHabit();
+                closeModal();
+                reset();
+              }}
+              className={styles.confirmButton}
+            >
               추가하기
             </button>
           )}
