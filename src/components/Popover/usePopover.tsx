@@ -5,17 +5,17 @@ function usePopover() {
   const [isOpen, setIsOpen] = React.useState(false);
   const { toggleModal, changeModalComponent } = useModalHandleContext();
 
-  const toggleOpen = () => {
+  const togglePopover = () => {
     setIsOpen((prev) => !prev);
   };
 
   const openModal = (modalComponent: JSX.Element) => {
     toggleModal();
-    toggleOpen();
+    togglePopover();
     changeModalComponent(modalComponent);
   };
 
-  return { isOpen, toggleOpen, openModal };
+  return { isOpen, togglePopover, openModal };
 }
 
 export default usePopover;

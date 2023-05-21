@@ -6,11 +6,11 @@ import usePopover from './usePopover';
 import type { Habit } from 'interface/main';
 
 const HabitPopover = ({ habit }: { habit: Habit }) => {
-  const { isOpen, toggleOpen, openModal } = usePopover();
+  const { isOpen, togglePopover, openModal } = usePopover();
 
   return (
     <div className={styles.container}>
-      <button className={styles.toggleButton} onClick={toggleOpen}>
+      <button className={styles.toggleButton} onClick={togglePopover}>
         <AiOutlineMore size={24} />
       </button>
       {isOpen && (
