@@ -37,7 +37,10 @@ export const getWeekAfterDate = (date: Date) => {
 };
 
 export const getDayword = (date: Date) => {
-  return WEEK_DAYS[getUnitOfDate(date, 'day') - 1];
+  return (
+    WEEK_DAYS[getUnitOfDate(date, 'day') - 1] ||
+    WEEK_DAYS[6 - getUnitOfDate(date, 'day')]
+  );
 };
 
 export const getRecordedDate = (date: Date) => {

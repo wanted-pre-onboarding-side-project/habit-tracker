@@ -58,14 +58,18 @@ const useModal = (habitToUpdate?: Habit) => {
   };
 
   const editHabit = () => {
+    const nowDate = new Date();
+    const newRecordedDate = { ...habitToUpdate?.recordedDates };
+    routineDays.includes(getDayword(nowDate))
+      ? (newRecordedDate[getRecordedDate(nowDate)] = 'inactive')
+      : delete newRecordedDate[getRecordedDate(nowDate)];
+
     const payload: Habit = {
       id: habitToUpdate?.id as number,
       name,
       description,
       routineDays,
-      recordedDates: habitToUpdate?.recordedDates as {
-        [key: string]: 'inactive' | 'completed';
-      },
+      recordedDates: newRecordedDate,
     };
 
     dispatch({ type: 'UPDATE', payload });
