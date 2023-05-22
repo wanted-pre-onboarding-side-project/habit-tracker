@@ -1,6 +1,6 @@
 import { GoPlus } from 'react-icons/go';
 import { useModalHandleContext } from 'contexts/ModalContext';
-import Modal from 'components/Modal/Modal';
+import AddHabitModal from 'components/Modal/AddHabitModal';
 import styles from './Header.module.css';
 
 const AddHabitBtn = () => {
@@ -11,7 +11,7 @@ const AddHabitBtn = () => {
       <button
         className={styles.addHabitBtn}
         onClick={() => {
-          openModal(<Modal />);
+          openModal(<AddHabitModal />);
         }}
       >
         <GoPlus size={18} />

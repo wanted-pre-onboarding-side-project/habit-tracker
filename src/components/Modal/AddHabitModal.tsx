@@ -1,9 +1,14 @@
 import { AiOutlineClose } from 'react-icons/ai';
-import useModal from './useModal';
+import { useHabitDispatchContext } from 'contexts/HabitContext';
+import { useModalHandleContext } from 'contexts/ModalContext';
+import { getDayword, getRecordedDate } from 'lib/helpers/dateHelpers';
+import useModalInput from './useModalInput';
 import styles from './Modal.module.css';
 import type { Habit } from 'interface/main';
 
-const Modal = ({ habitToUpdate }: { habitToUpdate?: Habit }) => {
+const AddHabitModal = () => {
+  const dispatch = useHabitDispatchContext();
+  const { closeModal } = useModalHandleContext();
   const {
     name,
     changeName,
@@ -12,11 +17,30 @@ const Modal = ({ habitToUpdate }: { habitToUpdate?: Habit }) => {
     routineDays,
     changeRoutineDays,
     WEEK_DAYS,
-    addHabit,
-    editHabit,
-    closeModal,
     reset,
-  } = useModal(habitToUpdate);
+  } = useModalInput();
+
+  const updateTodayRecord = (habit: Habit) => {
+    const nowDate = new Date();
+    const newRecordedDate = { ...habit.recordedDates };
+    habit.routineDays.includes(getDayword(nowDate))
+      ? (newRecordedDate[getRecordedDate(nowDate)] = 'inactive')
+      : delete newRecordedDate[getRecordedDate(nowDate)];
+
+    return { ...habit, recordedDates: newRecordedDate };
+  };
+
+  const addHabit = () => {
+    const newHabit: Habit = {
+      id: Math.ceil(Math.random() * 10000),
+      name,
+      description,
+      routineDays,
+      recordedDates: {},
+    };
+
+    dispatch({ type: 'ADD', payload: updateTodayRecord(newHabit) });
+  };
 
   return (
     <div className={styles.modalOverlay}>
@@ -53,33 +77,20 @@ const Modal = ({ habitToUpdate }: { habitToUpdate?: Habit }) => {
           </div>
         </div>
         <div className={styles.buttonContainer}>
-          {habitToUpdate ? (
-            <button
-              onClick={() => {
-                editHabit();
-                closeModal();
-                reset();
-              }}
-              className={styles.confirmButton}
-            >
-              수정하기
-            </button>
-          ) : (
-            <button
-              onClick={() => {
-                addHabit();
-                closeModal();
-                reset();
-              }}
-              className={styles.confirmButton}
-            >
-              추가하기
-            </button>
-          )}
+          <button
+            onClick={() => {
+              addHabit();
+              closeModal();
+              reset();
+            }}
+            className={styles.confirmButton}
+          >
+            추가하기
+          </button>
         </div>
       </div>
     </div>
   );
 };
 
-export default Modal;
+export default AddHabitModal;

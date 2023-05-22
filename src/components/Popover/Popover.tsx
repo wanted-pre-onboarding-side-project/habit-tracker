@@ -1,5 +1,5 @@
 import { AiOutlineMore } from 'react-icons/ai';
-import Modal from 'components/Modal/Modal';
+import EditHabitModal from 'components/Modal/EditHabitModal';
 import DeleteDialog from 'components/Dialog/DeleteDialog';
 import styles from './Popover.module.css';
 import usePopover from './usePopover';
@@ -18,7 +18,7 @@ const HabitPopover = ({ habit }: { habit: Habit }) => {
           <button
             onClick={() => {
               togglePopover();
-              openModal(<Modal habitToUpdate={habit} />);
+              openModal(<EditHabitModal habitToUpdate={habit} />);
             }}
           >
             Edit Habit
