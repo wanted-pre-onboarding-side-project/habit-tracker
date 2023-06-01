@@ -21,6 +21,12 @@ const AddHabitModal = () => {
     routineDays,
   });
 
+  const handleAddBtn = () => {
+    addHabit();
+    closeModal();
+    reset();
+  };
+
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
@@ -56,14 +62,7 @@ const AddHabitModal = () => {
           </div>
         </div>
         <div className={styles.buttonContainer}>
-          <button
-            onClick={() => {
-              addHabit();
-              closeModal();
-              reset();
-            }}
-            className={styles.confirmButton}
-          >
+          <button onClick={handleAddBtn} className={styles.confirmButton}>
             추가하기
           </button>
         </div>

@@ -7,15 +7,12 @@ const DeleteDialog = ({ habit }: { habit: Habit }) => {
   const { closeModal } = useModalHandleContext();
   const dispatch = useHabitDispatchContext();
 
-  return (
-    <Dialog
-      onCancel={closeModal}
-      onConfirm={() => {
-        dispatch({ type: 'DELETE', payload: habit });
-        closeModal();
-      }}
-    />
-  );
+  const handleConfirmBtn = () => {
+    dispatch({ type: 'DELETE', payload: habit });
+    closeModal();
+  };
+
+  return <Dialog onCancel={closeModal} onConfirm={handleConfirmBtn} />;
 };
 
 export default DeleteDialog;

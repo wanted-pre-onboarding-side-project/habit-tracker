@@ -8,6 +8,16 @@ import type { Habit } from 'lib/types/main';
 const HabitPopover = ({ habit }: { habit: Habit }) => {
   const { isOpen, togglePopover, openModal } = usePopover();
 
+  const handleEditBtn = () => {
+    togglePopover();
+    openModal(<EditHabitModal habitToUpdate={habit} />);
+  };
+
+  const handleDeleteBtn = () => {
+    togglePopover();
+    openModal(<DeleteDialog habit={habit} />);
+  };
+
   return (
     <div className={styles.container}>
       <button className={styles.toggleButton} onClick={togglePopover}>
@@ -15,22 +25,8 @@ const HabitPopover = ({ habit }: { habit: Habit }) => {
       </button>
       {isOpen && (
         <div className={styles.innerContainer}>
-          <button
-            onClick={() => {
-              togglePopover();
-              openModal(<EditHabitModal habitToUpdate={habit} />);
-            }}
-          >
-            Edit Habit
-          </button>
-          <button
-            onClick={() => {
-              togglePopover();
-              openModal(<DeleteDialog habit={habit} />);
-            }}
-          >
-            Delete Habit
-          </button>
+          <button onClick={handleEditBtn}>Edit Habit</button>
+          <button onClick={handleDeleteBtn}>Delete Habit</button>
         </div>
       )}
     </div>
