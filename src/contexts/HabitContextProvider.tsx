@@ -1,10 +1,7 @@
 import React from 'react';
+import useLocalStorageReducer from 'lib/hooks/useLocalStorageReducer';
 import { HabitStateContext, HabitDispatchContext } from './HabitContext';
 import type { Habit } from 'interface/main';
-
-const initialState: Habit[] = JSON.parse(
-  localStorage.getItem('HABIT_DATA') || '[]',
-);
 
 const reducer = (
   state: Habit[],
@@ -30,8 +27,7 @@ const reducer = (
 };
 
 const HabitProvider = ({ children }: { children: React.ReactNode }) => {
-  const [state, dispatch] = React.useReducer(reducer, initialState);
-  localStorage.setItem('HABIT_DATA', JSON.stringify(state));
+  const { state, dispatch } = useLocalStorageReducer('HABIT_DATA', reducer);
 
   return (
     <HabitStateContext.Provider value={state}>
