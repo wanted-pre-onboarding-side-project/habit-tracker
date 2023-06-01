@@ -1,0 +1,60 @@
+.container {
+}
+
+.gridRow {
+  display: grid;
+  grid-template-columns: 160px 1fr 80px;
+  grid-template-areas: 'heading grid summary';
+  height: 60px;
+  align-items: center;
+}
+
+.gridRowHeading {
+  grid-area: heading;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.gridRowHeading span {
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gridRowMain {
+  grid-area: grid;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.gridRowEnd {
+  grid-area: summary;
+  text-align: right;
+  color: #8f99a7;
+}
+
+.gridRowItem {
+  height: 30px;
+  width: 30px;
+  border: none;
+  border-radius: 4px;
+  line-height: 30px;
+  text-align: center;
+  transition: background-color 0.5s;
+  background-color: transparent;
+}
+
+.gridRowItem[data-type='inactive'] {
+  background-color: #ddd;
+}
+
+.gridRowItem[data-type='completed'] {
+  background-color: #007bff;
+}
+
+.gridRowItem[data-type='future'] {
+  background-color: #f4f4f4;
+}

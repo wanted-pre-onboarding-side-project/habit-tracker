@@ -1,0 +1,125 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+
+.modalContent {
+  position: relative;
+  padding: 40px;
+  background-color: #fff;
+  width: 580px;
+  height: 100vh;
+}
+
+.header {
+  position: relative;
+}
+
+.header h1 {
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.header p {
+  color: #888;
+}
+.section {
+  margin: 20px 0;
+}
+
+.section h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.section input {
+  width: 100%;
+  font-size: 18px;
+  height: 45px;
+  padding: 10px;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid #bed1ed;
+}
+
+.section input:focus {
+  border: 1px solid #007bff;
+}
+
+.section textarea {
+  resize: none;
+  width: 100%;
+  font-size: 16px;
+  height: 150px;
+  padding: 10px;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid #bed1ed;
+}
+
+.section textarea:focus {
+  border: 1px solid #007bff;
+}
+
+.closeIconButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #eee;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+
+.routineSelectContainer {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-column-gap: 15px;
+  grid-row-gap: 15px;
+}
+
+.routineSelectButton {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 500;
+  height: 45px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #007bff;
+}
+
+.routineSelectButton[data-active='true'] {
+  color: #fff;
+  border: 1px solid #007bff;
+  background-color: #007bff;
+}
+
+.buttonContainer {
+  margin: 40px 0;
+}
+.confirmButton {
+  width: 100%;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 16px 32px;
+  border-radius: 8px;
+  outline: none;
+  transition: border 0.3s;
+  color: #007bff;
+  border: 1px solid #bed1ed;
+}
+
+.confirmButton:hover {
+  border: 1px solid #007bff;
+}

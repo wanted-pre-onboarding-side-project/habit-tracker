@@ -1,23 +1,26 @@
-import "./Layout.css";
-import React from "react";
-import ReactDOM from "react-dom/client";
-import HabitTracker from "HabitTracker";
-import { ModalProvider } from "contexts/ModalContextProvider";
-import { RecordProvider } from "contexts/RecordContextProvider";
-import { HabitProvider } from "contexts/HabitContextProvider";
-import "./setupDayjs.ts";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import HabitTracker from 'HabitTracker';
+import ModalProvider from 'contexts/ModalContextProvider';
+import PeriodProvider from 'contexts/PeriodContextProvider';
+import HabitProvider from 'contexts/HabitContextProvider';
+import ModalPortal from 'components/Modal/ModalPortal';
+import './setupDayjs.ts';
+
+import './styles/global.css';
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById('root') as HTMLElement,
 );
 root.render(
   <React.StrictMode>
     <HabitProvider>
-      <RecordProvider>
+      <PeriodProvider>
         <ModalProvider>
+          <ModalPortal />
           <HabitTracker />
         </ModalProvider>
-      </RecordProvider>
+      </PeriodProvider>
     </HabitProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

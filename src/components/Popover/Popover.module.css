@@ -1,0 +1,38 @@
+.container {
+  position: relative;
+  border-radius: 50%;
+}
+
+.toggleButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 4px;
+  border-radius: 50%;
+}
+
+.innerContainer {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  z-index: 1;
+  background-color: #fff;
+  border: 1px solid #cecece;
+  border-radius: 4px;
+}
+
+.innerContainer > button {
+  padding: 10px;
+  font-size: 16px;
+  width: 120px;
+
+  & + & {
+    border-top: 1px solid #eee;
+  }
+}
+
+.innerContainer > button:hover {
+  background-color: #eee;
+}
