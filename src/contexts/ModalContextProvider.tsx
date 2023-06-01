@@ -1,19 +1,27 @@
-import { useState, ReactNode, useCallback } from "react";
-import { ModalContext, ModalHandleContext } from "./ModalContext";
+import { useState, ReactNode } from 'react';
+import { ModalStateContext, ModalHandleContext } from './ModalContext';
 
-export const ModalProvider = ({ children }: { children: ReactNode }) => {
+const ModalProvider = ({ children }: { children: ReactNode }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalComponent, setModalComponent] = useState(<></>);
 
-  const toggleModal = useCallback(() => setIsModalOpen((prev) => !prev), []);
+  const openModal = (modal: JSX.Element) => {
+    setIsModalOpen(true);
+    setModalComponent(modal);
+  };
 
-  //  TODO
-  //  현재는 create 뿐이라 T/F로 충분하지만, 앞으로 여러 종류의 모달에 따라 다른 상태를 가져야 할 수 있다.
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setModalComponent(<></>);
+  };
 
   return (
-    <ModalContext.Provider value={isModalOpen}>
-      <ModalHandleContext.Provider value={toggleModal}>
+    <ModalStateContext.Provider value={{ isModalOpen, modalComponent }}>
+      <ModalHandleContext.Provider value={{ openModal, closeModal }}>
         {children}
       </ModalHandleContext.Provider>
-    </ModalContext.Provider>
+    </ModalStateContext.Provider>
   );
 };
+
+export default ModalProvider;
