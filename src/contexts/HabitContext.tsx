@@ -1,5 +1,5 @@
 import React from 'react';
-import { Habit } from 'interface/main';
+import type { Habit } from 'lib/types/main';
 
 export const HabitStateContext = React.createContext<Habit[]>([]);
 export const HabitDispatchContext = React.createContext<React.Dispatch<{

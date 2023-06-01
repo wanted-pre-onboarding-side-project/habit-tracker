@@ -1,7 +1,7 @@
 import { useHabitDispatchContext } from 'contexts/HabitContext';
 import { useModalHandleContext } from 'contexts/ModalContext';
 import { getDayword, getRecordedDate } from 'lib/helpers/date';
-import type { Habit } from 'interface/main';
+import type { Habit } from 'lib/types/main';
 
 const useModalAction = ({
   name,

@@ -3,7 +3,7 @@ import EditHabitModal from 'components/Modal/EditHabitModal';
 import DeleteDialog from 'components/Dialog/DeleteDialog';
 import styles from './Popover.module.css';
 import usePopover from './usePopover';
-import type { Habit } from 'interface/main';
+import type { Habit } from 'lib/types/main';
 
 const HabitPopover = ({ habit }: { habit: Habit }) => {
   const { isOpen, togglePopover, openModal } = usePopover();

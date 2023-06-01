@@ -1,7 +1,7 @@
 import React from 'react';
 import useLocalStorageReducer from 'lib/hooks/useLocalStorageReducer';
 import { HabitStateContext, HabitDispatchContext } from './HabitContext';
-import type { Habit } from 'interface/main';
+import type { Habit } from 'lib/types/main';
 
 const reducer = (
   state: Habit[],

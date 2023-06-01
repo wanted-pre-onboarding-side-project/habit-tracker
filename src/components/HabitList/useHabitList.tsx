@@ -3,9 +3,9 @@ import {
   useHabitStateContext,
 } from 'contexts/HabitContext';
 import { usePeriodStateContext } from 'contexts/PeriodContext';
-import { Habit } from 'interface/main';
 import { isAfterDay, isSameWeek } from 'lib/helpers/date';
 import { getWeekData } from './HabitList.helpers';
+import type { Habit } from 'lib/types/main';
 
 const useHabitList = () => {
   const habits = useHabitStateContext();

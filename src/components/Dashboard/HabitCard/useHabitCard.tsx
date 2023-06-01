@@ -1,8 +1,8 @@
 import React from 'react';
 import { useHabitDispatchContext } from 'contexts/HabitContext';
-import { TOGGLE_BY_HEIGHT } from 'constant';
+import { TOGGLE_BY_HEIGHT } from 'lib/constant/main';
 import { getRecordedDate } from 'lib/helpers/date';
-import type { Habit } from 'interface/main';
+import type { Habit } from 'lib/types/main';
 
 const useHabitCard = (habit: Habit) => {
   const [isLongToFold, setIsLongToFold] = React.useState<boolean>(false);

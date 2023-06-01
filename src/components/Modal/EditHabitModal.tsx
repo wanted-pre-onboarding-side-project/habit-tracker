@@ -3,7 +3,7 @@ import { WEEK_DAYS } from 'lib/constant/main';
 import styles from './Modal.module.css';
 import useModalInput from './useModalInput';
 import useModalAction from './useModalAction';
-import type { Habit } from 'interface/main';
+import type { Habit } from 'lib/types/main';
 
 const EditHabitModal = ({ habitToUpdate }: { habitToUpdate: Habit }) => {
   const {

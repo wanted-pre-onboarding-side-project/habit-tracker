@@ -1,4 +1,4 @@
-import { WEEK_DAYS } from 'constant';
+import { WEEK_DAYS } from 'lib/constant/main';
 
 export type Day = (typeof WEEK_DAYS)[number];
 

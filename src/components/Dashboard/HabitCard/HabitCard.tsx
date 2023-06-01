@@ -1,7 +1,7 @@
 import HabitPopover from 'components/Popover/Popover';
 import styles from './HabitCard.module.css';
 import useHabitCard from './useHabitCard';
-import type { Habit } from 'interface/main';
+import type { Habit } from 'lib/types/main';
 
 const HabitCard = ({ habit }: { habit: Habit }) => {
   const {

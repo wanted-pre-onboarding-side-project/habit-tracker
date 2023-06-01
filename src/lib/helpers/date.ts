@@ -5,7 +5,7 @@ import {
   getUnitOfDate,
   compareDate,
 } from 'lib/utils/date';
-import { WEEK_DAYS } from 'constant';
+import { WEEK_DAYS } from 'lib/constant/main';
 
 export const isSameWeek = (date1: Date | string, date2: Date | string) => {
   return compareDate(date1, 'isSame', date2, 'week');

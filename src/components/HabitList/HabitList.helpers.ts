@@ -1,4 +1,4 @@
-import { WEEK_DAYS } from 'constant';
+import { WEEK_DAYS } from 'lib/constant/main';
 import {
   getFormattedString,
   getEdgePointDate,
