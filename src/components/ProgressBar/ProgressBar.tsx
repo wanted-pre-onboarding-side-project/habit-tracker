@@ -1,12 +1,8 @@
-import { useHabitStateContext } from 'contexts/HabitContext';
-import { usePeriodStateContext } from 'contexts/PeriodContext';
 import styles from './ProgressBar.module.css';
-import { getTotalAchieveRate } from './ProgressBar.helpers';
+import useProgressBar from './useProgressBar';
 
 const ProgressBar = () => {
-  const habits = useHabitStateContext();
-  const { selectedDate } = usePeriodStateContext();
-  const totalAchieveRate = getTotalAchieveRate(habits, selectedDate);
+  const totalAchieveRate = useProgressBar();
 
   return (
     <div className={styles.backgroundArea}>
