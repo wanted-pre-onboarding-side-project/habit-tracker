@@ -1,4 +1,4 @@
-import { isSameWeek } from 'lib/helpers/dateHelpers';
+import { isSameWeek } from 'lib/helpers/date';
 import type { Habit } from 'interface/main';
 
 export const getAchieveRate = (item: Habit, selectedDate: Date) => {

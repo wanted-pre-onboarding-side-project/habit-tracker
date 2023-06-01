@@ -1,5 +1,5 @@
 import { useHabitStateContext } from 'contexts/HabitContext';
-import { getDayword } from 'lib/helpers/dateHelpers';
+import { getDayword } from 'lib/helpers/date';
 import styles from './Dashboard.module.css';
 import HabitCard from './HabitCard/HabitCard';
 

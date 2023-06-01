@@ -3,7 +3,7 @@ import {
   getFormattedString,
   getEdgePointDate,
   getCalculatedDate,
-} from 'lib/utils/dateUtils';
+} from 'lib/utils/date';
 
 export const getWeekData = (date: Date) => {
   const startOfWeek = getEdgePointDate(date, 'TO_START_OF', 'week');

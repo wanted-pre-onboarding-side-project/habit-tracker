@@ -4,7 +4,7 @@ import {
 } from 'contexts/HabitContext';
 import { usePeriodStateContext } from 'contexts/PeriodContext';
 import { Habit } from 'interface/main';
-import { isAfterDay, isSameWeek } from 'lib/helpers/dateHelpers';
+import { isAfterDay, isSameWeek } from 'lib/helpers/date';
 import { getWeekData } from './HabitList.helpers';
 
 const useHabitList = () => {

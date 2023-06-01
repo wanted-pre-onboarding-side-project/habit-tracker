@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHabitDispatchContext } from 'contexts/HabitContext';
 import { TOGGLE_BY_HEIGHT } from 'constant';
-import { getRecordedDate } from 'lib/helpers/dateHelpers';
+import { getRecordedDate } from 'lib/helpers/date';
 import type { Habit } from 'interface/main';
 
 const useHabitCard = (habit: Habit) => {
