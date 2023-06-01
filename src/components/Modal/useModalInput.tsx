@@ -2,7 +2,7 @@ import React from 'react';
 import { WEEK_DAYS } from 'constant';
 import type { Day, Habit } from 'interface/main';
 
-const useModal = (habitToUpdate?: Habit) => {
+const useModalInput = (habitToUpdate?: Habit) => {
   const [name, setName] = React.useState<string>(habitToUpdate?.name || '');
   const [description, setDescription] = React.useState<string>(
     habitToUpdate?.description || '',
@@ -46,4 +46,4 @@ const useModal = (habitToUpdate?: Habit) => {
   };
 };
 
-export default useModal;
+export default useModalInput;
