@@ -1,14 +1,11 @@
 import { AiOutlineClose } from 'react-icons/ai';
-import { useHabitDispatchContext } from 'contexts/HabitContext';
-import { useModalHandleContext } from 'contexts/ModalContext';
-import { getDayword, getRecordedDate } from 'lib/helpers/dateHelpers';
-import useModalInput from './useModalInput';
+import { WEEK_DAYS } from 'lib/constant/main';
 import styles from './Modal.module.css';
+import useModalInput from './useModalInput';
+import useModalAction from './useModalAction';
 import type { Habit } from 'interface/main';
 
 const EditHabitModal = ({ habitToUpdate }: { habitToUpdate: Habit }) => {
-  const dispatch = useHabitDispatchContext();
-  const { closeModal } = useModalHandleContext();
   const {
     name,
     changeName,
@@ -17,29 +14,13 @@ const EditHabitModal = ({ habitToUpdate }: { habitToUpdate: Habit }) => {
     routineDays,
     changeRoutineDays,
     reset,
-    WEEK_DAYS,
   } = useModalInput(habitToUpdate);
 
-  const editHabit = () => {
-    const changedHabit: Habit = {
-      ...habitToUpdate,
-      name,
-      description,
-      routineDays,
-    };
-
-    dispatch({ type: 'UPDATE', payload: updateTodayRecord(changedHabit) });
-  };
-
-  const updateTodayRecord = (habit: Habit) => {
-    const nowDate = new Date();
-    const newRecordedDate = { ...habit.recordedDates };
-    habit.routineDays.includes(getDayword(nowDate))
-      ? (newRecordedDate[getRecordedDate(nowDate)] = 'inactive')
-      : delete newRecordedDate[getRecordedDate(nowDate)];
-
-    return { ...habit, recordedDates: newRecordedDate };
-  };
+  const { editHabit, closeModal } = useModalAction({
+    name,
+    description,
+    routineDays,
+  });
 
   return (
     <div className={styles.modalOverlay}>
@@ -78,7 +59,7 @@ const EditHabitModal = ({ habitToUpdate }: { habitToUpdate: Habit }) => {
         <div className={styles.buttonContainer}>
           <button
             onClick={() => {
-              editHabit();
+              editHabit(habitToUpdate);
               closeModal();
               reset();
             }}

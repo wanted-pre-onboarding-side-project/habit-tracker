@@ -1,14 +1,10 @@
 import { AiOutlineClose } from 'react-icons/ai';
-import { useHabitDispatchContext } from 'contexts/HabitContext';
-import { useModalHandleContext } from 'contexts/ModalContext';
-import { getDayword, getRecordedDate } from 'lib/helpers/dateHelpers';
-import useModalInput from './useModalInput';
+import { WEEK_DAYS } from 'lib/constant/main';
 import styles from './Modal.module.css';
-import type { Habit } from 'interface/main';
+import useModalInput from './useModalInput';
+import useModalAction from './useModalAction';
 
 const AddHabitModal = () => {
-  const dispatch = useHabitDispatchContext();
-  const { closeModal } = useModalHandleContext();
   const {
     name,
     changeName,
@@ -16,31 +12,14 @@ const AddHabitModal = () => {
     changeDescription,
     routineDays,
     changeRoutineDays,
-    WEEK_DAYS,
     reset,
   } = useModalInput();
 
-  const updateTodayRecord = (habit: Habit) => {
-    const nowDate = new Date();
-    const newRecordedDate = { ...habit.recordedDates };
-    habit.routineDays.includes(getDayword(nowDate))
-      ? (newRecordedDate[getRecordedDate(nowDate)] = 'inactive')
-      : delete newRecordedDate[getRecordedDate(nowDate)];
-
-    return { ...habit, recordedDates: newRecordedDate };
-  };
-
-  const addHabit = () => {
-    const newHabit: Habit = {
-      id: Math.ceil(Math.random() * 10000),
-      name,
-      description,
-      routineDays,
-      recordedDates: {},
-    };
-
-    dispatch({ type: 'ADD', payload: updateTodayRecord(newHabit) });
-  };
+  const { addHabit, closeModal } = useModalAction({
+    name,
+    description,
+    routineDays,
+  });
 
   return (
     <div className={styles.modalOverlay}>

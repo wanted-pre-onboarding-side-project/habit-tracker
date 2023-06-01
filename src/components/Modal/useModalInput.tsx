@@ -42,7 +42,6 @@ const useModal = (habitToUpdate?: Habit) => {
     changeDescription,
     routineDays,
     changeRoutineDays,
-    WEEK_DAYS,
     reset,
   };
 };
