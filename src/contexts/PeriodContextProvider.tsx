@@ -1,4 +1,4 @@
-import { useState, ReactNode, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import {
   getPeriod,
   getWeekBeforeDate,
@@ -7,7 +7,7 @@ import {
 } from 'lib/helpers/date';
 import { PeriodStateContext, PeriodHandleContext } from './PeriodContext';
 
-const PeriodProvider = ({ children }: { children: ReactNode }) => {
+const PeriodProvider = ({ children }: { children: React.ReactNode }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const period = getPeriod(selectedDate);
   const isLatestWeek = isSameWeek(selectedDate, new Date());

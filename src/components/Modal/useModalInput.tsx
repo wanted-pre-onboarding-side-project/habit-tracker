@@ -1,13 +1,13 @@
-import React from 'react';
+import { useState } from 'react';
 import { WEEK_DAYS } from 'lib/constant/main';
 import type { Day, Habit } from 'lib/types/main';
 
 const useModalInput = (habitToUpdate?: Habit) => {
-  const [name, setName] = React.useState<string>(habitToUpdate?.name || '');
-  const [description, setDescription] = React.useState<string>(
+  const [name, setName] = useState<string>(habitToUpdate?.name || '');
+  const [description, setDescription] = useState<string>(
     habitToUpdate?.description || '',
   );
-  const [routineDays, setRoutineDays] = React.useState(
+  const [routineDays, setRoutineDays] = useState(
     habitToUpdate?.routineDays || [...WEEK_DAYS],
   );
 

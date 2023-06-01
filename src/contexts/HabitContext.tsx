@@ -1,15 +1,15 @@
-import React from 'react';
+import { useContext, createContext } from 'react';
 import type { Habit } from 'lib/types/main';
 
-export const HabitStateContext = React.createContext<Habit[]>([]);
-export const HabitDispatchContext = React.createContext<React.Dispatch<{
+export const HabitStateContext = createContext<Habit[]>([]);
+export const HabitDispatchContext = createContext<React.Dispatch<{
   type: 'ADD' | 'UPDATE' | 'DELETE';
   payload: Habit;
 }> | null>(null);
 
-export const useHabitStateContext = () => React.useContext(HabitStateContext);
+export const useHabitStateContext = () => useContext(HabitStateContext);
 export const useHabitDispatchContext = () => {
-  const context = React.useContext(HabitDispatchContext);
+  const context = useContext(HabitDispatchContext);
 
   if (!context)
     throw new Error('<HabitHandleContext.Provider>가 제공되지 않았습니다.');

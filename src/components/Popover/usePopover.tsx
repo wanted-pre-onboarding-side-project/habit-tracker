@@ -1,8 +1,8 @@
-import React from 'react';
+import { useState } from 'react';
 import { useModalHandleContext } from 'contexts/ModalContext';
 
 function usePopover() {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const { openModal } = useModalHandleContext();
 
   const togglePopover = () => {
