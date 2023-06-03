@@ -3,7 +3,8 @@ import {
   useHabitStateContext,
 } from 'contexts/HabitContext';
 import { usePeriodStateContext } from 'contexts/PeriodContext';
-import { isAfterDay, isSameWeek } from 'lib/helpers/date';
+import { isAfterDay } from 'lib/helpers/date';
+import { getRoutineByDate } from 'lib/helpers/habit';
 import { getWeekData } from './HabitList.helpers';
 import type { Habit } from 'lib/types/main';
 
@@ -14,39 +15,32 @@ const useHabitList = () => {
   const weekData = getWeekData(selectedDate);
 
   const getTypeOfButton = (item: Habit, day: (typeof weekData)[number]) => {
+    if (item.completedDates.includes(day.date)) return 'completed';
+
+    const routine = getRoutineByDate(item.routineList, day.date);
     const nowDate = new Date();
 
-    if (isSameWeek(selectedDate, nowDate)) {
-      return (item.routineDays.includes(day.label) ||
-        item.recordedDates[day.date]) &&
-        isAfterDay(day.date, nowDate)
-        ? 'future'
-        : item.recordedDates[day.date];
-    }
-
-    return item.recordedDates[day.date];
+    if (!routine?.includes(day.label)) return undefined;
+    if (isAfterDay(day.date, nowDate)) return 'future';
+    return 'inactive';
   };
 
   const toggleComplete = (item: Habit, day: (typeof weekData)[number]) => {
-    item.recordedDates[day.date] =
-      item.recordedDates[day.date] === 'inactive' ? 'completed' : 'inactive';
-    dispatch({ type: 'UPDATE', payload: item });
+    const completedDatesSet = new Set(item.completedDates);
+
+    const newCompletedDates = completedDatesSet.delete(day.date)
+      ? Array.from(completedDatesSet)
+      : Array.from(completedDatesSet.add(day.date));
+
+    dispatch({
+      type: 'UPDATE',
+      payload: { ...item, completedDates: newCompletedDates },
+    });
   };
 
-  const getAchieveRate = (item: Habit) => {
-    const achieveRate = { complete: 0, total: 0 };
+  // const getAchieveRate = (item: Habit) => {};
 
-    Object.entries(item.recordedDates)
-      .filter(([date]) => isSameWeek(date, selectedDate))
-      .forEach(([_, status]) => {
-        achieveRate.total++;
-        status === 'completed' && achieveRate.complete++;
-      });
-
-    return `${achieveRate.complete} / ${achieveRate.total}`;
-  };
-
-  return { weekData, habits, getTypeOfButton, getAchieveRate, toggleComplete };
+  return { weekData, habits, getTypeOfButton, toggleComplete };
 };
 
 export default useHabitList;

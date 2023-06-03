@@ -3,8 +3,7 @@ import styles from './HabitList.module.css';
 import useHabitList from './useHabitList';
 
 const HabitList = () => {
-  const { weekData, habits, getTypeOfButton, getAchieveRate, toggleComplete } =
-    useHabitList();
+  const { weekData, habits, getTypeOfButton, toggleComplete } = useHabitList();
 
   return (
     <div className={styles.container}>
@@ -36,7 +35,7 @@ const HabitList = () => {
               ></button>
             ))}
           </div>
-          <div className={styles.gridRowEnd}>{getAchieveRate(item)}</div>
+          <div className={styles.gridRowEnd}></div>
         </div>
       ))}
     </div>

@@ -12,7 +12,7 @@ const useHabitCard = (habit: Habit) => {
 
   const todayRecordedDate = getRecordedDate(new Date());
   const foldButtonContent = isFold ? '더보기' : '닫기';
-  const completed = habit.recordedDates[todayRecordedDate] === 'completed';
+  const completed = habit.completedDates.includes(todayRecordedDate);
   const completeButtonContent = completed ? '취소' : '완료';
 
   useEffect(() => {
@@ -25,13 +25,16 @@ const useHabitCard = (habit: Habit) => {
   };
 
   const toggleComplete = () => {
-    const clonedHabit = { ...habit };
-    clonedHabit.recordedDates[todayRecordedDate] =
-      clonedHabit.recordedDates[todayRecordedDate] === 'inactive'
-        ? 'completed'
-        : 'inactive';
+    const completedDatesSet = new Set(habit.completedDates);
 
-    dispatch({ type: 'UPDATE', payload: clonedHabit });
+    const newCompletedDates = completedDatesSet.delete(todayRecordedDate)
+      ? Array.from(completedDatesSet)
+      : Array.from(completedDatesSet.add(todayRecordedDate));
+
+    dispatch({
+      type: 'UPDATE',
+      payload: { ...habit, completedDates: newCompletedDates },
+    });
   };
 
   return {
