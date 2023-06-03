@@ -2,14 +2,14 @@ import styles from './ProgressBar.module.css';
 import useProgressBar from './useProgressBar';
 
 const ProgressBar = () => {
-  // const totalAchieveRate = useProgressBar();
-
+  const totalAchieveRate = useProgressBar();
+  console.log(totalAchieveRate);
   return (
     <div className={styles.backgroundArea}>
       <div
         className={styles.completedArea}
         style={{
-          width: 0,
+          width: totalAchieveRate,
         }}
       ></div>
     </div>

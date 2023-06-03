@@ -9,3 +9,8 @@ export interface Habit {
   routineList: { [key: string]: Day[] };
   completedDates: string[];
 }
+
+export type WeekData = {
+  label: Day;
+  date: string;
+}[];

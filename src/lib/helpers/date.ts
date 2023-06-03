@@ -53,3 +53,13 @@ export const getDayword = (date: Date) => {
 export const getRecordedDate = (date: Date) => {
   return getFormattedString(date);
 };
+
+export const getWeekData = (date: Date) => {
+  const startOfWeek = getEdgePointDate(date, 'TO_START_OF', 'week');
+  return WEEK_DAYS.map((day, index) => ({
+    label: day,
+    date: getFormattedString(
+      getCalculatedDate(startOfWeek, 'ADD', index, 'day'),
+    ),
+  }));
+};

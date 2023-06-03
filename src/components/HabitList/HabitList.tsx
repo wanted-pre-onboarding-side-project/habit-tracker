@@ -3,7 +3,7 @@ import styles from './HabitList.module.css';
 import useHabitList from './useHabitList';
 
 const HabitList = () => {
-  const { weekData, habits, getTypeOfButton, toggleComplete } = useHabitList();
+  const { weekData, habitsData } = useHabitList();
 
   return (
     <div className={styles.container}>
@@ -18,24 +18,24 @@ const HabitList = () => {
         </div>
         <div className={styles.gridRowEnd}></div>
       </div>
-      {habits.map((item) => (
+      {habitsData.map((item) => (
         <div className={styles.gridRow} key={item.id}>
           <div className={styles.gridRowHeading}>
             <span>{item.name}</span>
             <Popover habit={item} />
           </div>
           <div className={styles.gridRowMain}>
-            {weekData.map((day) => (
+            {item.buttonData.map((button, idx) => (
               <button
-                key={day.label}
+                key={idx}
                 className={styles.gridRowItem}
-                disabled={!getTypeOfButton(item, day)}
-                data-type={getTypeOfButton(item, day)}
-                onClick={() => toggleComplete(item, day)}
+                disabled={button.disabled}
+                data-type={button.type}
+                onClick={button.toggle}
               ></button>
             ))}
           </div>
-          <div className={styles.gridRowEnd}></div>
+          <div className={styles.gridRowEnd}>{item.achieveRate}</div>
         </div>
       ))}
     </div>
