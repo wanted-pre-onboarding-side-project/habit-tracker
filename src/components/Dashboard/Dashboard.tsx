@@ -9,7 +9,7 @@ const DashBoard = () => {
     <div className={styles.container}>
       <div>
         {todayHabits.length === 0 ? (
-          <div className={styles.addHabitButton}>오늘은 할일이 없습니다</div>
+          <div className={styles.nothingToday}>오늘은 할일이 없습니다</div>
         ) : (
           todayHabits.map((habit) => <HabitCard key={habit.id} habit={habit} />)
         )}
