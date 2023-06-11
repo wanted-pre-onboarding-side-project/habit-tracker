@@ -11,15 +11,16 @@ const EditHabitModal = ({ habitToUpdate }: { habitToUpdate: Habit }) => {
     changeName,
     description,
     changeDescription,
-    routineDays,
-    changeRoutineDays,
+    routine,
+    changeRoutine,
+    routineList,
     reset,
   } = useModalInput(habitToUpdate);
 
   const { editHabit, closeModal } = useModalAction({
     name,
     description,
-    routineDays,
+    routineList,
   });
 
   const handleEditBtn = () => {
@@ -54,8 +55,8 @@ const EditHabitModal = ({ habitToUpdate }: { habitToUpdate: Habit }) => {
               <button
                 key={day}
                 className={styles.routineSelectButton}
-                data-active={routineDays.includes(day)}
-                onClick={() => changeRoutineDays(day)}
+                data-active={routine.includes(day)}
+                onClick={() => changeRoutine(day)}
               >
                 {day}
               </button>

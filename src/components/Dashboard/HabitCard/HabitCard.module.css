@@ -1,5 +1,5 @@
 .container {
-  min-width: 250px;
+  max-width: 250px;
   padding: 16px;
   margin-bottom: 8px;
   border-radius: 4px;
@@ -31,7 +31,7 @@
   composes: description;
   display: -webkit-box;
   word-wrap: break-word;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;

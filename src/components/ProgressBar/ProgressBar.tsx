@@ -3,7 +3,7 @@ import useProgressBar from './useProgressBar';
 
 const ProgressBar = () => {
   const totalAchieveRate = useProgressBar();
-
+  console.log(totalAchieveRate);
   return (
     <div className={styles.backgroundArea}>
       <div
