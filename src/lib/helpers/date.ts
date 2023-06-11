@@ -15,6 +15,13 @@ export const isAfterDay = (date1: Date | string, date2: Date | string) => {
   return compareDate(date1, 'isAfter', date2, 'day');
 };
 
+export const isSameOrAfterDay = (
+  date1: Date | string,
+  date2: Date | string,
+) => {
+  return compareDate(date1, 'isSameOrAfter', date2, 'day');
+};
+
 export const getPeriod = (date: Date) => {
   const start = getFormattedString(
     getEdgePointDate(date, 'TO_START_OF', 'week'),
@@ -45,4 +52,14 @@ export const getDayword = (date: Date) => {
 
 export const getRecordedDate = (date: Date) => {
   return getFormattedString(date);
+};
+
+export const getWeekData = (date: Date) => {
+  const startOfWeek = getEdgePointDate(date, 'TO_START_OF', 'week');
+  return WEEK_DAYS.map((day, index) => ({
+    label: day,
+    date: getFormattedString(
+      getCalculatedDate(startOfWeek, 'ADD', index, 'day'),
+    ),
+  }));
 };

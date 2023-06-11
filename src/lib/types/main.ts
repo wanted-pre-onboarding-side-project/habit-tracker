@@ -6,8 +6,11 @@ export interface Habit {
   id: number;
   name: string;
   description: string;
-  routineDays: Day[];
-  recordedDates: {
-    [key: string]: 'inactive' | 'completed';
-  };
+  routineList: { [key: string]: Day[] };
+  completedDates: string[];
 }
+
+export type WeekData = {
+  label: Day;
+  date: string;
+}[];

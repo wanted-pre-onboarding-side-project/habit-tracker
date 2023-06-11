@@ -10,15 +10,16 @@ const AddHabitModal = () => {
     changeName,
     description,
     changeDescription,
-    routineDays,
-    changeRoutineDays,
+    routine,
+    changeRoutine,
+    routineList,
     reset,
   } = useModalInput();
 
   const { addHabit, closeModal } = useModalAction({
     name,
     description,
-    routineDays,
+    routineList,
   });
 
   const handleAddBtn = () => {
@@ -53,8 +54,8 @@ const AddHabitModal = () => {
               <button
                 key={day}
                 className={styles.routineSelectButton}
-                data-active={routineDays.includes(day)}
-                onClick={() => changeRoutineDays(day)}
+                data-active={routine.includes(day)}
+                onClick={() => changeRoutine(day)}
               >
                 {day}
               </button>

@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { WEEK_DAYS } from 'lib/constant/main';
+import { getRoutineByDate } from 'lib/helpers/habit';
+import { getRecordedDate } from 'lib/helpers/date';
 import type { Day, Habit } from 'lib/types/main';
 
 const useModalInput = (habitToUpdate?: Habit) => {
@@ -7,14 +9,20 @@ const useModalInput = (habitToUpdate?: Habit) => {
   const [description, setDescription] = useState<string>(
     habitToUpdate?.description || '',
   );
-  const [routineDays, setRoutineDays] = useState(
-    habitToUpdate?.routineDays || [...WEEK_DAYS],
+  const [routine, setRoutine] = useState(
+    habitToUpdate
+      ? getRoutineByDate(habitToUpdate.routineList)
+      : [...WEEK_DAYS],
   );
+
+  const routineList = habitToUpdate
+    ? { ...habitToUpdate.routineList, [getRecordedDate(new Date())]: routine }
+    : { [getRecordedDate(new Date())]: routine };
 
   const reset = () => {
     setName('');
     setDescription('');
-    setRoutineDays([...WEEK_DAYS]);
+    setRoutine([...WEEK_DAYS]);
   };
 
   const changeName = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,13 +33,13 @@ const useModalInput = (habitToUpdate?: Habit) => {
     setDescription(event.target.value);
   };
 
-  const changeRoutineDays = (day: Day) => {
-    const newRoutineDays = new Set(routineDays);
+  const changeRoutine = (day: Day) => {
+    const newRoutine = new Set(routine);
 
-    setRoutineDays(
-      newRoutineDays.delete(day)
-        ? Array.from(newRoutineDays)
-        : Array.from(newRoutineDays.add(day)),
+    setRoutine(
+      newRoutine.delete(day)
+        ? Array.from(newRoutine)
+        : Array.from(newRoutine.add(day)),
     );
   };
 
@@ -40,8 +48,9 @@ const useModalInput = (habitToUpdate?: Habit) => {
     changeName,
     description,
     changeDescription,
-    routineDays,
-    changeRoutineDays,
+    routine,
+    changeRoutine,
+    routineList,
     reset,
   };
 };
